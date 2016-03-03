@@ -140,7 +140,7 @@ if ($username === 'hello world') { ?&gt;
 				<section data-transition="slide" data-background="#b5533c">
 					<section>
 						<p style="font-size: 2em">Ruby on Rails 出現</p>
-						<img src="img/rails.png">
+						<img src="img/rails.png" style="background-color: #fff">
 						<p class="fragment">優雅、且對開發者友善，很快地席捲 Web 開發</p>
 					</section>
 					<section>
@@ -304,12 +304,17 @@ var AppUI = AppComponent(state);
 					</section>
 					<section>
 						<p>最近才剛 release android 的版本</p>
-						<img src="img/react-native.png">
+						<img src="img/react-native.png" style="width: 75%">
 						<p>from <a href="https://twitter.com/yannickdot/status/643920055944744960?lang=zh-tw">twitter@yannickdot</a></p>
 					</section>
 					<section>
+						<p>配合 electron 做桌面程式</p>
+						<img src="https://cloud.githubusercontent.com/assets/3382565/10557547/b1f07a4e-74e3-11e5-8d27-79ab6947d429.gif">
+						<p>from <a href="https://github.com/chentsulin/electron-react-boilerplate">chentsulin/electron-react-boilerplate</a></p>
+					</section>
+					<section>
 						<p>甚至還可以用在 Command line UI</p>
-						<img src="img/hot-motion.gif">
+						<img src="img/hot-motion.gif" style="width: 65%">
 						<p>from <a href="https://github.com/gaearon/react-blessed-hot-motion">github@react-blessed-hot-motion</a></p>
 					</section>
 				</section>
@@ -590,7 +595,7 @@ var result = sum(1, 2);
 					</section>
 					<section>
 						<p>DOM 是由一個一個的 DOM Node 組成</p>
-						<img src="img/dom-tree.svg">
+						<img src="img/dom-tree.svg" style="background-color: white">
 					</section>
 					<section>
 						<p>瀏覽器裡面最重要的就是的</p>
@@ -603,6 +608,10 @@ var result = sum(1, 2);
 				<section data-transition="slide" data-background="#4d7e65">
 					<h3>對於 API 有任何疑惑時</h3>
 					<p>請參考 <a href="https://developer.mozilla.org/en-US/docs/Web/API">MDN</a></p>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<p style="font-size: 2em">開一個 HTML 檔來試試</p>
 				</section>
 
 				<section data-transition="slide" data-background="#b5533c">
@@ -839,10 +848,20 @@ targetElement.appendChild(newDiv);
 						<ul>
 							<li><a src="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style">HTMLElement.style</a></li>
 							<li><a src="https://developer.mozilla.org/en-US/docs/Web/API/Element/className">Element.className</a></li>
+							<li><a src="https://developer.mozilla.org/en-US/docs/Web/API/Element/classList">Element.classList</a></li>
 						</ul>
 					</section>
 					<section data-markdown>
 						<script type="text/template">
+查詢 style
+
+```
+var targetElement = document.getElementById('target');
+
+console.log(targetElement.style.color);
+
+```
+
 改變 style
 
 ```
@@ -855,13 +874,48 @@ targetElement.style.color = 'red';
 					</section>
 					<section data-markdown>
 						<script type="text/template">
-改變 className
+查詢 className
 
+```
+var targetElement = document.getElementById('target');
+
+console.log(targetElement.className);
+```
+
+改變 className
 
 ```
 var targetElement = document.getElementById('target');
 
 targetElement.className = 'new-class';
+```
+
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+查詢 classList
+
+```
+var targetElement = document.getElementById('target');
+
+console.log(targetElement.classList);
+```
+
+新增 class 到 classList
+
+```
+var targetElement = document.getElementById('target');
+
+targetElement.classList.add('another-class');
+```
+
+從 classList 移除 class
+
+```
+var targetElement = document.getElementById('target');
+
+targetElement.classList.remove('another-class');
 ```
 
 						</script>
