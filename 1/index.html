@@ -1,0 +1,996 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Web Hackthon Seminar</title>
+
+		<meta name="description" content="Web Hackthon Seminar - 1">
+		<meta name="author" content="C. T. Lin">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section data-background="#b5533c">
+					<h1>Web Hackthon Seminar </h1>
+					<h3>1</h3>
+					<p>
+						<small>Web 發展 / JavaScript / DOM</small>
+					</p>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">既然這門專題是<br /> Web Programming</p>
+						<p class="fragment">那麼不外乎</p>
+					</section>
+					<section>
+						<p style="font-size: 2em">前端</p>
+					</section>
+					<section>
+						<h4>瀏覽器使用者介面</h4>
+						<img src="img/browser.png">
+					</section>
+					<section>
+						<p style="font-size: 2em">後端</p>
+					</section>
+					<section>
+						<h5>處理使用者請求的伺服器、資料庫</h5>
+						<img src="img/backend.png">
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<p style="font-size: 2em">Web 應用程式的發展</p>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p><code>.edu</code> 的網頁保存了很多歷史遺跡...</p>
+						<!-- 我還以為 old fashion 的東西都找不到了 -->
+					</section>
+					<section>
+						<p>十五年前<p>
+						<p>小學、國中會教你使用 Frontpage </p>
+						<p>或是 Dreamweaver 來開發網站</p>
+					</section>
+					<section>
+						<img src="img/frontpage.gif">
+					</section>
+					<section>
+						<p>其實一直有在推陳出新，以前還不屬於 Adobe</p>
+						<img src="img/dreamweaver.jpg">
+					</section>
+					<section>
+						<p style="font-size: 2em">那時候的 fashion 就是</p>
+						<p>會閃爍的跑馬燈</p>
+						<p>像仙女棒一般的滑鼠游標</p>
+						<p>紀錄來客數的計數器</p>
+					</section>
+					<section>
+						<h3>那時我們看到的網頁是這樣的</h3>
+						<p><a href="https://www.google.com.tw/search?es_sm=91&q=個人首頁&oq=個人首頁">Google 搜尋個人首頁</a></p>
+						<p><a href="https://www.google.com.tw/search?es_sm=91&q=個人網頁&oq=個人網頁">Google 搜尋個人網頁</a></p>
+						<p><a href="http://www.tdes.chc.edu.tw/works/computer/kimo/kimo.htm">奇怪的游標</a></p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<h3>之後漸漸地出現了所謂動態網站</h3>
+					</section>
+					<section>
+						<h3>可以查詢資料庫、記錄使用者</h3>
+					</section>
+					<section>
+						<p>那時候好像幾乎都是用什麼 P 開發<br>JSP、PHP、ASP</p>
+					</section>
+					<section>
+<pre><code>&lt;?php
+// 純屬亂寫，很可能不能跑
+// 現代 php 寫得好就不會長這樣了
+$username = $_POST['username'];
+$password = $_POST['password'];
+// 前後台混在一起
+if ($username === 'hello world') { ?&gt;
+	&lt;h1&gt;&lt;? echo $username ?&gt;&lt;/h1&gt;
+&lt;? } else { ?&gt;
+	&lt;ul&gt;
+&lt;? 	for ($i = 0; $i &lt; 10 ; $i++) { ?&gt;
+		&lt;li&gt;&lt;? echo $i ?&gt;&lt;/li&gt;
+&lt;? 	} ?&gt;
+	&lt;/ul&gt;
+&lt;? }
+</code></pre>
+					</section>
+					<section>
+						<h3>現在來看，這種寫法已經不被接受</h3>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">Ruby on Rails 出現</p>
+						<img src="img/rails.png">
+						<p class="fragment">優雅、且對開發者友善，很快地席捲 Web 開發</p>
+					</section>
+					<section>
+						<p style="font-size: 2em">哲學</p>
+						<ol>
+							<li>Don't Repeat Yourself</li>
+							<li>Convention Over Configuration</li>
+							<li>RESTful</li>
+							<li>Test Driven Development</li>
+						</ol>
+					</section>
+					<section>
+						<p>現在各種語言幾乎都有一套承襲 Rails Style 的框架</p>
+						<img src="img/rails-like.png">
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">Ajax 的盛行</p>
+					</section>
+					<section>
+						<p>還記得哪個時候漸漸的</p>
+						<p>網頁換頁之間 loading 比較少出現白畫面了嗎？</p>
+						<p class="fragment">像是 Gmail, Google Map 等 app </p>
+						<p class="fragment">操作體驗都不太會中斷的時候</p>
+						<p class="fragment">這就是 Ajax (Asynchronous JavaScript and XML) 的功勞</p>
+					</section>
+					<section>
+						<p style="font-size: 2em">Ajax 說明</p>
+					</section>
+					<section>
+						<p style="margin-top: -35px">早期的網頁要跟伺服器交換資料，按下超連結或是提交表單，都會直接送出並回傳新的頁面的 HTML 回來</p>
+						<img src="img/old.png" style="margin-top: -25px">
+					</section>
+					<section>
+						<p style="margin-top: -30px">透過 JavaScript 非同步的方式，跟後台拿資料，<br>在這中間使用者還是可以進行其他操作，不會被打斷</p>
+						<img src="img/ajax.png" style="margin-top: -20px">
+					</section>
+					<section>
+						<p>雖然叫做 Asynchronous JavaScript and XML...<br>但現在都用 JSON</p>
+						<img src="img/xml-vs-json.png">
+					</section>
+					<section>
+						<h3>XML</h3>
+						<img src="img/xml.jpg" style="width: 100%;">
+					</section>
+					<section>
+						<h3>JSON</h3>
+						<img src="img/json.png" style="width: 100%;">
+					</section>
+					<section>
+						<h3>才稍微開始有所謂<br>前後分離的工作方式開始出現</h3>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">Client Side Render 技術</p>
+					</section>
+					<section>
+						<h3>問題：</h3>
+						<ol>
+							<li>網頁往應用程式發展，越來越龐大</li>
+							<li>Ajax 使用太多會導致程式意外的複雜</li>
+							<li>前端需要一些架構，MVX (之後還會提到)</li>
+							<li>前後端所使用的 view 模板不容易共用</li>
+						</ol>
+					</section>
+					<section>
+						<h3>解決方式：</h3>
+						<ul>
+							<li>讓 javascript 來負責顯示畫面</li>
+							<li>全面使用 Ajax 並使用一些架構模式</li>
+							<li>伺服器則變成 API server</li>
+						</ul>
+					</section>
+					<section>
+						<h3>2010 年開始，風向一直在變</h3>
+						<img src="img/trend.png">
+					</section>
+				</section>
+
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<h3>元件式開發 & 狀態決定 UI</h3>
+					</section>
+					<section>
+					<pre><code>// 如果 UI 是一種有順序依賴性的東西
+// 某個 bug 需要 5 個操作步驟來重現
+// 可能會讓你很崩潰
+
+
+// 那如果把應用程式 UI 想像成一個 y = f(x) 的函數呢？
+var AppUI = AppComponent(state);
+</code></pre>
+						<p>這就是 React 帶來的影響，會在後幾個禮拜漸漸講到</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<h3>後端的語言現在百花齊放</h3>
+					</section>
+					<section>
+						<p>可以跑在伺服器 (電腦) 的程式語言都可以用</p>
+					</section>
+					<section>
+						<h3>現在主流的伺服器程式語言</h3>
+						<img src="img/lang.png">
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<h3>這門專題會涵蓋的內容</h3>
+					<ul>
+						<li>JavaScript</li>
+						<li>React</li>
+						<li>Classic MVC framework - Ruby on Rails</li>
+						<li>Database - MySQL</li>
+						<li>Node</li>
+					</ul>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">JavaScript</p>
+					</section>
+					<section>
+						<p>因為是瀏覽器內獨佔的程式語言</p>
+						<p>基本上它的引擎就有以下公司在幫忙加強：</p>
+						<ul>
+							<li>Microsoft (IE, Edge)</li>
+							<li>Google (Chrome)</li>
+							<li>Mozilla (Firefox)</li>
+							<li>Apple (Safari)</li>
+						</ul>
+						<p>相對其他直譯式語言速度稍微較快</p>
+					</section>
+					<section>
+						<h3>因為可以直接在網頁分享<br>所以傳播速度、社群能量較強</h3>
+					</section>
+					<section>
+						<h3>另一方面 Web 技術可以使用在開發特定的<br>手機應用程式、桌面應用程式開發上</h3>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">React</p>
+					</section>
+					<section>
+						<p>facebook 在 2013 年 open source</p>
+						<p>它嘗試證明有比過去 10 年的主流 - MVC 更好的方式</p>
+						<p>至今已經被許多開發者、公司採用</p>
+					</section>
+					<section>
+						<p>用 Native 的 UI 跨足 Mobile</p>
+						<img src="img/react-eco.jpg">
+					</section>
+					<section>
+						<p>最近才剛 release android 的版本</p>
+						<img src="img/react-native.png">
+						<p>from <a href="https://twitter.com/yannickdot/status/643920055944744960?lang=zh-tw">twitter@yannickdot</a></p>
+					</section>
+					<section>
+						<p>甚至還可以用在 Command line UI</p>
+						<img src="img/hot-motion.gif">
+						<p>from <a href="https://github.com/gaearon/react-blessed-hot-motion">github@react-blessed-hot-motion</a></p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">Node.js</p>
+					</section>
+					<section>
+						<p>最初 (2009) 是為了能做出一套非同步的伺服器架構而成</p>
+					</section>
+					<section>
+						<p>它的套件庫 npm 有難以想像的下載量</p>
+						<img src="img/npm.png">
+					</section>
+					<section>
+						<p style="font-size: 2em">啊不對</p>
+					</section>
+					<section>
+						<p>那是上學期的</p>
+						<p>下面這個才是現在的</p>
+						<img src="img/npm2.png">
+					</section>
+					<section>
+						<p>npm 的套件數量也已經遠超過其他語言</p>
+						<img src="img/module.png">
+					</section>
+					<section>
+						<p>還在繼續拉開差距</p>
+						<img src="img/module-count.png">
+					</section>
+					<section>
+						<p>一路漫延到手機應用程式、桌面應用程式、<br />IoT、機器人、VR 開發</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">Rails</p>
+					</section>
+					<section>
+						<ul>
+							<li>Restful</li>
+							<li>MVC</li>
+							<li>ORM (Active Record)</li>
+							<li>Migration</li>
+							<li>Generator</li>
+						</ul>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">Database</p>
+					</section>
+					<section>
+						<p>關聯式資料庫跟 SQL</p>
+						<p>NoSQL</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<h3>學會這些不是最重要的</h3>
+					<p>重點是能去實做一些東西出來</p>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<p style="font-size: 2em">進入 JavaScript 主題</p>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p>想要測試語法，請直接打開瀏覽器</p>
+						<img src="img/console.png">
+					</section>
+					<section>
+						<p>console.log 是你 debug 好夥伴</p>
+<pre><code>var a = 1;
+console.log(a); // 可以是任何型別
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">型別</p>
+					</section>
+					<section>
+						<p>JS 只有五種內建型別 (primitive types) 其他都是物件</p>
+						<table>
+							<thead>
+								<tr>
+									<th>型別</th>
+									<th>範例值</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Undefined (未定義)</td>
+									<td>undefined</td>
+								</tr>
+								<tr>
+									<td>Null (空值)</td>
+									<td>null</td>
+								</tr>
+								<tr>
+									<td>String (字串)</td>
+									<td>'哎呀'</td>
+								</tr>
+								<tr>
+									<td>Boolean (布林值)</td>
+									<td>true, false</td>
+								</tr>
+								<tr>
+									<td>Number (數字)</td>
+									<td>3.1415926</td>
+								</tr>
+							</tbody>
+						</table>
+					</section>
+					<section>
+						<p>常用物件</p>
+						<table>
+							<thead>
+								<tr>
+									<th>型別</th>
+									<th>範例值</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Object (物件)</td>
+									<td>{ name: 'Tim', age: 21 }</td>
+								</tr>
+								<tr>
+									<td>Array (陣列)</td>
+									<td>[ 1, 2, '3', true]</td>
+								</tr>
+								<tr>
+									<td>Date (日期)</td>
+									<td>new Date()</td>
+								</tr>
+								<tr>
+									<td>RegExp (正規表達式)</td>
+									<td>/\.css$/</td>
+								</tr>
+							</tbody>
+						</table>
+					</section>
+					<section>
+						<h2>所有的值被分成兩個陣營..</h2>
+						<p class="fragment">Truthy</p>
+						<p class="fragment">Falsy</p>
+					</section>
+					<section>
+						<h2>不是 Falsy 的值..都是 Truthy</h2>
+						<div class="fragment">
+							<p>Falsy 的值：</p>
+							<p><code>false</code>, <code>null</code>, <code>undefined</code>, <code>0</code>, <code>NaN</code>, <code>''</code></p>
+							<a href="https://developer.mozilla.org/en-US/docs/Glossary/Falsy" target="_blank">MDN</a>
+						</div>
+						<p class="fragment">這會用在 <code>if</code>, <code>while</code></p>
+						<p class="fragment">邏輯運算子 <code>&&</code>, <code>||</code>, 三元運算子判斷等等地方</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section data-markdown>
+						<script type="text/template">
+定義變數：是用 `var`
+
+定義的位置會自動抬升到最前面
+
+
+```
+// 警告：現實人生中絕對不會有人這樣寫！！！
+a = 1;
+a = 2;
+var a = 3;
+```
+
+等同於
+```
+var a;
+a = 1;
+a = 2;
+a = 3;
+```
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+JavaScript 的變數 scope 跟 c, c++ 等其他語言不太一樣
+
+區域變數活在 `function` 之中而不是在 block 之中
+
+```
+function() {
+  for (var i = 0; i < 0; i++) {
+    console.log(i);
+  }
+}
+````
+
+等同於
+```
+function() {
+  var i;
+  for (i = 0; i < 0; i++) {
+    console.log(i);
+  }
+}
+```
+						</script>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section data-markdown>
+						<script type="text/template">
+定義函數：是用 `function`
+
+像以下這樣定義一樣會自動抬升到最前面
+
+
+```
+// 這種稱為 function declaration
+function sum(a, b) {
+  return a + b;
+}
+```
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+但在 JavaScript 裡面
+
+`function` 是 first-class 的
+
+可以指定到變數中
+
+這樣則不會抬升，就依照定義那行的順序
+
+```
+// 這種稱為 function expression
+// 如果我在這之前先呼叫 sum(1, 2) 會錯誤
+var sum = function(a, b) {
+  return a + b;
+};
+
+var result = sum(1, 2);
+```
+						</script>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<p><code>if else</code>, <code>switch case</code>, <code>for loop</code>, <code>while loop</code></p>
+					<p>這些跟其他語言沒有太大差異</p>
+				</section>
+
+				<section data-background="#fff">
+					<section data-background="img/responsibility.png"></section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">DOM</p>
+						<p>文件物件模型 (Document Object Model, DOM)</p>
+						<p>它提供了一個文件（樹）的結構化表示法，並定義讓程式可以存取並改變文件架構、風格和內容的方法。</p>
+						<p>本身不是 JavaScript 的一部分，是瀏覽器環境提供的</p>
+						<p>以後教到 node 就不會有瀏覽器裡面的</p>
+						<p><code>window</code>, <code>document</code> 物件</p>
+					</section>
+					<section>
+						<p>要把這種文字檔，轉換成可操作的形式</p>
+						<img src="img/html.svg" style="background-color: white; width: 90%">
+					</section>
+					<section>
+						<p>DOM 是由一個一個的 DOM Node 組成</p>
+						<img src="img/dom-tree.svg">
+					</section>
+					<section>
+						<p>瀏覽器裡面最重要的就是的</p>
+						<p><code>window</code>, <code>document</code> 物件</p>
+						<p><code>window</code> 是全域物件</p>
+						<p>而 <code>document</code> 是 <code>window</code> 物件下的一個屬性</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<h3>對於 API 有任何疑惑時</h3>
+					<p>請參考 <a href="https://developer.mozilla.org/en-US/docs/Web/API">MDN</a></p>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">選擇 DOM Node</p>
+						<ul>
+							<li><a src="https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById">document.getElementById(id)</a></li>
+							<li><a src="https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementsByClassName">document.getElementsByClassName(className)</a></li>
+							<li><a src="https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementsByTagName">document.getElementsByTagName(tagName)</a></li>
+							<li><a src="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector">document.querySelector(selectors)</a></li>
+							<li><a src="https://developer.mozilla.org/en-US/docs/Web/API/Element/querySelectorAll">document.querySelectorAll(selectors)</a></li>
+						</ul>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+同樣的 id 在同一頁 html 只能有一個
+
+```
+<div id="target"></div>
+```
+
+```
+// 用 id string 當參數
+var target = document.getElementById('target');
+```
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+同樣的 class 在同一頁 html 可以有很多個
+
+```
+<div class="a-class"></div>
+<div class="a-class"></div>
+<div class="a-class"></div>
+```
+
+```
+// 用 class name string 當參數
+var targets = document.getElementsByClassName('a-class');
+
+// 取第一個符合條件的
+var target1 = targets[0];
+```
+
+要注意會選到一個以上的東西
+
+它的值是個偽陣列，像是陣列又不是陣列
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+選取 tag element node
+
+```
+<div></div>
+<div></div>
+<div></div>
+```
+
+```
+// 用 tag name 當參數
+var targets = document.getElementsByTagName('div');
+```
+
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+querySelector, querySelectorAll 是個 IE 8,9 才導入的 API
+
+可以用 css 的一部份 selector 來選取
+
+```
+var el = document.querySelector('#test');
+var matches = el.querySelectorAll('div.highlighted > p');
+```
+						</script>
+					</section>
+
+					<section>
+						<p>body 是個特殊的 node<p>
+						<p>可以直接用 <code>document.body</code> 拿到</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<p style="font-size: 2em">DOM Node 物件</p>
+					<ul>
+						<li><a src="https://developer.mozilla.org/en-US/docs/Web/API/Node/parentNode">Node.parentNode</a></li>
+						<li><a src="https://developer.mozilla.org/en-US/docs/Web/API/Node/firstChild">Node.firstChild</a></li>
+						<li><a src="https://developer.mozilla.org/en-US/docs/Web/API/Node/lastChild">Node.lastChild</a></li>
+					</ul>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">建立 DOM Node</p>
+						<ul>
+							<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement">document.createElement(tagName)</a></li>
+							<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/createTextNode">Document.createTextNode(text)</a></li>
+						</ul>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+建立任何 tag element node
+
+```
+// 用 tag name 當參數
+var newDiv = document.createElement('div');
+```
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+建立 text node
+
+```
+// 用字串當參數
+var newText = document.createTextNode('this is a text node');
+```
+						</script>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">移除 DOM Node</p>
+						<ul>
+							<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Node/removeChild">Node.removeChild(childNode)</a></li>
+						</ul>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+```
+<!--Sample HTML code-->
+
+<div id="top" align="center">
+  <div id="nested"></div>
+</div>
+```
+
+```
+var topElement = document.getElementById('top');
+var nestedElement = document.getElementById('nested');
+var throwawayNode = topElement.removeChild(nestedElement);
+```
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+Document 跟 DocumentFragment 沒有 parentNode
+
+所以檢查一下比較安全
+
+```
+var node = document.getElementById('target');
+if (node.parentNode) {
+  node.parentNode.removeChild(node);
+}
+```
+						</script>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">插入 DOM Node</p>
+						<ul>
+							<li><a src="https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML">Element.innerHTML = htmlString</a></li>
+							<li><a src="https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild">Node.appendChild(node)</a></li>
+						</ul>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+
+innerHTML: 插入 HTML 字串到 DOM Element
+
+```
+<!-- before -->
+<div id="target"></div>
+```
+
+```
+var targetElement = document.getElementById('target');
+targetElement.innerHTML = '<div id="div1"></div><div id="div2"></div>';
+```
+
+```
+<!-- after -->
+<div id="target">
+	<div id="div1"></div>
+	<div id="div2"></div>
+</div>
+```
+
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+
+appendChild: 把 DOM Node 放到裡面的最後面
+
+```
+<!-- before -->
+<div id="target">
+	<div id="div1"></div>
+	<div id="div2"></div>
+</div>
+```
+
+```
+var newDiv = document.createElement('div');
+var targetElement = document.getElementById('target');
+targetElement.appendChild(newDiv);
+```
+
+```
+<!-- after -->
+<div id="target">
+	<div id="div1"></div>
+	<div id="div2"></div>
+	<div></div>
+</div>
+```
+
+						</script>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">改變 style, className</p>
+						<ul>
+							<li><a src="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style">HTMLElement.style</a></li>
+							<li><a src="https://developer.mozilla.org/en-US/docs/Web/API/Element/className">Element.className</a></li>
+						</ul>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+改變 style
+
+```
+var targetElement = document.getElementById('target');
+
+targetElement.style.color = 'red';
+```
+
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+改變 className
+
+
+```
+var targetElement = document.getElementById('target');
+
+targetElement.className = 'new-class';
+```
+
+						</script>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">事件</p>
+					</section>
+					<section>
+						<table>
+							<thead>
+								<td>名稱</td>
+								<td>發生處理狀況</td>
+							</thead>
+							<tr>
+								<td>click</td>
+								<td>點擊的時候</td>
+							</tr>
+							<tr>
+								<td>dblclick</td>
+								<td>連點兩次的時候</td>
+							</tr>
+							<tr>
+								<td>focus</td>
+								<td>開始在輸入框輸入時候</td>
+							</tr>
+							<tr>
+								<td>blur</td>
+								<td>離開輸入框時候</td>
+							</tr>
+							<tr>
+								<td>change</td>
+								<td>輸入值改變的後</td>
+							</tr>
+							<tr>
+								<td>keydown</td>
+								<td>鍵盤按下去的時候</td>
+							</tr>
+							<tr>
+								<td>keyup</td>
+								<td>鍵盤按下去的鍵上來的時候</td>
+							</tr>
+							<tr>
+								<td>mouseenter</td>
+								<td>滑鼠進到元素裡面的時候</td>
+							</tr>
+							<tr>
+								<td>mouseleave</td>
+								<td>滑鼠移出元素的時候</td>
+							</tr>
+						</table>
+					</section>
+					<section>
+						<h3></h3>
+						<ul>
+							<li><a src="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener">EventTarget.addEventListener(eventType, listener)</a></li>
+						</ul>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+去聽事件，在發生的時候呼叫 function
+
+```
+<button id="target">是個按鈕</button>
+```
+
+```
+var targetElement = document.getElementById('target');
+
+targetElement.addEventListener('click', function() {
+  // ..做一些事，任何事，你希望按鈕按了要幹麻？
+  alert('你希望按鈕按了要幹麻？');
+});
+```
+
+						</script>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65" style="text-align: left;">
+					<section>
+						<h1>練習</h1>
+					</section>
+					<section>
+						<p>1. 打開 browser console 來試一遍剛剛的一些 DOM 操作</p>
+					</section>
+					<section>
+						<p>2. 寫一個 button，<br />在你 click 的時候會 appendChild 進去一個 body</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65" style="text-align: left;">
+					<h1>THE END</h1>
+					<p>Thanks for listening</p>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
