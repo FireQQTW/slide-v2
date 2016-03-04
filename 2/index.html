@@ -1,0 +1,683 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Web Hackthon Seminar</title>
+
+		<meta name="description" content="Web Hackthon Seminar - 2">
+		<meta name="author" content="C. T. Lin">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section data-background="#b5533c">
+					<h1>Web Hackthon Seminar </h1>
+					<h3>2</h3>
+					<p>
+						<small>JavaScript Good/Bad Parts</small>
+					</p>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<h3>JavaScript Good/Bad Parts</h3>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<p>JavaScript 是個很棒也很糟糕的程式語言<p>
+					<p class="fragment">Designing a Language in 10 Days (Brendan Eich)<p>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p>Doug Crockford</p>
+						<img src="img/douglas.jpg" style="height: 400px">
+						<p class="fragment">輕量級資料交換格式「JSON」的創造者<p>
+					</section>
+					<section>
+						<img src="img/good-parts.jpg" style="height: 400px">
+						<p>2008 年出版的經典</p>
+						<p>也有中譯本 - JavaScript：優良部分</p>
+					</section>
+					<section>
+						<p>Youtube 上也有<a href="https://www.youtube.com/watch?v=hQVTIJBZook">這個主題</a>的演講</p>
+					</section>
+					<section>
+						<p>這個禮拜的內容就會大致從這裡面去濃縮、延伸</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<h3>Good Parts</h3>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<p>表達非常的簡潔</p>
+<pre><code>var num = 1;
+var bool = true;
+var str = 'This is a sentence.';
+var obj = {
+  name: 'John',
+  age: 18
+};
+var arr = [ 1, 2, 3 ];
+</code></pre>
+					<p class="fragment">所以大家才喜歡「JSON」<p>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p>程式可以很 Object-oriented programming (OOP) 也可以很 Functional programming (FP)</p>
+					</section>
+					<section>
+						<h3>Object-oriented programming (OOP)</h3>
+<pre><code>function Car(engine) {
+  this.engine = engine
+}
+
+function Engine() {}
+
+var engine = new Engine();
+var car = new Car(engine);
+</code></pre>
+					</section>
+					<section>
+						<h3>Functional programming (FP)</h3>
+<pre><code>function compose(...funcs) {
+  return arg => funcs.reduceRight((composed, f) => f(composed), arg);
+}
+
+function add1(val) {
+  return val + 1;
+}
+
+function powerOf2(val) {
+  return val * val;
+}
+
+var add1ThenPowerOf2 = compose(powerOf2, add1);
+
+add1ThenPowerOf2(1) // 4
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<h3>學習了各種語言的優點</h3>
+					</section>
+					<section>
+						<ul>
+							<li>Self
+								<ul>
+									<li>prototypal inherit</li>
+									<li>dynamic objects</li>
+								</ul>
+							</li>
+							<li>Scheme
+								<ul>
+									<li>lambda</li>
+									<li>loose typing</li>
+								</ul>
+							</li>
+							<li>Java
+								<ul>
+									<li>syntax</li>
+									<li>covention</li>
+								</ul>
+							</li>
+							<li>Perl
+								<ul>
+									<li>regular expression</li>
+								</ul>
+							</li>
+  						</ul>
+					</section>
+					<section>
+						<h3>dynamic objects</h3>
+						<p>不想要讓 console 有東西 log 出來可以直接把它蓋掉</p>
+<pre><code>console.log = function() {};
+</code></pre>
+						<p>這個會讓測試更容易寫</p>
+					</section>
+					<section>
+						<h3>lambda</h3>
+<pre><code>[ 1, 2, 3, 4 ].filter(function(val) { return val % 2 === 0; })
+// [ 2, 4 ]
+</code></pre>
+						<p>通常也被稱為 Anonymous function</p>
+					</section>
+					<section>
+						<h3>Java</h3>
+						<p>網景公司管理層希望它外觀看起來像Java</p>
+						<p>因此取名為JavaScript</p>
+						<p>也在 Java Applet 失敗後頂住前端的位置</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<h3>這世界上陷阱很多，請避免走在雷區</h3>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<h3>型別的陷阱</h3>
+						<p>動態型別 (Dynamic type) + 弱型別 (Weak type)</p>
+					</section>
+					<section>
+						<p>Python、Ruby 雖都是動態型別 (Dynamic type)</p>
+						<p>但也都是強型別 (Strong type)</p>
+						<p>JavaScript 卻是弱型別 (Weak type)</p>
+					</section>
+					<section>
+<pre><code>1 + '1' // 11
+</code></pre>
+					</section>
+					<section>
+<pre><code>1 + {} // "1[object Object]"
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<h3>隱式型別轉換非常複雜</h3>
+					</section>
+					<section>
+						<h3>不要想要輕易破解它</h3>
+						<p>它會試圖把各種東西轉換成數字或字串來比對</p>
+					</section>
+					<section>
+						<img src="img/type-compare.png">
+					</section>
+					<section>
+<pre><code>[] + [] // ""
+{} + {} // NaN
+[] + {} // "[object Object]"
+{} + [] // 0
+// .....WTF?
+</code></pre>
+					</section>
+					<section>
+						<h3>我曾經搞懂過</h3>
+						<p class="fragment">但我忘光了</p>
+						<p class="fragment">不會有人想在雷區行走</p>
+					</section>
+					<section>
+						<h3>如果你真的很偏執</h3>
+						<pre><code>// http://stackoverflow.com/questions/7202157/why-does-return-the-string-10
+++[[]][+[]]+[+[]] // "10"
+</code></pre>
+					</section>
+					<section>
+						<p>所以請使用 === 和 !==</p>
+						<p>不要使用 == 和 !=</p>
+						<p>(至少在你還不夠熟悉的時候)</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p>內建陷阱 keyword: typeof</p>
+					</section>
+					<section>
+						<h3>練習操作一下</h3>
+<pre><code>typeof 1
+typeof NaN
+typeof true
+typeof "this is a string."
+typeof []
+typeof {}
+typeof function() {}
+typeof undefined
+typeof null
+</code></pre>
+					</section>
+					<section>
+<pre><code>// typeof 很好用，像是判斷 string、boolean、undefined、function
+// 但有些時候...
+typeof null // "object"
+typeof [] // "object"
+typeof NaN // "number"
+</code></pre>
+					</section>
+				</section>
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<h3>Phony Array</h3>
+						<p>連 chrome 都會被騙</p>
+					</section>
+					<section>
+<pre><code>// http://blog.vjeux.com/2010/javascript/javascript-fake-arrays.html
+({0: 42, 1: 666, length: 2, splice: function() {}}) // [42, 666]
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<h3>數字的陷阱</h3>
+					</section>
+					<section>
+						<p>JavaScript 跟很多語言都是使用</p>
+						<p><a href="https://en.wikipedia.org/wiki/Double-precision_floating-point_format"IEEE 754 雙精確度 64 位元浮點數></a></p>
+						<p>(double-precision 64-bit format IEEE 754)</p>
+					</section>
+					<section>
+						<p>1 位正負號、11 位指數、52 位精準度</p>
+						<img src="img/double.png">
+					</section>
+					<section>
+						<p>浮點數運算有精準度問題</p>
+<pre><code>
+0.1 + 0.2 === 0.3 // false
+0.1 + 0.2 // 0.30000000000000004
+</code></pre>
+					</section>
+					<section>
+<pre><code>
+Number.MAX_VALUE // 1.7976931348623157e+308
+Number.MAX_VALUE * 2 // Infinity
+</code></pre>
+					</section>
+					<section>
+						<p>Infinity、-Infinity、NaN 都是特殊的 Number</p>
+					</section>
+					<section>
+						<p>另一個雷 isNaN</p>
+<pre><code>
+isNaN('1') // false
+</code></pre>
+					</section>
+					<section>
+						<p>型別轉換請永遠戒慎恐懼</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<h3>普遍大家接受的型別轉換方式</h3>
+					</section>
+					<section>
+						<h3>轉成數字</h3>
+<pre><code>var a = '-1';
++a // -1
+</code></pre>
+					</section>
+					<section>
+						<h3>轉成字串</h3>
+<pre><code>var a = '-1';
+'' + a // "-1"
+</code></pre>
+					</section>
+					<section>
+						<h3>轉成布林值</h3>
+<pre><code>var a = '-1';
+!!a // true
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<h3>prototype 繼承</h3>
+					</section>
+					<section>
+						<p>類別繼承 (class) inherit</p>
+						<p>按照設計圖 (class) 來建立物件</p>
+						<img src="img/class-i.png">
+					</section>
+					<section>
+						<p>prototype 繼承 inherit</p>
+						<img src="img/prototype-i.png" style="height: 550px">
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<h3>建構式 constructor</h3>
+					</section>
+					<section>
+						<p>JavaScript 建構式也是用 function</p>
+						<p>慣例上首字會大寫</p>
+<pre><code>function Person(name, age) {
+  this.name = name;
+  this.age = age;
+}
+</code></pre>
+<p>就可以用 new 產生物件了</p>
+<pre><code>var person1 = new Person('Tim', 18);
+var person2 = new Person('Joe', 24);
+</code></pre>
+					</section>
+					<section>
+						<p>可以在 prototype 上寫一些功能</p>
+<pre><code>Person.prototype.getName = function() {
+  return this.name;
+}
+</code></pre>
+<p>所有依照 Person prototype 建出來的物件都可以用了</p>
+<pre><code>person1.getName() // Tim
+</code></pre>
+
+					</section>
+					<section>
+						<p>試試沒有加 new 會發生什麼事？</p>
+					</section>
+					<section>
+						<p>屬性都會跑到 global，除非你在嚴格模式</p>
+					</section>
+					<section>
+						<ul>
+							<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode">嚴格模式 MDN</a></li>
+							<li><a href="http://www.ruanyifeng.com/blog/2013/01/javascript_strict_mode.html">簡中的一個嚴格模式說明</a></li>
+						</ul>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p>prototype and __proto__ 的差別？</p>
+					</section>
+					<section>
+						<img src="img/chain.png">
+						<p>prototype 是放在 constructor function 上的，在建構物件時會用到</p>
+						<p>__proto__ 則是物件實際在 inherit chain 下查詢用到的</p>
+						<p><a href="http://stackoverflow.com/questions/9959727/proto-vs-prototype-in-javascript">可參考</a></p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<h3>this</h3>
+					</section>
+					<section>
+						<p>this 到底指向誰是一個容易困惑的問題</p>
+					</section>
+					<section>
+						<p>這個特別的 keyword，是由呼叫的狀況來決定的</p>
+					</section>
+					<section>
+						<p>直接在物件上呼叫 this 當然是指物件本身</p>
+<pre><code>function DemoItem(item) {
+  this.internalItem = item;
+}
+
+DemoItem.prototype.show = function() {
+  console.log(this.internalItem);
+}
+
+var item = new DemoItem('demo');
+item.show();
+</code></pre>
+<p>但這樣呢？</p>
+<pre><code>var show = item.show;
+show(); // this 錯了，又變成 global，除非你在嚴格模式
+</code></pre>
+
+					</section>
+					<section>
+						<p>如果你把一個裡面有 this 的 function 丟給別人</p>
+						<p>那很有可能會出問題</p>
+<pre><code>element.addEventListener('click', function() {
+  // 這是丟給別人的 function
+  // 這有用 this 要很小心！！
+});
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p>改變 <code>this</code> 的做法</p>
+					</section>
+					<section>
+						<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply">Function.prototype.apply(thisArg, [argsArray])</a></p>
+<pre><code>var marshall = {
+  name: 'Marshall',
+  walk: function() {
+  	console.log(this.name + ' walk')
+  }
+};
+
+marshall.walk(); // Marshall walk
+marshall.walk.apply({ name: 'Amy' }); // Amy walk
+</code></pre>
+					</section>
+					<section>
+						<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind">Function.prototype.bind(thisArg[, arg1[, arg2[, ...]]])</a></p>
+<pre><code>
+var log1 = console.log;
+log1('demo'); // Uncaught TypeError: Illegal invocation(…)
+
+var log2 = console.log.bind(console);
+log2('demo'); // 'demo'
+
+var log3 = console.log.bind(console, 'assign', 'other', 'args');
+log3(); // 'assign other args'
+</code></pre>
+					</section>
+					<section>
+						<p>用處？</p>
+						<ul>
+							<li>確保一個物件的 method 被別人 call 還能有原本的 this</li>
+							<li>可以借用別的物件的方法</li>
+						</ul>
+					</section>
+					<section>
+						<p>練習</p>
+						<p>把前面的 apply 範例改成用 bind 寫</p>
+						<p>以瞭解 apply 跟 bind 的差異</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<h3>Lexical scope</h3>
+					</section>
+					<section>
+						<p>JavaScript 每個 function 都會產生一個 Lexical scope</p>
+						<p>找變數時會在 scope chain 一路往上找</p>
+<pre><code>var y = 3;
+function outer() {
+  var x = 2;
+  var y = 1;
+  function inner() {
+    var x = 1;
+    console.log(x + y) // 2
+  }
+}
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<h3>closure (閉包)</h3>
+					</section>
+					<section>
+						<p>如果外圍 <code>function</code> 已經執行並 <code>return</code> 了</p>
+						<p>還有可以參考到的 independent (free) variables</p>
+						<p>就會形成 closure</p>
+					</section>
+					<section>
+<pre><code>function makeList() {
+  var list = []; // free variables in closure
+  return {
+    getState: function() {
+      return list;
+    },
+    append: function(item) {
+      list.push(item);
+    }
+  };
+}
+
+var list = makeList();
+list.append(1);
+list.append(2);
+list.getState() // [1, 2]
+</code></pre>
+						<p class="fragment">練習：試著加上 <code>reset</code> function 看看</p>
+					</section>
+					<section>
+						<p>練習：寫一個 <code>once</code> function</p>
+<pre><code>function log() {
+  console.log('some side effects');
+}
+
+var logOnlyOnce = once(log);
+
+logOnlyOnce(); // 'some side effects'
+logOnlyOnce(); // 不會在有東西印出來
+</code></pre>
+					</section>
+					<section>
+						<p>練習：寫一個 <code>delay</code> function</p>
+<pre><code>function log() {
+  console.log('some side effects');
+}
+
+var logDelay = delay(log, 1000);
+
+logDelay(); // 一秒鐘後... 'some side effects'
+</code></pre>
+					</section>
+				</section>
+
+
+				<section data-transition="slide" data-background="#b5533c">
+					<h3>分號插入機制 (semicolon insertion)</h3>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p>寫程式的人很喜歡戰 coding style</p>
+					</section>
+					<section>
+						<p>這樣寫比較好？</p>
+<pre><code>if (true) {
+
+}
+</code></pre>
+					</section>
+					<section>
+						<p>還是這樣寫比較好？</p>
+<pre><code>// js 幾乎沒人這樣寫
+if (true)
+{
+
+}
+</code></pre>
+					</section>
+					<section>
+						<h3>因為 semicolon insertion</h3>
+<pre><code>
+function demo() {
+  return
+  {
+
+  }
+}
+</code></pre>
+	<p>會自動被解析成這樣</p>
+<pre><code>
+function demo() {
+  return;
+  {
+
+  }
+}
+</code></pre>
+	<p>會 return undefined</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p>還有些狀況是想要有分號沒分號</p>
+					</section>
+					<section>
+<pre><code>function demo() {}
+demo()
+[1, 2, 3]
+</code></pre>
+<p>會自動被解析成這樣</p>
+<pre><code>function demo() {}
+demo()[1, 2, 3] // Uncaught TypeError: Cannot read property '3' of undefined(…)
+</code></pre>
+					</section>
+					<section>
+						<p>所以請在結尾加上 ;</p>
+						<p>(至少在你還不夠熟悉的時候)</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65" style="text-align: left;">
+					<h1>THE END</h1>
+					<p>Thanks for listening</p>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
