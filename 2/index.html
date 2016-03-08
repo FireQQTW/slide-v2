@@ -49,7 +49,7 @@
 				</section>
 
 				<section data-transition="slide" data-background="#4d7e65">
-					<h3>JavaScript Good/Bad Parts</h3>
+					<p style="font-size: 2em">JavaScript Good/Bad Parts</p>
 				</section>
 
 				<section data-transition="slide" data-background="#b5533c">
@@ -77,7 +77,7 @@
 				</section>
 
 				<section data-transition="slide" data-background="#b5533c">
-					<h3>Good Parts</h3>
+					<p style="font-size: 2em">Good Parts</p>
 				</section>
 
 				<section data-transition="slide" data-background="#b5533c">
@@ -99,9 +99,9 @@ var arr = [ 1, 2, 3 ];
 						<p>程式可以很 Object-oriented programming (OOP) 也可以很 Functional programming (FP)</p>
 					</section>
 					<section>
-						<h3>Object-oriented programming (OOP)</h3>
+						<p style="font-size: 2em">Object-oriented programming (OOP)</p>
 <pre><code>function Car(engine) {
-  this.engine = engine
+  this.engine = engine;
 }
 
 function Engine() {}
@@ -111,7 +111,21 @@ var car = new Car(engine);
 </code></pre>
 					</section>
 					<section>
-						<h3>Functional programming (FP)</h3>
+						<p style="font-size: 2em">ES2015 - OOP</p>
+<pre><code>class Car {
+  constructor(engine) {
+     this.engine = engine;
+  }
+}
+
+class Engine {}
+
+var engine = new Engine();
+var car = new Car(engine);
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 2em">Functional programming (FP)</p>
 <pre><code>function compose(...funcs) {
   return arg => funcs.reduceRight((composed, f) => f(composed), arg);
 }
@@ -152,7 +166,7 @@ add1ThenPowerOf2(1) // 4
 							<li>Java
 								<ul>
 									<li>syntax</li>
-									<li>covention</li>
+									<li>convention</li>
 								</ul>
 							</li>
 							<li>Perl
@@ -163,21 +177,21 @@ add1ThenPowerOf2(1) // 4
   						</ul>
 					</section>
 					<section>
-						<h3>dynamic objects</h3>
+						<p style="font-size: 2em">dynamic objects</p>
 						<p>不想要讓 console 有東西 log 出來可以直接把它蓋掉</p>
 <pre><code>console.log = function() {};
 </code></pre>
-						<p>這個會讓測試更容易寫</p>
+						<p>這會讓測試更容易寫</p>
 					</section>
 					<section>
-						<h3>lambda</h3>
+						<p style="font-size: 2em">lambda</p>
 <pre><code>[ 1, 2, 3, 4 ].filter(function(val) { return val % 2 === 0; })
 // [ 2, 4 ]
 </code></pre>
 						<p>通常也被稱為 Anonymous function</p>
 					</section>
 					<section>
-						<h3>Java</h3>
+						<p style="font-size: 2em">Java</p>
 						<p>網景公司管理層希望它外觀看起來像Java</p>
 						<p>因此取名為JavaScript</p>
 						<p>也在 Java Applet 失敗後頂住前端的位置</p>
@@ -185,7 +199,7 @@ add1ThenPowerOf2(1) // 4
 				</section>
 
 				<section data-transition="slide" data-background="#b5533c">
-					<h3>這世界上陷阱很多，請避免走在雷區</h3>
+					<h3>陷阱很多，請避免走在雷區</h3>
 				</section>
 
 				<section data-transition="slide" data-background="#4d7e65">
@@ -230,7 +244,7 @@ add1ThenPowerOf2(1) // 4
 					<section>
 						<h3>我曾經搞懂過</h3>
 						<p class="fragment">但我忘光了</p>
-						<p class="fragment">不會有人想在雷區行走</p>
+						<p class="fragment">不會有人這麼喜歡踩地壘</p>
 					</section>
 					<section>
 						<h3>如果你真的很偏執</h3>
@@ -247,7 +261,7 @@ add1ThenPowerOf2(1) // 4
 
 				<section data-transition="slide" data-background="#4d7e65">
 					<section>
-						<p>內建陷阱 keyword: typeof</p>
+						<p style="font-size: 2em">內建陷阱 keyword: typeof</p>
 					</section>
 					<section>
 						<h3>練習操作一下</h3>
@@ -273,7 +287,7 @@ typeof NaN // "number"
 				</section>
 				<section data-transition="slide" data-background="#4d7e65">
 					<section>
-						<h3>Phony Array</h3>
+						<p style="font-size: 2em">Phony Array</p>
 						<p>連 chrome 都會被騙</p>
 					</section>
 					<section>
@@ -298,14 +312,12 @@ typeof NaN // "number"
 					</section>
 					<section>
 						<p>浮點數運算有精準度問題</p>
-<pre><code>
-0.1 + 0.2 === 0.3 // false
+<pre><code>0.1 + 0.2 === 0.3 // false
 0.1 + 0.2 // 0.30000000000000004
 </code></pre>
 					</section>
 					<section>
-<pre><code>
-Number.MAX_VALUE // 1.7976931348623157e+308
+<pre><code>Number.MAX_VALUE // 1.7976931348623157e+308
 Number.MAX_VALUE * 2 // Infinity
 </code></pre>
 					</section>
@@ -313,9 +325,8 @@ Number.MAX_VALUE * 2 // Infinity
 						<p>Infinity、-Infinity、NaN 都是特殊的 Number</p>
 					</section>
 					<section>
-						<p>另一個雷 isNaN</p>
-<pre><code>
-isNaN('1') // false
+						<p style="font-size: 2em">另一個雷 isNaN</p>
+<pre><code>isNaN('1') // false
 </code></pre>
 					</section>
 					<section>
@@ -349,7 +360,7 @@ isNaN('1') // false
 
 				<section data-transition="slide" data-background="#b5533c">
 					<section>
-						<h3>prototype 繼承</h3>
+						<p style="font-size: 2em">prototype 繼承</p>
 					</section>
 					<section>
 						<p>類別繼承 (class) inherit</p>
@@ -364,7 +375,7 @@ isNaN('1') // false
 
 				<section data-transition="slide" data-background="#4d7e65">
 					<section>
-						<h3>建構式 constructor</h3>
+						<p style="font-size: 2em">建構式 constructor</p>
 					</section>
 					<section>
 						<p>JavaScript 建構式也是用 function</p>
@@ -383,15 +394,15 @@ var person2 = new Person('Joe', 24);
 						<p>可以在 prototype 上寫一些功能</p>
 <pre><code>Person.prototype.getName = function() {
   return this.name;
-}
+};
 </code></pre>
 <p>所有依照 Person prototype 建出來的物件都可以用了</p>
-<pre><code>person1.getName() // Tim
+<pre><code>person1.getName(); // Tim
 </code></pre>
 
 					</section>
 					<section>
-						<p>試試沒有加 new 會發生什麼事？</p>
+						<p>沒有加 new 會發生什麼事？</p>
 					</section>
 					<section>
 						<p>屬性都會跑到 global，除非你在嚴格模式</p>
@@ -418,7 +429,7 @@ var person2 = new Person('Joe', 24);
 
 				<section data-transition="slide" data-background="#b5533c">
 					<section>
-						<h3>this</h3>
+						<p style="font-size: 2em">this</p>
 					</section>
 					<section>
 						<p>this 到底指向誰是一個容易困惑的問題</p>
@@ -441,7 +452,7 @@ item.show();
 </code></pre>
 <p>但這樣呢？</p>
 <pre><code>var show = item.show;
-show(); // this 錯了，又變成 global，除非你在嚴格模式
+show(); // this 錯了
 </code></pre>
 
 					</section>
@@ -465,7 +476,7 @@ show(); // this 錯了，又變成 global，除非你在嚴格模式
 <pre><code>var marshall = {
   name: 'Marshall',
   walk: function() {
-  	console.log(this.name + ' walk')
+    console.log(this.name + ' walk');
   }
 };
 
@@ -475,8 +486,7 @@ marshall.walk.apply({ name: 'Amy' }); // Amy walk
 					</section>
 					<section>
 						<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind">Function.prototype.bind(thisArg[, arg1[, arg2[, ...]]])</a></p>
-<pre><code>
-var log1 = console.log;
+<pre><code>var log1 = console.log;
 log1('demo'); // Uncaught TypeError: Illegal invocation(…)
 
 var log2 = console.log.bind(console);
@@ -502,7 +512,7 @@ log3(); // 'assign other args'
 
 				<section data-transition="slide" data-background="#b5533c">
 					<section>
-						<h3>Lexical scope</h3>
+						<p style="font-size: 2em">Lexical scope</p>
 					</section>
 					<section>
 						<p>JavaScript 每個 function 都會產生一個 Lexical scope</p>
@@ -513,7 +523,7 @@ function outer() {
   var y = 1;
   function inner() {
     var x = 1;
-    console.log(x + y) // 2
+    console.log(x + y); // 2
   }
 }
 </code></pre>
@@ -522,7 +532,7 @@ function outer() {
 
 				<section data-transition="slide" data-background="#4d7e65">
 					<section>
-						<h3>closure (閉包)</h3>
+						<p style="font-size: 2em">closure (閉包)</p>
 					</section>
 					<section>
 						<p>如果外圍 <code>function</code> 已經執行並 <code>return</code> 了</p>
@@ -545,7 +555,7 @@ function outer() {
 var list = makeList();
 list.append(1);
 list.append(2);
-list.getState() // [1, 2]
+list.getState(); // [1, 2]
 </code></pre>
 						<p class="fragment">練習：試著加上 <code>reset</code> function 看看</p>
 					</section>
@@ -576,7 +586,7 @@ logDelay(); // 一秒鐘後... 'some side effects'
 
 
 				<section data-transition="slide" data-background="#b5533c">
-					<h3>分號插入機制 (semicolon insertion)</h3>
+					<p style="font-size: 2em">分號插入機制<br /> (semicolon insertion)</p>
 				</section>
 
 				<section data-transition="slide" data-background="#4d7e65">
@@ -600,7 +610,7 @@ if (true)
 </code></pre>
 					</section>
 					<section>
-						<h3>因為 semicolon insertion</h3>
+						<p style="font-size: 2em">因為 semicolon insertion</p>
 <pre><code>
 function demo() {
   return
