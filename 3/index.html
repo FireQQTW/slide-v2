@@ -55,14 +55,14 @@ a { color: white !important; text-decoration: underline !important;}
 				<section data-transition="slide" data-background="#4d7e65">
 					<section>
 						<img src="img/jsdc.png" />
-						<p>Build Anything in JavaScript</p>
+						<p style="font-size: 2em">Build Anything in JavaScript</p>
 					</section>
 					<section>
-						<p>Atwood's Law</p>
+						<p style="font-size: 2em">Atwood's Law</p>
 						<p>Any application that can be written in JavaScript will eventually be written in JavaScript.</p>
 					</section>
 					<section>
-						<h2>JSDC 2015 的講題</h2>
+						<p style="font-size: 2em">JSDC 2015 的講題</p>
 						<ul>
 							<li>跟 Web 相關的主題一半左右</li>
 							<li>IoT 相關的主題有三個</li>
@@ -74,7 +74,7 @@ a { color: white !important; text-decoration: underline !important;}
 					<section>
 						<p>其中最令人感到驚訝的：JavaScript 控制 CNC</p>
 						<p><a href="https://github.com/cheton/cnc.js" target="_blank">cnc.js</a></p>
-						<p><a href="http://cheton.github.io/jsdc2015/#/" target="_blank">jsdc 上的簡報</a></p>
+						<p><a href="http://cheton.github.io/jsdc2015/#/" target="_blank">JSDC 上的簡報</a></p>
 						<p><a href="https://www.youtube.com/watch?v=fJyq4fyiGSc" target="_blank">youtube demo</a></p>
 					</section>
 					<section>
@@ -84,31 +84,29 @@ a { color: white !important; text-decoration: underline !important;}
 
 				<section data-transition="slide" data-background="#b5533c">
 					<section>
-						<p>以往的開發模式有需多問題</p>
-						<p>尤其是：</p>
-						<ol>
+						<p style="font-size: 2em">以往的開發模式有許多問題</p>
+						<ul>
 							<li>HTML、CSS、JavaScript 的缺陷</li>
 							<li>應用程式狀態</li>
 							<li>封裝性</li>
-						</ol>
+						</ul>
 					</section>
 					<section>
-						<h3>HTML、CSS、JavaScript 的缺陷</h3>
-						<p>全域的碰撞很嚴重：</p>
-						<ol>
+						<p style="font-size: 2em">HTML CSS JavaScript 的缺陷<br />全域碰撞很嚴重：</p>
+						<ul>
 							<li>HTML id 只能有一個</li>
 							<li>CSS 的命名碰撞</li>
 							<li>直接宣告的 js 變數會是全域變數</li>
-						</ol>
-						<p>另外 css 還有<a href="https://speakerdeck.com/vjeux/react-css-in-js" target="_blank">很多問題</a></p>
+						</ul>
+						<p>另外 css 還有<a href="https://speakerdeck.com/vjeux/react-css-in-js" target="_blank">很多問題...</a></p>
 					</section>
 					<section>
-						<h3>應用程式狀態</h3>
+						<p style="font-size: 2em">應用程式狀態</p>
 						<p>應用程式的狀態存在於各個程式片斷中</p>
 						<p>於且可能有許多複本存在不同變數中，需要同步</p>
 					</section>
 					<section>
-						<h3>封裝性</h3>
+						<p style="font-size: 2em">封裝性</p>
 						<p>沒有經過元件化封裝的話</p>
 						<p>像是原生的 JavaScript 跟 jQuery 等 library</p>
 						<p>任何一個地方都可能對整個應用程式造成 bug</p>
@@ -120,40 +118,46 @@ a { color: white !important; text-decoration: underline !important;}
 				</section>
 
 				<section data-transition="slide" data-background="#4d7e65">
-					<p>Babel</p>
+					<p style="font-size: 2em">Babel</p>
 					<img src="img/babel.png" />
 				</section>
 
 				<section data-transition="slide" data-background="#b5533c">
 					<section>
-						<h3>瀏覽器支援度</h3>
+						<p style="font-size: 2em">瀏覽器支援度</p>
 					</section>
 					<section>
 						<p>之前推薦過的用來查瀏覽器支援度的 <a href="http://caniuse.com/" target="_blank">caniuse</a></p>
 						<img src="img/caniuse.png" />
 					</section>
 					<section>
-						<p>JavaScript <a href="https://kangax.github.io/compat-table/es6/" target="_blank">版本相容性 table</a></p>
+						<p style="font-size: 2em">JavaScript <a href="https://kangax.github.io/compat-table/es6/" target="_blank">版本相容性 table</a></p>
 						<img src="img/comp-table.png" />
 					</section>
 					<section>
-						<p>大家都開始接受</p>
+						<p>大家都開始了解</p>
 						<p>等到 browser 支援的一天是不實際的</p>
+						<br />
+						<br />
+						<div class="fragment">
+							<p>不過過了半年支援度從</p>
+							<p>chrome 47 的 63% 提升到 chrome 51 的 97%！</p>
+						</div>
 					</section>
 				</section>
 
 				<section data-transition="slide" data-background="#4d7e65">
 					<section>
-						<p>觀念：JavaScript 必須 compile</p>
+						<p style="font-size: 2em">JavaScript 必須 compile</p>
 					</section>
 					<section>
-					<p>必須在網路上傳輸：大小很重要</p>
+						<p style="font-size: 2em">必須在網路上傳輸：<br />大小很重要</p>
 
 
 <ul>
-<li>Gzip: 可壓縮至原本 30%</li>
-<li>Uglify: 可壓縮至原本 50%</li>
-<li>所以大概可減至小於原本 15%</li>
+<li>Gzip：可壓縮至原本 30%</li>
+<li>Uglify：可壓縮至原本 50%</li>
+<li>所以加起來可減至原本 15%</li>
 <li>壓縮後通常會命名為 `.min.js`，<br />例如：`https://fb.me/react-0.13.3.min.js`</li>
 </ul>
 
@@ -161,7 +165,7 @@ a { color: white !important; text-decoration: underline !important;}
 						</script>
 					</section>
 					<section>
-						<p>瀏覽器 socket 數量限制</p>
+						<p style="font-size: 1.4em">瀏覽器 socket 數量限制</p>
 						<img src="img/socket.png" />
 						<p>在 HTTP2 普及之前</p>
 						<ul>
@@ -170,7 +174,7 @@ a { color: white !important; text-decoration: underline !important;}
 						</ul>
 					</section>
 					<section>
-						<p>Dead Code Elimination</p>
+						<p style="font-size: 2em">Dead Code Elimination</p>
 
 <pre><code class="lang-js">if (__DEV__) {
   // some development code
@@ -184,35 +188,37 @@ a { color: white !important; text-decoration: underline !important;}
 						</script>
 					</section>
 					<section>
-						<p>更激進的手段們</p>
+						<p style="font-size: 2em">更激進的手段們</p>
 						<ul>
 							<li><a href="https://github.com/babel/babel/tree/development/packages/babel-plugin-transform-remove-console" target="_blank">babel-plugin-remove-console</a></li>
 							<li><a href="https://github.com/babel/babel/tree/development/packages/babel-plugin-transform-remove-debugger" target="_blank">babel-plugin-transform-remove-debugger</a></li>
 							<li><a href="https://github.com/nkt/babel-plugin-react-remove-prop-types" target="_blank">babel-plugin-transform-remove-prop-types</a></li>
 							<li><a href="https://github.com/facebook/react/pull/4230" target="_blank">flat file bundle</a></li>
+							<li><a href="http://www.2ality.com/2015/12/webpack-tree-shaking.html" target="_blank">tree shaking</a></li>
 						</ul>
 					</section>
 				</section>
 
 				<section data-transition="slide" data-background="#4d7e65">
 					<section>
-						<p>使用 babel 的方法</p>
+						<p style="font-size: 2em">使用 babel 的方法</p>
 					</section>
 					<section>
 						<p>還沒教 node 之前只能</p>
 						<ul>
-							<li>include babel-core/browser.js</li>
-							<li>https://jsbin.com/viwomanadu/1/edit?html,js,console,output</li>
+							<li>include babel-core/browser.js (chrome 有些問題)</li>
+							<li><a href="https://jsbin.com/viwomanadu/1/edit?html,js,console,output" target="_blank">Jsbin</a></li>
+							<li><a href="http://codepen.io/chentsulin/pen/mPRWEm" target="_blank">Codepen</a></li>
 						</ul>
 					</section>
 				</section>
 
 				<section data-transition="slide" data-background="#b5533c">
 					<section>
-						<p>幾個 babel 語法</p>
+						<p style="font-size: 2em">幾個 ES2015 語法</p>
 					</section>
 					<section>
-						<p>Arrow function</p>
+						<p style="font-size: 2em">Arrow function</p>
 
 <pre><code class="lang-js">[1, 2, 3].map(n => n + 1); // [2, 3, 4];
 element.addEventListener('click', (evt) => {
@@ -221,7 +227,7 @@ element.addEventListener('click', (evt) => {
 
 					</section>
 					<section>
-<p>Classes</p>
+<p style="font-size: 2em">Classes</p>
 
 
 <pre><code class="lang-js">class Car extends Vehicle {
@@ -242,7 +248,7 @@ element.addEventListener('click', (evt) => {
 
 					</section>
 					<section>
-<p>Destructuring</p>
+<p style="font-size: 2em">Destructuring</p>
 
 
 <pre><code class="lang-js">var { name, age } = person1;
@@ -250,7 +256,7 @@ var [ x, y ] = [ 900, 600];</code></pre>
 
 					</section>
 					<section>
-<p>Default</p>
+<p style="font-size: 2em">Default</p>
 
 
 <pre><code class="lang-js">function f(x, y=12) {
@@ -260,7 +266,7 @@ var [ x, y ] = [ 900, 600];</code></pre>
 f(3) == 15</code></pre>
 
 
-<p>Rest</p>
+<p style="font-size: 2em">Rest</p>
 
 
 <pre><code class="lang-js">function f(x, ...y) {
@@ -274,7 +280,7 @@ f(3, "hello", true) == 6</code></pre>
 
 					</section>
 					<section>
-<p>Spread</p>
+<p style="font-size: 2em">Spread</p>
 
 
 <pre><code class="lang-js">function f(x, y, z) {
@@ -284,7 +290,7 @@ f(3, "hello", true) == 6</code></pre>
 f(...[1,2,3]) == 6</code></pre>
 					</section>
 					<section>
-<p>Let</p>
+<p style="font-size: 2em">Let</p>
 
 
 <pre><code class="lang-js">let a = 10 * Math.random();
@@ -296,7 +302,7 @@ if (a > 5) {
 console.log(b); // 20</code></pre>
 
 
-	<p>Const</p>
+<p style="font-size: 2em">Const</p>
 
 
 <pre><code class="lang-js">const PI = 3.14;
@@ -311,32 +317,47 @@ PI = 5; // throw Error</code></pre>
 
 				<section data-transition="slide" data-background="#4d7e65">
 					<section>
-						<p>React</p>
+						<p style="font-size: 2em">React</p>
 					</section>
 					<section>
-						<p>課程大部份會以 React 0.14 當作教材</p>
-						<p style="text-decoration:line-through">現在是 rc 1 的階段</p>
-						<p>facebook 現在正在用</p>
-						<p>非常穩定、<span style="text-decoration:line-through">即將</span> 已經 release</p>
-						<p>也是跨平台重要一步</p>
+						<p>課程大部份會以 React 15.x 當作教材</p>
+						<p>現在是 rc 2 的階段</p>
+						<p>facebook 現在正在用 rc1</p>
+						<p>很快就會 release</p>
 					</section>
 					<section>
-						<img src="img/14.png" />
+						<p>最近 0.14.7 直升 15.0.0</p>
+						<a href="https://facebook.github.io/react/blog/2016/02/19/new-versioning-scheme.html" target="_blank">New Versioning Scheme</a>
 					</section>
 					<section>
-						<p><a href="http://semver.org/lang/zh-TW/" target="_blank">Semantic Version</a></p>
+						<p style="font-size: 1.5em">名詞介紹</p>
+						<p style="font-size: 2em"><a href="http://semver.org/lang/zh-TW/" target="_blank">Semantic Version</a></p>
 					</section>
 					<section>
-						<p><a href="https://zh.wikipedia.org/wiki/%E8%BB%9F%E4%BB%B6%E7%89%88%E6%9C%AC%E9%80%B1%E6%9C%9F" target="_blank">Release Candidate</a></p>
+						<p style="font-size: 1.5em">名詞介紹</p>
+						<p style="font-size: 2em"><a href="https://zh.wikipedia.org/wiki/%E8%BB%9F%E4%BB%B6%E7%89%88%E6%9C%AC%E9%80%B1%E6%9C%9F" target="_blank">Release Candidate</a></p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">React 的基本概念</p>
+						<pre><code class="lang-js">(props, state) => HTML</code></pre>
+					</section>
+					<section>
+						<p>UI 由一個個的 Component 組合而成</p>
+					</section>
+					<section>
+						<p>定義 UI 而不要去操作 UI</p>
 					</section>
 				</section>
 
 				<section data-transition="slide" data-background="#4d7e65">
 					<section>
-						<p>Hello World Component</p>
+						<p style="font-size: 2em">Hello World Component</p>
 					</section>
 					<section>
-						<p>建一個 React Component</p>
+						<p style="font-size: 1.5em">定義一個 React Component</p>
 
 <pre><code class="lang-js">// React.createClass 是舊的寫法
 class Hello extends React.Component {
@@ -351,7 +372,7 @@ class Hello extends React.Component {
 				</section>
 				<section data-transition="slide" data-background="#4d7e65">
 					<section>
-						<p>把 Component render 到畫面上</p>
+						<p style="font-size: 1.5em">把 Component render 到畫面上</p>
 					</section>
 					<section>
 <pre><code class="lang-html">&lt;!-- &#32102;&#19968;&#20491; div &#20358;&#30070; render root&#65292;&#30433;&#37327;&#19981;&#35201;&#30452;&#25509; render &#22312; body &#19978; --&gt;
@@ -368,7 +389,7 @@ ReactDOM.render(&lt;Hello /&gt;, document.getElementById('root'));
 
 				<section data-transition="slide" data-background="#b5533c">
 					<section>
-						<h3>jsx</h3>
+						<p style="font-size: 2em">jsx</p>
 					</section>
 					<section>
 						<p>jsx 是一種 JavaScript 的擴充語法</p>
@@ -438,7 +459,7 @@ var app = React.createElement(
 
 				<section data-transition="slide" data-background="#4d7e65">
 					<section>
-						<p>Component render 常見錯誤</p>
+						<p style="font-size: 2em">Component render 常見錯誤</p>
 					</section>
 					<section>
 						<p>錯誤範例：</p>
@@ -489,32 +510,31 @@ var app = React.createElement(
 }
 </code></pre>
 					</section>
+					<section>
+						<p>錯誤範例：</p>
+
+						<p>用 undefined 去 createElement</p>
+
+<pre><code class="lang-js">class Hello extends React.Component {
+  render() {
+    var A = undefined;
+    return (
+      &lt;A&gt;Hello World&lt;/A&gt;
+    );
+  }
+}
+</code></pre>
+					</section>
 				</section>
 
 				<section data-transition="slide" data-background="#b5533c">
-					<p>props and state</p>
+					<p style="font-size: 2em">props and state</p>
 					<p class="fragment">這是初學者最容易有疑惑的地方</p>
 				</section>
 
-				<section data-transition="slide" data-background="#4d7e65">
-					<section>
-						<h3>他們相似的地方</h3>
-						<ul>
-							<li>都是一般 JavaScript 物件</li>
-							<li>都會觸發 UI 更新</li>
-							<li>對 UI 有決定性影響</li>
-						</ul>
-					</section>
-					<section>
-						<p>如果 component 需要在某個時間點改變某個屬性</p>
-						<p>才需要是 state</p>
-						<p>大部份時候應該是 props</p>
-					</section>
-				</section>
-
 				<section data-transition="slide" data-background="#b5533c">
 					<section>
-						<p>props</p>
+						<p style="font-size: 2em">props</p>
 					</section>
 					<section>
 <pre><code class="lang-html">&lt;Hello text="Yo"&gt;
@@ -570,16 +590,27 @@ Hello.defaultProps = {
 	<p>會 get warning message，詳細的 propTypes 可以看<a href="https://facebook.github.io/react/docs/reusable-components.html#prop-validation">這裡</a></p>
 					</section>
 					<section>
+						<p>包在 element 裡面的東西則會作為 this.props.children 傳下去</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
 						<p>只依靠 props 決定 UI 的 Component</p>
 						<p>稱為 Stateless Component</p>
 						<p>而且很容易測試</p>
 						<p>大部份的 component 都是這種</p>
 					</section>
+					<section>
+						<p>0.14 後出現的 Stateless Functional Component</p>
+<pre><code class="lang-js">function Hello({ text }) => &lt;div&gt;{'Hello ' + text }&lt;/div&gt;
+</code></pre>
+					</section>
 				</section>
 
 				<section data-transition="slide" data-background="#b5533c">
 					<section>
-						<p>state</p>
+						<p style="font-size: 2em">state</p>
 					</section>
 					<section>
 						<p>通常是比較高階的 component 才會有</p>
@@ -589,7 +620,7 @@ Hello.defaultProps = {
 <pre><code class="lang-js">class Counter extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {count: props.initialCount};
+    this.state = { count: props.initialCount };
   }
   tick() {
   	// 只用 setState 去改變 state
@@ -614,82 +645,25 @@ Counter.propTypes = { initialCount: React.PropTypes.number };
 					</section>
 				</section>
 
-				<section data-transition="slide" data-background="#b5533c">
-					<section>
-						<p>Controlled Components</p>
-					</section>
-					<section>
-<pre><code class="lang-js">// 沒有 value 就會是 Uncontrolled Component
-// 跟一般一樣
-// 但沒有辦法用 react 去控制 value
-render: function() {
-  return &lt;input type="text" /&gt;;
-}
-</code></pre>
-					</section>
-					<section>
-<pre><code class="lang-js">// Controlled Component
-// 指定了值，那就無法改變它
-render: function() {
-  return &lt;input type="text" value="Hello!" /&gt;;
-}
-</code></pre>
-					</section>
-					<section>
-<p>通常的 Controlled Component 手法</p>
-
-<pre><code class="lang-js">getInitialState: function() {
-  return {value: 'Hello!'};
-},
-handleChange: function(event) {
-  this.setState({value: event.target.value});
-},
-render: function() {
-  var value = this.state.value;
-  return &lt;input type="text" value={value} onChange={this.handleChange} /&gt;;
-}
-</code></pre>
-					</section>
-					<section>
-<pre><code class="lang-js">// 像 twitter 一樣限制 140 個字
-handleChange: function(event) {
-  this.setState({value: event.target.value.substr(0, 140)});
-}
-</code></pre>
-					</section>
-				</section>
-
 				<section data-transition="slide" data-background="#4d7e65">
 					<section>
-					<p>v0.14 之前的寫法， props 跟 state 的語法不太一樣</p>
-<pre><code class="lang-js" style="font-size: 16px">React.createClass({
-  propTypes: {
-    initialCount: React.PropTypes.number
-  },
-  getInitialState: function() {
-  	return {count: props.initialCount}
-  },
-  getDefaultProps: function() {
-  	{ initialCount: 0 };
-  },
-  tick() {
-    this.setState({count: this.state.count + 1});
-  },
-  render() {
-    return (
-      &lt;div onClick={this.tick.bind(this)}&gt;
-        Clicks: {this.state.count}
-      &lt;/div&gt;
-    );
-  }
-});
-</code></pre>
+						<p style="font-size: 2em">它們相似的地方</h3>
+						<ul>
+							<li>都是一般 JavaScript 物件</li>
+							<li>都會觸發 UI 更新</li>
+							<li>對 UI 有決定性影響</li>
+						</ul>
+					</section>
+					<section>
+						<p>如果 component 需要在某個時間點改變某個屬性</p>
+						<p>才需要是 state</p>
+						<p>大部份時候應該是 props</p>
 					</section>
 				</section>
 
 				<section data-transition="slide" data-background="#b5533c">
 					<section>
-						<p>Event System</p>
+						<p style="font-size: 2em">Event System</p>
 					</section>
 					<section>
 						<p>React 使用 SyntheticEvent</p>
@@ -700,23 +674,14 @@ handleChange: function(event) {
 						</ul>
 					</section>
 					<section>
-
-						<p>Event pooling：會把 event 重複使用，要很小心</p>
+						<p>onSomeEvent...</p>
 
 <pre><code class="lang-js">class Demo extends React.Component {
   handleClick(event) {
-    console.log(event); // => nullified object.
-    console.log(event.type); // => "click"
-    var eventType = event.type; // => "click"
-
-    setTimeout(function() {
-      console.log(event.type); // => null
-      console.log(eventType); // => "click"
-    }, 0);
-
-    this.setState({clickEvent: event}); // Won't work. this.state.clickEvent will only contain null values.
-    this.setState({eventType: event.type}); // You can still export event properties.
+	// 這裡如果有用到 this 的話，就必須要 bind
+	alert('button was clicked!!!');
   }
+
   render() {
   	return &lt;button onClick={this.handleClick.bind(this)}&gt;
   }
@@ -728,20 +693,72 @@ handleChange: function(event) {
 					</section>
 				</section>
 
-				<section data-transition="slide" data-background="#4d7e65">
+				<section data-transition="slide" data-background="#b5533c">
 					<section>
-						<p>Ref</p>
+						<p style="font-size: 2em">Controlled Components</p>
 					</section>
 					<section>
-						<p>有時候還是需要取得 DOM</p>
+<pre><code class="lang-js">// 沒有 value 就會是 Uncontrolled Component
+// 跟一般一樣
+// 但沒有辦法用 react 去控制 value
+render() {
+  return &lt;input type="text" /&gt;;
+}
+</code></pre>
+					</section>
+					<section>
+<pre><code class="lang-js">// Controlled Component
+// 指定了值，那就無法改變它
+render() {
+  return &lt;input type="text" value="Hello!" /&gt;;
+}
+</code></pre>
+					</section>
+					<section>
+<p>通常的 Controlled Component 手法</p>
+
+<pre><code class="lang-js">...
+constructor(props, context) {
+  super(props, context);
+  this.state = { value: 'Hello!' };
+  this.handleChange = this.handleChange.bind(this)
+}
+handleChang(event) {
+  this.setState({ value: event.target.value });
+}
+render() {
+  var value = this.state.value;
+  return &lt;input type="text" value={value} onChange={this.handleChange} /&gt;;
+}
+</code></pre>
+					</section>
+					<section>
+<pre><code class="lang-js">// 像 twitter 一樣限制 140 個字
+handleChange(event) {
+  this.setState({ value: event.target.value.substr(0, 140) });
+}
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">Ref</p>
+					</section>
+					<section>
+						<p>還是可以取得 DOM</p>
 
 <pre><code class="lang-js">class Zoo extends React.Component {
-  render: function() {
-    return &lt;div&gt;Giraffe name: &lt;input ref="giraffe" /&gt;&lt;/div&gt;;
-  },
-  showName: function() {
-    // 以前的寫法: var input = this.refs.giraffe.getDOMNode();
-    var input = this.refs.giraffe;
+  render() {
+    return (
+      &lt;div&gt;
+        Giraffe name: &lt;input ref="giraffe" /&gt;
+        &lt;button onClick={this.showName.bind(this)}&gt;showName&lt;/button&gt;
+      &lt;/div&gt;
+    );
+  }
+  showName() {
+    const input = this.refs.giraffe;
     alert(input.value);
   }
 }
@@ -752,7 +769,7 @@ handleChange: function(event) {
 
 				<section data-transition="slide" data-background="#b5533c">
 					<section>
-						<p>Life Cycle Hook</p>
+						<p style="font-size: 2em">Life Cycle Hook</p>
 						<ul>
 							<li>componentWillMount</li>
 							<li>componentDidMount</li>
@@ -763,11 +780,17 @@ handleChange: function(event) {
 							<li>componentWillUnmount</li>
 						</ul>
 					</section>
+					<section>
+						<p>如果可以不要用到就不要用到</p>
+					</section>
+					<section>
+						<p>通常用來做 call api, animation, 或處理 3rd party ui library</p>
+					</section>
 				</section>
 
 				<section data-transition="slide" data-background="#4d7e65">
 					<section>
-						<p>Think in React</p>
+						<p style="font-size: 2em">Think in React</p>
 					</section>
 					<section>
 						<p>用 component 的角度</p>
@@ -789,8 +812,13 @@ handleChange: function(event) {
 					</section>
 				</section>
 
+				<section data-transition="slide" data-background="#4d7e65" >
+					<p style="font-size: 2em">React Devtools</p>
+					<p><a href="https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi" target="_blank">載點</a></p>
+				</section>
+
 				<section data-transition="slide" data-background="#b5533c">
-					<p>練習：改寫 Todo List</p>
+					<p style="font-size: 2em">練習</p>
 				</section>
 
 				<section data-transition="slide" data-background="#4d7e65" style="text-align: left;">
