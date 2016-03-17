@@ -537,7 +537,7 @@ var app = React.createElement(
 						<p style="font-size: 2em">props</p>
 					</section>
 					<section>
-<pre><code class="lang-html">&lt;Hello text="Yo"&gt;
+<pre><code class="lang-html">&lt;Hello text="Yo" /&gt;
 </code></pre>
 
 	<p>可以把 Yo 當做 props 傳下去：</p>
@@ -603,7 +603,7 @@ Hello.defaultProps = {
 					</section>
 					<section>
 						<p>0.14 後出現的 Stateless Functional Component</p>
-<pre><code class="lang-js">function Hello({ text }) => &lt;div&gt;{'Hello ' + text }&lt;/div&gt;
+<pre><code class="lang-js">const Hello = ({ text }) => &lt;div&gt;{'Hello ' + text }&lt;/div&gt;
 </code></pre>
 					</section>
 				</section>
@@ -723,7 +723,7 @@ constructor(props, context) {
   this.state = { value: 'Hello!' };
   this.handleChange = this.handleChange.bind(this)
 }
-handleChang(event) {
+handleChange(event) {
   this.setState({ value: event.target.value });
 }
 render() {
