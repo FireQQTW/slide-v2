@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Web Hackthon Seminar</title>
+
+		<meta name="description" content="Web Hackthon Seminar - 5">
+		<meta name="author" content="C. T. Lin">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="node_modules/prismjs/themes/prism.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+		<style>
+.reveal pre code { max-height: 500px !important;}
+a { color: white !important; text-decoration: underline !important;}
+		</style>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section data-background="#b5533c">
+					<h1>Web Hackthon Seminar </h1>
+					<h3>5</h3>
+					<p>
+						<small>node/npm/webpack</small>
+					</p>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<img src="img/node.png" />
+					</section>
+					<section>
+						<p>Ryan Dahl</p>
+						<img src="img/ryan.jpg" />
+					</section>
+					<section>
+						<p>他最初的目標是尋找一個適合實作 non-blocking 的語言</p>
+						<p>因為 JavaScript 有 Event Driven 的特性</p>
+						<p>又剛好有 Google Open Source 的 V8 引擎</p>
+						<p>所以最後就選擇了 JavaScript</p>
+						<p>並在 2009 年做出了 Open Source 的 nodejs</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p>Non-blocking I/O</p>
+					</section>
+					<section>
+						<h3>以往多執行緒的程式</h3>
+						<img src="img/threads.png" />
+						<p>Context Switch 會有多餘的資源消耗</p>
+					</section>
+					<section>
+						<p>node 是單執行緒 non-blocking</p>
+						<img src="img/nonblocking.png" />
+						<p class="fragment">不需要等 I/O..</p>
+					</section>
+					<section>
+						<ul>
+							<li>電鍋煮飯：40 mins</li>
+							<li>吃飯：25 mins</li>
+							<li>看朋友傳給你的電影：90 mins</li>
+						</ul>
+						<p class="fragment">Blocking: 155 mins</p>
+						<p class="fragment">Non-Blocking: 90 mins </p>
+					</section>
+					<section>
+						<h3>可以多個任務一起執行</h3>
+						<img src="img/async.jpg" />
+						<p class="fragment">不過非同步的程式比較難寫一點..</p>
+					</section>
+					<section>
+						<p>Callback Hell</p>
+						<img src="img/callback.jpg">
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p>Event Loop</p>
+						<img src="img/event-loop.jpg" />
+					</section>
+					<section>
+						<ul>
+							<li>單執行緒：同時只有一個地方在跑</li>
+							<li>當下這圈發生的事件都會放到下一圈的佇列</li>
+							<li>避免 blocking 與一次進行大量的操作</li>
+						</ul>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<h3>V8</h3>
+					</section>
+					<section>
+						<img src="img/wiki-v8.png" />
+						<p class="fragment">就是 Chrome 裡面的 JavaScript 引擎..</p>
+					</section>
+					<section>
+						<img src="img/github-v8.png" />
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<img src="img/codebase.jpg" />
+					<p>libuv: C 寫的跨平非同步函式庫</p>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p>CommonJS</p>
+					</section>
+					<section>
+						<p>2009 年開始</p>
+						<p>因為 JavaScript 沒有 Standard Library</p>
+						<p>所以希望有個規範來統一瀏覽器外的 Ecosystem</p>
+						<p>例如：模組、檔案讀寫等等</p>
+					</section>
+					<section>
+						<p>不過現在比較為人所知的只剩模組規範</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+<pre><code class="lang-bash">每個 module 會有兩個重要的變數注入進來
+require, module
+require 用來載入模組
+module 用來匯出模組
+</code></pre>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p>內建 module</p>
+					</section>
+					<section>
+						<img src="img/api.png" />
+						<p><a href="https://nodejs.org/api/">https://nodejs.org/api/</a></p>
+					</section>
+					<section>
+						<p>built-in module: http</p>
+<pre><code class="lang-js">var http = require('http');
+
+http.createServer(function (req, res) {
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+  res.end('Hello World\n');
+}).listen(1337, "127.0.0.1");
+
+console.log('Server running at http://127.0.0.1:1337/');
+</code></pre>
+					</section>
+					<section>
+						<p>built-in module: fs</p>
+<pre><code class="lang-js">var fs = require('fs');
+
+fs.writeFile('hello.txt', 'Hello World!', function(err) {
+  if (err) return console.log(err);
+  console.log('Hello World > helloworld.txt');
+})
+</code></pre>
+<pre><code class="lang-js">var fs = require('fs');
+
+fs.readFile('hello.txt', function(err, buffer) {
+  if (err) return console.log(err);
+  console.log(buffer.toString());
+})
+</code></pre>
+					</section>
+					<section>
+						<h1>練習</h1>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p>自己寫 module</p>
+					</section>
+					<section>
+						<p>用 module.exports 匯出即可</p>
+
+<pre><code class="lang-js">// 匯出數字
+module.exports = 1;</code></pre>
+<pre><code class="lang-js">// 匯出字串
+module.exports = 'a module';</code></pre>
+<pre><code class="lang-js">// 匯出函數
+module.exports = function() {};</code></pre>
+<pre><code class="lang-js">// 匯出物件
+module.exports = {
+  a: 'test',
+  myMethod: function() {}
+};</code></pre>
+					</section>
+					<section>
+						<p>用 require 搭配路徑載入</p>
+
+<pre><code class="lang-js">// 相對路徑：同層目錄
+var MessageItem = require('./MessageItem')</code></pre>
+<pre><code class="lang-js">// 相對路徑：外層目錄
+var MessageItem = require('../MessageItem')</code></pre>
+<pre><code class="lang-js">// 相對路徑：同層的 src 目錄裡面
+var MessageItem = require('./src/MessageItem')</code></pre>
+					</section>
+					<section>
+						<h1>練習</h1>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p>npm</p>
+						<img src="img/npm.svg" />
+					</section>
+					<section>
+						<img src="img/react-pkg.png">
+						<p class="fragment">總不能叫同伴一個個照版本載回來吧..</p>
+					</section>
+					<section>
+						<h3>另一個原因..</h3>
+					</section>
+					<section>
+						<h3>第一個禮拜的投影片 (一個月前)</h3>
+						<img src="img/npm-1.png" />
+					</section>
+					<section>
+						<h3>現在</h3>
+						<img src="img/npm-now.png" />
+						<p class="fragment">居然又多了一萬個 module!!!</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<h3>開新專案</h3>
+<pre><code class="lang-bash">npm init</code></pre>
+					<p class="fragment">可以產生一個新的 package.json</p>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<h3>安裝第三方 module</h3>
+<pre><code class="lang-bash">npm install --save module-name</code></pre>
+						<p>安裝為依賴套件放進 package.json</p>
+<pre><code class="lang-bash">npm install --save-dev module-name</code></pre>
+						<p>安裝為開發用依賴套件放進 package.json</p>
+<pre><code class="lang-bash">npm install -g module-name</code></pre>
+						<p>安裝在全域、通常是指令列工具</p>
+					</section>
+					<section>
+						<p>接下來就能用 require 直接載入第三方 module</p>
+<pre><code class="lang-js">// 直接是模組名稱
+var assign = require('object-assign')</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p>package.json</p>
+						<br>
+<pre><code class="lang-bash">main - module 進入點，如果沒有就是 index.js
+dependencies - 依賴套件
+devDependencies - 開發用依賴套件
+</code></pre>
+					</section>
+					<section>
+						<p>Demo React</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<p>不過前端不能直接使用 CommonJS module</p>
+					<p class="fragment">需要編譯過</p>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<p>webpack</p>
+					<img src="img/webpack.png">
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+						<p>安裝</p>
+<pre><code class="lang-bash">npm install -g webpack</code></pre>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p>簡單的使用狀況</p>
+					</section>
+					<section>
+<pre><code class="lang-html">&lt;html/&gt;
+    &lt;head/&gt;
+        &lt;meta charset="utf-8"/&gt;
+    &lt;/head/&gt;
+    &lt;body/&gt;
+        &lt;script src="bundle.js"/&gt;&lt;/script/&gt;
+    &lt;/body/&gt;
+&lt;/html/&gt;
+</code></pre>
+<pre><code class="lang-js">// entry.js
+var add = require('./add');
+console.log('9876 + 1546 = ', add(9876, 1546));
+
+// add.js
+module.exports = function(a, b) { return a + b; }
+</code></pre>
+<pre><code class="lang-bash">// terminal
+webpack ./entry bundle.js
+</code></pre>
+					</section>
+					<section>
+<pre><code class="lang-bash">// terminal
+webpack ./entry bundle.js
+
+// webpack [entry-path] [output-path]
+// ./entry 是模組的進入點，編譯會從這裡開始
+// bundle.js 是常用的輸出檔案名稱
+</code></pre>
+					</section>
+					<section>
+						<h1>練習</h1>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p>Watch Mode</p>
+<pre><code class="lang-bash">// terminal
+webpack --watch ./entry bundle.js
+
+// --watch 會監控檔案改變進行編譯
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p>Loader</p>
+					</section>
+					<section>
+						<p>Webpack 可以透過 loader 來讓檔案經過某種處理</p>
+<pre><code class="lang-bash">先安裝 babel-loader
+npm install --save-dev babel-loader</code></pre>
+					</section>
+					<section>
+<pre><code class="lang-js">// 因為稍微複雜了最好寫個設定檔 webpack.config.js
+module.exports = {
+  devtool: 'cheap-module-eval-source-map',
+  entry: './entry',
+  output: {
+    filename: 'bundle.js',
+  },
+  module: {
+    loaders: [{
+      test: /\.js$/,
+      loaders: ['babel'],
+      exclude: /node_modules/
+    }]
+  }
+};
+</code></pre>
+<pre><code class="lang-js">// 設定檔寫好了所以直接 call 就好了
+webpack</code></pre>
+					</section>
+					<section>
+<pre><code class="lang-js">// 如果設定檔不想叫 webpack.config.js 的話，可以設定設定檔
+webpack --config webpack.config.dev.js</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<h3>改寫 Todo List</h3>
+					<p><a href=""></a></p>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<p>Hot Reload</p>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p>“Hot Module Replacement” (HMR) is a feature to inject updated modules into the active runtime.</p>
+
+						<p>It’s like LiveReload for every module.</p>
+					</section>
+					<section>
+<pre><code class="lang-js">// webpack.config.js
+var webpack = require('webpack');
+module.exports = {
+  devtool: 'cheap-module-eval-source-map',
+  entry: './entry',
+  output: {
+    filename: 'bundle.js',
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
+  ],
+  module: {
+    loaders: [{
+      test: /\.js$/,
+      loaders: ['babel'],
+      exclude: /node_modules/
+    }]
+  }
+};
+// HotModuleReplacementPlugin => 啟用 Hot Module Replacement
+// NoErrorsPlugin => 不要把錯誤的 Code 打包進來
+</code></pre>
+					</section>
+					<section>
+						<p>比較一下 Hot Module Replacement 跟只有 Watch 的效果</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<h3>React Hot Reload</h3>
+						<p>搭配 Hot Module Replacement 使用 React Transform</p>
+					</section>
+					<section>
+						<h3>安裝</h3>
+<pre><code class="lang-bash">// React 是不可缺的
+npm install --save react react-dom</code></pre>
+<pre><code class="lang-bash">// 乍看好像要裝一堆東西，但很多都很小
+npm install --save-dev babel-loader babel-plugin-react-transform express
+react-transform-catch-errors react-transform-hmr redbox-react webpack
+webpack-dev-middleware webpack-hot-middleware</code></pre>
+					</section>
+					<section>
+						<p>加一個 .babelrc</p>
+<pre><code class="lang-js">{
+  "stage": 0,
+  "env": {
+    "development": {
+      "plugins": ["react-transform"],
+      "extra": {
+        "react-transform": {
+          "transforms": [{
+            "transform": "react-transform-hmr",
+            "imports": ["react"],
+            "locals": ["module"]
+          }, {
+            "transform": "react-transform-catch-errors",
+            "imports": ["react", "redbox-react"]
+          }]
+        }
+      }
+    }
+  }
+}</code></pre>
+					</section>
+					<section>
+						<p>加一個 devServer</p>
+<pre style="font-size: 15px;"><code class="lang-js">var path = require('path');
+var express = require('express');
+var webpack = require('webpack');
+var config = require('./webpack.config.dev');
+
+var app = express();
+var compiler = webpack(config);
+
+app.use(require('webpack-dev-middleware')(compiler, {
+  noInfo: true,
+  publicPath: config.output.publicPath
+}));
+
+app.use(require('webpack-hot-middleware')(compiler));
+
+app.get('*', function(req, res) {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+app.listen(3000, 'localhost', function(err) {
+  if (err) { return console.log(err); }
+  console.log('Listening at http://localhost:3000');
+});</code></pre>
+					</section>
+					<section>
+						<p>還有一個 webpack.config.dev.js</p>
+<pre style="font-size: 14px;"><code class="lang-js">var path = require('path');
+var webpack = require('webpack');
+
+module.exports = {
+  devtool: 'cheap-module-eval-source-map',
+  entry: [
+  	'webpack-hot-middleware/client',
+  	'./src/index'
+  ],
+  output: {
+    path: path.join(__dirname, 'dist'),
+    filename: 'bundle.js',
+    publicPath: '/static/'
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
+  ],
+  module: {
+    loaders: [{
+      test: /\.js$/,
+      loaders: ['babel'],
+      include: path.join(__dirname, 'src')
+    }]
+  }
+};</code></pre>
+					</section>
+					<section>
+						<h3>這樣就大致 ok 了！</h3>
+						<p>程式進入點請寫在 src/index.js</p>
+						<p>也需要有一個 html 放在 project 根目錄</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65" style="text-align: left;">
+					<h1>THE END</h1>
+					<p>Thanks for listening</p>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				slideNumber: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'node_modules/prismjs/prism.js'},
+                    { src: 'node_modules/prismjs/components/prism-bash.min.js'},
+                    { src: 'node_modules/prismjs/plugins/autolinker/prism-autolinker.min.js'},
+                    { src: 'node_modules/prismjs/components/prism-javascript.min.js', async: true, callback: function() {
+                    		Prism.highlightAll();
+                    	}
+                    },
+					// { src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() {
+					// 	hljs.initHighlightingOnLoad(); }
+					// },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+		</script>
+
+	</body>
+</html>
