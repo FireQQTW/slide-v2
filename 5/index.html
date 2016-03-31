@@ -48,7 +48,7 @@ a { color: white !important; text-decoration: underline !important;}
 					<h1>Web Hackthon Seminar </h1>
 					<h3>5</h3>
 					<p>
-						<small>node/npm/webpack</small>
+						<small>node/npm/http/express</small>
 					</p>
 				</section>
 
@@ -57,7 +57,7 @@ a { color: white !important; text-decoration: underline !important;}
 						<img src="img/node.png" />
 					</section>
 					<section>
-						<p>Ryan Dahl</p>
+						<p style="font-size: 2em">Ryan Dahl</p>
 						<img src="img/ryan.jpg" />
 					</section>
 					<section>
@@ -71,26 +71,28 @@ a { color: white !important; text-decoration: underline !important;}
 
 				<section data-transition="slide" data-background="#b5533c">
 					<section>
-						<p>Non-blocking I/O</p>
+						<p style="font-size: 2em">Non-blocking I/O</p>
 					</section>
 					<section>
-						<h3>以往多執行緒的程式</h3>
+						<p style="font-size: 2em">多執行緒的程式</p>
 						<img src="img/threads.png" />
 						<p>Context Switch 會有多餘的資源消耗</p>
 					</section>
 					<section>
 						<p>node 是單執行緒 non-blocking</p>
-						<img src="img/nonblocking.png" />
-						<p class="fragment">不需要等 I/O..</p>
+						<img src="img/nonblocking.png" style="width: 100%" />
+						<p class="fragment">不需要等 I/O</p>
 					</section>
 					<section>
 						<ul>
+							<li>肉片退冰：25 mins</li>
 							<li>電鍋煮飯：40 mins</li>
-							<li>吃飯：25 mins</li>
-							<li>看朋友傳給你的電影：90 mins</li>
+							<li>寫作業：45 mins</li>
 						</ul>
-						<p class="fragment">Blocking: 155 mins</p>
-						<p class="fragment">Non-Blocking: 90 mins </p>
+						<p class="fragment">I/O - 肉片退冰, 電鍋煮飯 </p>
+						<p class="fragment">Calculation - 寫作業</p>
+						<p class="fragment">Blocking: 110 mins</p>
+						<p class="fragment">Non-Blocking: 45+ mins </p>
 					</section>
 					<section>
 						<h3>可以多個任務一起執行</h3>
@@ -98,28 +100,62 @@ a { color: white !important; text-decoration: underline !important;}
 						<p class="fragment">不過非同步的程式比較難寫一點..</p>
 					</section>
 					<section>
-						<p>Callback Hell</p>
+						<p style="font-size: 2em">Callback Hell</p>
 						<img src="img/callback.jpg">
+					</section>
+					<section>
+						<p style="font-size: 2em">解決方案</p>
+						<ul>
+							<li>Promise</li>
+							<li>Generator (Coroutines)</li>
+							<li>Async Await</li>
+						</ul>
+					</section>
+					<section>
+						<p>想要搞清楚建議看 <a href="http://www.books.com.tw/products/0010644512" target="_blank">深入淺出 nodejs</a> chapter 4</p>
 					</section>
 				</section>
 
 				<section data-transition="slide" data-background="#4d7e65">
 					<section>
-						<p>Event Loop</p>
+						<p style="font-size: 2em">Event Loop</p>
 						<img src="img/event-loop.jpg" />
+						<p class="fragment">每執行一次事件迴圈稱作 tick</p>
 					</section>
 					<section>
 						<ul>
-							<li>單執行緒：同時只有一個地方在跑</li>
-							<li>當下這圈發生的事件都會放到下一圈的佇列</li>
+							<li>單執行緒</li>
+							<li>當下 tick 發生的事件 callback 都會放到下一 tick</li>
 							<li>避免 blocking 與一次進行大量的操作</li>
 						</ul>
+					</section>
+					<section>
+<pre><code class="lang-js">// 0 秒後執行
+setTimeout(function() {
+  console.log('2');
+}, 0);
+console.log('1');
+</code></pre>
+					</section>
+					<section>
+<pre><code class="lang-js">element.addEventListener('click', function() {
+  console.log('click'); // can't be invoked
+});
+
+// 或是其他超煩重複雜計算，會讓程式其他 handler 類似當機
+while (true) {
+  // blocking
+}
+</code></pre>
+					</section>
+					<section>
+						<p>想要搞清楚建議看 <a href="http://www.books.com.tw/products/0010644512" target="_blank">深入淺出 nodejs</a> chapter 3</p>
 					</section>
 				</section>
 
 				<section data-transition="slide" data-background="#b5533c">
 					<section>
-						<h3>V8</h3>
+						<p style="font-size: 2em">V8</p>
 					</section>
 					<section>
 						<img src="img/wiki-v8.png" />
@@ -132,12 +168,12 @@ a { color: white !important; text-decoration: underline !important;}
 
 				<section data-transition="slide" data-background="#4d7e65">
 					<img src="img/codebase.jpg" />
-					<p>libuv: C 寫的跨平非同步函式庫</p>
+					<p><a href="" target="_blank">libuv</a>: C 寫的跨平非同步函式庫</p>
 				</section>
 
 				<section data-transition="slide" data-background="#4d7e65">
 					<section>
-						<p>CommonJS</p>
+						<p style="font-size: 2em">CommonJS</p>
 					</section>
 					<section>
 						<p>2009 年開始</p>
@@ -156,18 +192,19 @@ require, module
 require 用來載入模組
 module 用來匯出模組
 </code></pre>
+					<p>詳細的介紹可以看 <a href="https://github.com/mo-group/morning/blob/master/node/learning-node-module.md" target="_blank">這裡</a></p>
 				</section>
 
 				<section data-transition="slide" data-background="#4d7e65">
 					<section>
-						<p>內建 module</p>
+						<p style="font-size: 2em">內建 module</p>
 					</section>
 					<section>
 						<img src="img/api.png" />
-						<p><a href="https://nodejs.org/api/">https://nodejs.org/api/</a></p>
+						<p><a href="https://nodejs.org/api/" target="_blank">https://nodejs.org/api/</a></p>
 					</section>
 					<section>
-						<p>built-in module: http</p>
+						<p style="font-size: 2em">built-in module - http</p>
 <pre><code class="lang-js">var http = require('http');
 
 http.createServer(function (req, res) {
@@ -179,7 +216,7 @@ console.log('Server running at http://127.0.0.1:1337/');
 </code></pre>
 					</section>
 					<section>
-						<p>built-in module: fs</p>
+						<p style="font-size: 2em">built-in module - fs</p>
 <pre><code class="lang-js">var fs = require('fs');
 
 fs.writeFile('hello.txt', 'Hello World!', function(err) {
@@ -189,23 +226,27 @@ fs.writeFile('hello.txt', 'Hello World!', function(err) {
 </code></pre>
 <pre><code class="lang-js">var fs = require('fs');
 
-fs.readFile('hello.txt', function(err, buffer) {
+fs.readFile('hello.txt', 'utf8', function(err, content) {
   if (err) return console.log(err);
-  console.log(buffer.toString());
+  console.log(content);
 })
 </code></pre>
 					</section>
 					<section>
-						<h1>練習</h1>
+						<p style="font-size: 2em">node style callback</p>
+						<p>第一個參數都是 error</p>
+					</section>
+					<section>
+						<p style="font-size: 2em">練習</p>
 					</section>
 				</section>
 
 				<section data-transition="slide" data-background="#4d7e65">
 					<section>
-						<p>自己寫 module</p>
+						<p style="font-size: 2em">自己寫 module</p>
 					</section>
 					<section>
-						<p>用 module.exports 匯出即可</p>
+						<p style="font-size: 2em">用 module.exports 匯出即可</p>
 
 <pre><code class="lang-js">// 匯出數字
 module.exports = 1;</code></pre>
@@ -220,7 +261,7 @@ module.exports = {
 };</code></pre>
 					</section>
 					<section>
-						<p>用 require 搭配路徑載入</p>
+						<p style="font-size: 2em">用 require 搭配路徑載入</p>
 
 <pre><code class="lang-js">// 相對路徑：同層目錄
 var MessageItem = require('./MessageItem')</code></pre>
@@ -230,13 +271,39 @@ var MessageItem = require('../MessageItem')</code></pre>
 var MessageItem = require('./src/MessageItem')</code></pre>
 					</section>
 					<section>
-						<h1>練習</h1>
+						<p style="font-size: 2em">練習</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">CommonJS module <br />on front-end</p>
+					</section>
+					<section>
+						<p>browser 裡面不能直接使用 require</p>
+						<p>必須使用 webpack, browserify 之類的 tool</p>
+						<p>下禮拜才會教</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">ES2015 module</p>
+					</section>
+					<section>
+<pre><code class="lang-js">import fs from 'fs';
+import { a } from './b';
+
+export const c = 'c';
+export default function()
+</code></pre>
+						<p>在 v8 支援前只能先用 babel compile</p>
 					</section>
 				</section>
 
 				<section data-transition="slide" data-background="#4d7e65">
 					<section>
-						<p>npm</p>
+						<p style="font-size: 2em">npm</p>
 						<img src="img/npm.svg" />
 					</section>
 					<section>
@@ -244,28 +311,28 @@ var MessageItem = require('./src/MessageItem')</code></pre>
 						<p class="fragment">總不能叫同伴一個個照版本載回來吧..</p>
 					</section>
 					<section>
-						<h3>另一個原因..</h3>
+						<p style="font-size: 2em">另一個原因..</p>
 					</section>
 					<section>
-						<h3>第一個禮拜的投影片 (一個月前)</h3>
+						<p style="font-size: 2em">第一個禮拜的投影片<br /> (一個月前)</p>
 						<img src="img/npm-1.png" />
 					</section>
 					<section>
-						<h3>現在</h3>
+						<p style="font-size: 2em">現在</p>
 						<img src="img/npm-now.png" />
 						<p class="fragment">居然又多了一萬個 module!!!</p>
 					</section>
 				</section>
 
 				<section data-transition="slide" data-background="#b5533c">
-					<h3>開新專案</h3>
+					<p style="font-size: 2em">開新專案</p>
 <pre><code class="lang-bash">npm init</code></pre>
 					<p class="fragment">可以產生一個新的 package.json</p>
 				</section>
 
 				<section data-transition="slide" data-background="#4d7e65">
 					<section>
-						<h3>安裝第三方 module</h3>
+						<p style="font-size: 2em">安裝第三方 module</p>
 <pre><code class="lang-bash">npm install --save module-name</code></pre>
 						<p>安裝為依賴套件放進 package.json</p>
 <pre><code class="lang-bash">npm install --save-dev module-name</code></pre>
@@ -282,259 +349,478 @@ var assign = require('object-assign')</code></pre>
 
 				<section data-transition="slide" data-background="#b5533c">
 					<section>
-						<p>package.json</p>
+						<p style="font-size: 2em">package.json</p>
 						<br>
 <pre><code class="lang-bash">main - module 進入點，如果沒有就是 index.js
 dependencies - 依賴套件
 devDependencies - 開發用依賴套件
+scripts - 可以用 npm run xxx 執行的腳本
 </code></pre>
 					</section>
 					<section>
-						<p>Demo React</p>
-					</section>
-				</section>
-
-				<section data-transition="slide" data-background="#4d7e65">
-					<p>不過前端不能直接使用 CommonJS module</p>
-					<p class="fragment">需要編譯過</p>
-				</section>
-
-				<section data-transition="slide" data-background="#b5533c">
-					<p>webpack</p>
-					<img src="img/webpack.png">
-				</section>
-
-				<section data-transition="slide" data-background="#b5533c">
-						<p>安裝</p>
-<pre><code class="lang-bash">npm install -g webpack</code></pre>
-				</section>
-
-				<section data-transition="slide" data-background="#b5533c">
-					<section>
-						<p>簡單的使用狀況</p>
-					</section>
-					<section>
-<pre><code class="lang-html">&lt;html/&gt;
-    &lt;head/&gt;
-        &lt;meta charset="utf-8"/&gt;
-    &lt;/head/&gt;
-    &lt;body/&gt;
-        &lt;script src="bundle.js"/&gt;&lt;/script/&gt;
-    &lt;/body/&gt;
-&lt;/html/&gt;
-</code></pre>
-<pre><code class="lang-js">// entry.js
-var add = require('./add');
-console.log('9876 + 1546 = ', add(9876, 1546));
-
-// add.js
-module.exports = function(a, b) { return a + b; }
-</code></pre>
-<pre><code class="lang-bash">// terminal
-webpack ./entry bundle.js
-</code></pre>
-					</section>
-					<section>
-<pre><code class="lang-bash">// terminal
-webpack ./entry bundle.js
-
-// webpack [entry-path] [output-path]
-// ./entry 是模組的進入點，編譯會從這裡開始
-// bundle.js 是常用的輸出檔案名稱
-</code></pre>
-					</section>
-					<section>
-						<h1>練習</h1>
+						<p style="font-size: 2em">Demo React</p>
 					</section>
 				</section>
 
 				<section data-transition="slide" data-background="#4d7e65">
 					<section>
-						<p>Watch Mode</p>
-<pre><code class="lang-bash">// terminal
-webpack --watch ./entry bundle.js
-
-// --watch 會監控檔案改變進行編譯
-</code></pre>
+						<p style="font-size: 2em">HTTP</p>
+						<p>HyperText Transfer Protocol</p>
+						<p>超文本傳輸協定</p>
+					</section>
+					<section>
+						<p>HTTP Client 跟 Server 之間進行請求與回應的標準</p>
+					</section>
+					<section>
+						<p>2015/5 發表了 HTTP/2</p>
+						<br>
+						<p>現行主要版本還是 1.1</p>
 					</section>
 				</section>
 
 				<section data-transition="slide" data-background="#b5533c">
-					<section>
-						<p>Loader</p>
-					</section>
-					<section>
-						<p>Webpack 可以透過 loader 來讓檔案經過某種處理</p>
-<pre><code class="lang-bash">先安裝 babel-loader
-npm install --save-dev babel-loader</code></pre>
-					</section>
-					<section>
-<pre><code class="lang-js">// 因為稍微複雜了最好寫個設定檔 webpack.config.js
-module.exports = {
-  devtool: 'cheap-module-eval-source-map',
-  entry: './entry',
-  output: {
-    filename: 'bundle.js',
-  },
-  module: {
-    loaders: [{
-      test: /\.js$/,
-      loaders: ['babel'],
-      exclude: /node_modules/
-    }]
-  }
-};
+<pre><code class="lang-bash">// 一個範例
+
+Request:
+
+GET / HTTP/1.1
+Host: www.google.com
+
+Response:
+
+HTTP/1.1 200 OK
+Content-Length: 3059
+Server: GWS/2.0
+Date: Sat, 11 Jan 2003 02:44:04 GMT
+Content-Type: text/html
+Cache-control: private
+Set-Cookie: PREF=ID=73d4aef52e57bae9:TM=1042253044:LM=1042253044:S=SMCc_HRPCQiqy
+X9j; expires=Sun, 17-Jan-2038 19:14:07 GMT; path=/; domain=.google.com
+Connection: keep-alive
 </code></pre>
-<pre><code class="lang-js">// 設定檔寫好了所以直接 call 就好了
-webpack</code></pre>
-					</section>
-					<section>
-<pre><code class="lang-js">// 如果設定檔不想叫 webpack.config.js 的話，可以設定設定檔
-webpack --config webpack.config.dev.js</code></pre>
-					</section>
-				</section>
-
-				<section data-transition="slide" data-background="#4d7e65">
-					<h3>改寫 Todo List</h3>
-					<p><a href=""></a></p>
-				</section>
-
-				<section data-transition="slide" data-background="#b5533c">
-					<p>Hot Reload</p>
 				</section>
 
 				<section data-transition="slide" data-background="#4d7e65">
 					<section>
-						<p>“Hot Module Replacement” (HMR) is a feature to inject updated modules into the active runtime.</p>
-
-						<p>It’s like LiveReload for every module.</p>
+						<p style="font-size: 2em">Request</p>
 					</section>
 					<section>
-<pre><code class="lang-js">// webpack.config.js
-var webpack = require('webpack');
-module.exports = {
-  devtool: 'cheap-module-eval-source-map',
-  entry: './entry',
-  output: {
-    filename: 'bundle.js',
-  },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
-  ],
-  module: {
-    loaders: [{
-      test: /\.js$/,
-      loaders: ['babel'],
-      exclude: /node_modules/
-    }]
-  }
-};
-// HotModuleReplacementPlugin => 啟用 Hot Module Replacement
-// NoErrorsPlugin => 不要把錯誤的 Code 打包進來
-</code></pre>
+						<pre><code class="lang-bash">GET / HTTP/1.1
+Host: www.google.com
+						</code></pre>
+						<p>一個基本的請求至少會有</p>
+						<ul>
+							<li>Method 方法</li>
+							<li>Path 路徑</li>
+							<li>Host 主機</li>
+						</ul>
 					</section>
 					<section>
-						<p>比較一下 Hot Module Replacement 跟只有 Watch 的效果</p>
+						<p>path 複雜一點的範例</p>
+						<pre><code class="lang-bash">GET /posts/21?type=detail HTTP/1.1
+Host: www.example.com</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 2em">Host</p>
+						<ul>
+							<li>Domain name: google.com</li>
+							<li>IP: 64.233.189.94</li>
+							<li>也可以有 Port: localhost:3000</li>
+						</ul>
+					</section>
+					<section>
+						<p style="font-size: 2em">Method</p>
+						<p>常見的：</p>
+						<ul>
+							<li>GET - 用於取得資源</li>
+							<li>POST - 用於新增資源</li>
+							<li>PUT - 用於更新資源</li>
+							<li>DELETE - 用於刪除資源</li>
+						</ul>
+					</section>
+					<section>
+						<p style="font-size: 2em">URL</p>
+						<img src="img/url.png" />
+					</section>
+					<section>
+						<p>有一些標準的溝通屬性可以設定在 header</p>
+						<img src="img/panel.png" />
 					</section>
 				</section>
 
 				<section data-transition="slide" data-background="#b5533c">
 					<section>
-						<h3>React Hot Reload</h3>
-						<p>搭配 Hot Module Replacement 使用 React Transform</p>
+						<p style="font-size: 2em">Request Body</p>
 					</section>
 					<section>
-						<h3>安裝</h3>
-<pre><code class="lang-bash">// React 是不可缺的
-npm install --save react react-dom</code></pre>
-<pre><code class="lang-bash">// 乍看好像要裝一堆東西，但很多都很小
-npm install --save-dev babel-loader babel-plugin-react-transform express
-react-transform-catch-errors react-transform-hmr redbox-react webpack
-webpack-dev-middleware webpack-hot-middleware</code></pre>
-					</section>
-					<section>
-						<p>加一個 .babelrc</p>
-<pre><code class="lang-js">{
-  "stage": 0,
-  "env": {
-    "development": {
-      "plugins": ["react-transform"],
-      "extra": {
-        "react-transform": {
-          "transforms": [{
-            "transform": "react-transform-hmr",
-            "imports": ["react"],
-            "locals": ["module"]
-          }, {
-            "transform": "react-transform-catch-errors",
-            "imports": ["react", "redbox-react"]
-          }]
-        }
-      }
-    }
-  }
-}</code></pre>
-					</section>
-					<section>
-						<p>加一個 devServer</p>
-<pre style="font-size: 15px;"><code class="lang-js">var path = require('path');
-var express = require('express');
-var webpack = require('webpack');
-var config = require('./webpack.config.dev');
+						<ul>
+							<li>Get 請求沒有夾帶 body</li>
+							<li>Post 請求可以夾帶 body</li>
+						</ul>
+						<pre><code class="lang-bash">POST /posts HTTP/1.1
+Host: www.example.com
+Content-Type: application/x-www-form-urlencoded
 
+title=new-post&description=xxxxxx
+</code></pre>
+						<p class="fragment">告知後台 Content-Type，後台的框架通常才能正確處理</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">Content-Type</p>
+					</section>
+					<section>
+						<ul>
+							<li>text/plain</li>
+							<li>application/x-www-form-urlencode</li>
+							<li>multipart/form-data</li>
+							<li>application/json</li>
+						</ul>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">Response</p>
+					</section>
+					<section>
+<pre><code class="lang-bash">HTTP/1.1 200 OK
+Content-Length: 3059
+Server: GWS/2.0
+Date: Sat, 11 Jan 2003 02:44:04 GMT
+Content-Type: text/html
+Cache-control: private
+Set-Cookie: PREF=ID=73d4aef52e57bae9:TM=1042253044:LM=1042253044:S=SMCc_HRPCQiqy
+X9j; expires=Sun, 17-Jan-2038 19:14:07 GMT; path=/; domain=.google.com
+Connection: keep-alive
+
+&lt;!DOCTYPE html&gt;
+....
+</code></pre>
+						<p>一個基本的回應至少會有</p>
+						<ul>
+							<li>Status Code 狀態碼</li>
+						</ul>
+					</section>
+					<section>
+						<p style="font-size: 2em">Status Code</p>
+						<ul>
+							<li>1xx 訊息——請求已被伺服器接收，繼續處理</li>
+							<li>2xx 成功——請求已成功被伺服器接收、理解、並接受</li>
+							<li>3xx 重新導向——需要後續操作才能完成這一請求</li>
+							<li>4xx 請求錯誤——請求含有詞法錯誤或者無法被執行 (例如 404 Page Not Found)</li>
+							<li>5xx 伺服器錯誤——伺服器在處理某個正確請求時發生錯誤</li>
+						</ul>
+					</section>
+					<section>
+						<p style="font-size: 2em">Response Body</p>
+						<p>Response Body (非必需) 會有主要的回傳內容</p>
+						<p>而格式一般寫在 Response Header 的 Content-Type</p>
+						<p>例如：<code>text/plain</code>,<code>text/html</code>,<code>application/json</code></p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">Express</p>
+					</section>
+				</section>
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p>現階段為了方便測試，我們可以先裝 <a href="https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop" target="_blank">postman</a></p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">Initialize</p>
+					</section>
+					<section>
+<pre><code class="lang-js">var express = require('express');
 var app = express();
-var compiler = webpack(config);
 
-app.use(require('webpack-dev-middleware')(compiler, {
-  noInfo: true,
-  publicPath: config.output.publicPath
-}));
+app.listen(3000); // 監聽一個 port
+</code></pre>
+					</section>
+				</section>
 
-app.use(require('webpack-hot-middleware')(compiler));
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">Middleware</p>
+					</section>
+					<section>
+<pre><code class="lang-js">var express = require('express');
+var app = express();
 
-app.get('*', function(req, res) {
-  res.sendFile(path.join(__dirname, 'index.html'));
+// req - request 物件
+// res - response 物件
+// next - 下一個 middleware
+app.use(function(req, res, next) {
+  next(); // 一定要 call next 除非你不希望往下執行
 });
 
-app.listen(3000, 'localhost', function(err) {
-  if (err) { return console.log(err); }
-  console.log('Listening at http://localhost:3000');
+app.use(function(req, res) {
+  // Do Whatever You want
+});
+
+app.listen(3000); // 監聽一個 port
+</code></pre>
+					</section>
+					<section>
+						<p></p>
+<pre><code class="lang-js">// 只有 path 前綴有 /api 才會經過這個 middleware
+app.use('/api', function(req, res, next) {
+  next(); // 一定要 call next 除非你不希望往下執行
+});
+</code></pre>
+					</section>
+					<section>
+						<p>用數個 composable 的 middleware 處理 req 跟 res</p>
+						<p>可以用 short circuit 機制做 filter</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">Send response</p>
+					</section>
+					<section>
+						<p style="font-size: 2em">Response: res.send</p>
+<pre><code class="lang-js">var express = require('express');
+var app = express();
+
+app.use('/', function (req, res) {
+  res.send('Hello World!');
+});
+
+app.listen(3000, function () {
+  console.log('Example app listening on port 3000!');
+});
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 2em">JSON Response: res.josn</p>
+<pre><code class="lang-js">var express = require('express');
+var app = express();
+
+app.use('/', function (req, res) {
+  res.json({ text: 'Hello World!' });
+});
+
+app.listen(3000, function () {
+  console.log('Example app listening on port 3000!');
+});
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">Routing</p>
+					</section>
+					<section>
+						<p style="font-size: 2em">Methods: app.get, app.post..</p>
+<pre><code class="lang-js">var express = require('express');
+var app = express();
+
+app.get('/', function (req, res) {
+  res.json({ text: 'GET!!!' });
+});
+
+app.post('/', function (req, res) {
+  res.json({ text: 'POST!!!' });
+});
+
+app.listen(3000, function () {
+  console.log('Example app listening on port 3000!');
+});
+</code></pre>
+					</section>
+					<section>
+						<p>更模組化的方式是用 express.Router</p>
+<pre><code class="lang-js">var app = express();
+var router = express.Router();
+
+router.get('/', function(req, res) {
+  res.send('Home');
+});
+
+router.get('/yo', function(req, res) {
+  res.send('YoYo');
+});
+
+router.get('/ya', function(req, res) {
+  res.send('YaYa');
+});
+
+app.use('/', router);
+</code></pre>
+					</section>
+					<section>
+						<p><a href="https://github.com/Chiara-yen/startLearningNodejs/blob/master/ex-11-express-routing/app.js" target="_blank">範例</a></p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p>設計 HTTP API 時有三個地方可以當作參數</p>
+						<ul>
+							<li>query - path ? 後面的參數，例如：?x=1&y=2&c </li>
+							<li>params - 出現在 path 上的變動參數，例如：posts/21</li>
+							<li>body - Request Body</li>
+						</ul>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">query</p>
+					</section>
+					<section>
+						<p>req.query</p>
+<pre><code class="lang-js">var app = express();
+
+app.use(function(req, res) {
+  res.json(req.query);
+});
+</code></pre>
+					</section>
+					<section>
+						<p><a href="https://github.com/Chiara-yen/startLearningNodejs/blob/master/ex-08-express-qs/app.js" target="_blank">完整範例</a></p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">params</p>
+					</section>
+					<section>
+					<pre><code class="lang-js">var express = require('express');
+var app = express();
+
+app.get('/user/:name', function (req, res) {
+  res.send(req.params.name);
+});
+
+app.get('/post/:id', function (req, res) {
+  res.send(req.params.id);
+});
+
+app.listen(3000, function () {
+  console.log('Example app listening on port 3000!');
+});
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">body</p>
+					</section>
+					<section>
+						<p>req.body (必須安裝 body-parser)</p>
+<pre><code class="lang-bash">npm i --save body-parser</code></pre>
+
+<pre><code class="lang-js">var app = express();
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.post('/', function(req, res) {
+  res.send(JSON.stringify(req.body));
+});
+</code></pre>
+					</section>
+					<section>
+						<p><a href="https://github.com/Chiara-yen/startLearningNodejs/blob/master/ex-19-express-bodyparser/app.js" target="_blank">完整範例</a></p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">Render View</p>
+					</section>
+					<section>
+<pre><code class="lang-bash">npm i --save nunjucks</code></pre>
+
+<pre><code class="lang-html">// app/views/index.html
+&lt;h1&gt;{title}&lt;/h1&gt;
+</code></pre>
+<pre><code class="lang-js">var app = express();
+var nunjucks = require('nunjucks');
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'nunjucks');
+nunjucks.configure('views', {
+  autoescape: true,
+  express: app
+});
+
+router.get('/', function(req, res, next) {
+  res.render('index', { title: 'Express' });
+});
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">錯誤處理</p>
+					</section>
+					<section>
+						<p>四個參數的 middleware 會被當作是 error handler</p>
+<pre><code class="lang-js">app.use(function(err, req, res, next) {
+  res.status(err.status || 500);
+  res.render('error', {
+    message: err.message,
+    error: {}
+  });
 });</code></pre>
 					</section>
 					<section>
-						<p>還有一個 webpack.config.dev.js</p>
-<pre style="font-size: 14px;"><code class="lang-js">var path = require('path');
-var webpack = require('webpack');
-
-module.exports = {
-  devtool: 'cheap-module-eval-source-map',
-  entry: [
-  	'webpack-hot-middleware/client',
-  	'./src/index'
-  ],
-  output: {
-    path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js',
-    publicPath: '/static/'
-  },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
-  ],
-  module: {
-    loaders: [{
-      test: /\.js$/,
-      loaders: ['babel'],
-      include: path.join(__dirname, 'src')
-    }]
-  }
-};</code></pre>
+						<p>一般會這樣寫</p>
+<pre><code class="lang-js">if (app.get('env') === 'development') {
+  app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: err // 把錯誤丟出去顯示
+    });
+  });
+}
+// production error handler
+// no stacktraces leaked to user
+app.use(function(err, req, res, next) {
+  res.status(err.status || 500);
+  res.render('error', {
+    message: err.message,
+    error: {}
+  });
+});</code></pre>
 					</section>
 					<section>
-						<h3>這樣就大致 ok 了！</h3>
-						<p>程式進入點請寫在 src/index.js</p>
-						<p>也需要有一個 html 放在 project 根目錄</p>
+						<p>環境可以用 NODE_ENV 環境變數設定</p>
+<pre><code class="lang-bash">NODE_ENV=production npm start</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em"><a href="http://expressjs.com/en/starter/generator.html" target="_blank"></a>express-generator</p>
+<pre><code class="lang-bash">npm i --save body-parser</code></pre>
+
+<pre><code class="lang-js">var app = express();
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.post('/', function(req, res) {
+  res.send(JSON.stringify(req.body));
+});
+</code></pre>
 					</section>
 				</section>
 
