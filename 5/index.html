@@ -569,7 +569,7 @@ app.listen(3000); // 監聽一個 port
 </code></pre>
 					</section>
 					<section>
-						<p></p>
+						<p style="font-size: 2em">可以針對特定的 path</p>
 <pre><code class="lang-js">// 只有 path 前綴有 /api 才會經過這個 middleware
 app.use('/api', function(req, res, next) {
   next(); // 一定要 call next 除非你不希望往下執行
@@ -601,7 +601,7 @@ app.listen(3000, function () {
 </code></pre>
 					</section>
 					<section>
-						<p style="font-size: 2em">JSON Response: res.josn</p>
+						<p style="font-size: 2em">JSON Response: res.json</p>
 <pre><code class="lang-js">var express = require('express');
 var app = express();
 
@@ -809,18 +809,7 @@ app.use(function(err, req, res, next) {
 
 				<section data-transition="slide" data-background="#b5533c">
 					<section>
-						<p style="font-size: 2em"><a href="http://expressjs.com/en/starter/generator.html" target="_blank"></a>express-generator</p>
-<pre><code class="lang-bash">npm i --save body-parser</code></pre>
-
-<pre><code class="lang-js">var app = express();
-
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-
-app.post('/', function(req, res) {
-  res.send(JSON.stringify(req.body));
-});
-</code></pre>
+						<p style="font-size: 2em"><a href="http://expressjs.com/en/starter/generator.html" target="_blank">express-generator</a></p>
 					</section>
 				</section>
 
