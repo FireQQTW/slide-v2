@@ -1,0 +1,697 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Web Hackthon Seminar</title>
+
+		<meta name="description" content="Web Hackthon Seminar - 6">
+		<meta name="author" content="C. T. Lin">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="node_modules/prismjs/themes/prism.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+		<style>
+.reveal pre code { max-height: 500px !important;}
+a { color: white !important; text-decoration: underline !important;}
+		</style>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section data-background="#b5533c">
+					<h1>Web Hackthon Seminar </h1>
+					<h3>6</h3>
+					<p>
+						<small>css/webpack</small>
+					</p>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<p style="font-size: 2em">css</p>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">CSS 的多種 import 方式</p>
+					</section>
+					<section>
+						<p style="font-size: 2em">直接給 html 標籤 style <br>(inline-style)</p>
+<pre><code class="lang-css">&lt;div style=&quot;color: red; background-color: #D8756E; font-size: 80px;&quot;&gt;
+yo&lt;/div&gt;
+</code></pre>
+						<div style="color: red; background-color: #D8756E; font-size: 80px;">yo</div>
+						<p class="fragment">如果沒有特別的手段千萬別這樣做...</p>
+						<p class="fragment">以後會完全亂成一團...</p>
+					</section>
+					<section>
+						<p style="font-size: 2em">嵌入 style 區塊 (style block)</p>
+<pre><code class="lang-css">&lt;style&gt;
+h1 {
+  color: red;
+}
+&lt;/style&gt;</code></pre>
+						<p class="fragment">只有首頁比較常見：樣式比較快呈現</p>
+					</section>
+					<section>
+						<p style="font-size: 2em">寫在另一個 CSS 檔案再匯入</p>
+<pre><code class="lang-css">
+&lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;
+</code></pre>
+						<p class="fragment">這才是主流作法</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">CSS reset</p>
+					</section>
+					<section>
+						<p>學了一些 CSS 入門後千萬不要直接衝動就開始寫下去</p>
+					</section>
+					<section>
+						<p style="font-size: 2em">不然你就會像我三年前一樣</p>
+						<p class="fragment">怎麼到最後每個瀏覽器都長得不一樣...</p>
+					</section>
+					<section>
+						<p style="font-size: 2em">normalize.css</p>
+						<p><a href="https://necolas.github.io/normalize.css/">https://necolas.github.io/normalize.css/</a></p>
+						<p class="fragment">css 世界最偉大的發明之一</p>
+						<p class="fragment">被許多 css framework 內建進去</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">剛剛的 css...</p>
+<pre><code class="lang-css">h1 {
+  color: red;
+}</code></pre>
+						<p class="fragment">把 h1 tag 改成紅色</p>
+					</section>
+					<section>
+						<h2>這就是 CSS 定位目標的方式</h2>
+						<p>稱為選擇器 (selector)</p>
+					</section>
+
+					<section>
+						<p style="font-size: 2em">剛剛看到的是 tag selector</p>
+						<p>用法：</p>
+<pre><code class="lang-css">標籤名稱 {
+  樣式屬性: 樣式值;
+}</code></pre>
+					</section>
+
+					<section>
+						<p style="font-size: 2em">千萬別亂用 tag selector</p>
+						<p class="fragment">一改很可能就改到網站上其他東西</p>
+						<p class="fragment">還有幾個比 tag selector 重要一百倍的</p>
+					</section>
+
+					<section>
+						<p style="font-size: 2em">class selector</p>
+<pre><code class="lang-css">&lt;h1 class=&quot;article-heading&quot;&gt;&#27161;&#38988;&lt;/h1&gt;
+
+搭配
+
+.article-heading {
+  color: red;
+}
+
+.名稱 {
+  樣式屬性: 樣式值;
+}</code></pre>
+					</section>
+
+					<section>
+						<p style="font-size: 2em">id selector</p>
+<pre><code class="lang-css">&lt;h1 id=&quot;first-heading&quot;&gt;&#27161;&#38988;&lt;/h1&gt;
+
+搭配
+
+#first-heading {
+  color: red;
+}
+
+#名稱 {
+  樣式屬性: 樣式值;
+}</code></pre>
+					</section>
+
+					<section>
+						<h2>可以一路使用好幾個選擇器</h2>
+<pre><code class="lang-css">.article .title {
+  color: red;
+}
+
+會應用到
+
+&lt;div class=&quot;article&quot;&gt;
+  &lt;h2 class=&quot;title&quot;&gt;&#25991;&#31456;&#27161;&#38988;&lt;/h2&gt;
+  &lt;p&gt;....&lt;/p&gt;
+&lt;/div&gt;
+
+的文章標題
+</code></pre>
+					</section>
+
+					<section>
+						<h2>還有好多好多選擇器</h2>
+						<p><a href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_started/Selectors" target="_blank">可參考這裡</a></p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">Selector Priority</p>
+					</section>
+					<section>
+						<p>style > id > class > tag</p>
+						<img src="https://css-tricks.com/wp-content/csstricks-uploads/specificity-calculationbase.png" />
+					</section>
+					<section>
+						<p><a href="https://css-tricks.com/specifics-on-css-specificity/" target="_blank">可參考這裡</a></p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<h2>CSS 基本屬性</h2>
+						<p class="fragment">css 的屬性好多，多到有一些我也不會，不過那些大多不重要..</p>
+					</section>
+					<section>
+						<h2>長寬</h2>
+						<ul>
+							<li>width</li>
+							<li>height</li>
+							<li>min-width</li>
+							<li>min-height</li>
+							<li>max-width</li>
+							<li>max-height</li>
+						</ul>
+					</section>
+					<section>
+						<h2>字型</h2>
+						<ul>
+							<li>color</li>
+							<li>font-size</li>
+							<li>line-height</li>
+						</ul>
+					</section>
+					<section>
+						<h2>背景</h2>
+						<ul>
+							<li>background-color</li>
+							<li>background-image</li>
+						</ul>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">display</h2>
+					</section>
+					<section>
+						<h2>需要先知道<br>行內元素與區塊元素的差別</h2>
+						<p class="fragment">一般元素都是 inline 或 block</p>
+					</section>
+					<section>
+						<p style="font-size: 2em">區塊元素 (block)</p>
+						<p>代表結構的東西都是區塊元素</p>
+						<code>h1 ~ h6, p, br, div, ul, ol, form...</code>
+					</section>
+					<section>
+						<p style="font-size: 2em">行內元素 (inline)</p>
+						<p>其他不是結構的通常都是行內元素</p>
+						<code>a, img, span</code>
+					</section>
+					<section>
+						<p style="font-size: 2em">block</p>
+						<ul>
+							<li class="fragment">要置中必須設定長度並 margin: 0 auto;</li>
+							<li class="fragment">使用 max-width 取代 width 避免小螢幕出現滾動軸</li>
+						</ul>
+					</section>
+					<section>
+						<p style="font-size: 2em">inline-block</p>
+						<ul>
+							<li class="fragment">排多個元素時比 float 簡單許多</li>
+							<li class="fragment">可能需要 vertical-align: top 來對齊最上面</li>
+						</ul>
+					</section>
+					<section>
+						<p style="font-size: 1.5em">display: none v.s. visibility: hidden</p>
+						<ul>
+
+							<li class="fragment">display: none 看不見且不佔空間</li>
+							<li class="fragment">visibility: hidden 看不見但佔空間</li>
+						</ul>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<img src="img/box-model.gif">
+					</section>
+					<section>
+						<p style="font-size: 2em">border</p>
+						<ul>
+							<li>border: 3px solid #000;</li>
+						</ul>
+					</section>
+					<section>
+						<p style="font-size: 2em">margin</p>
+						<ul>
+							<li>margin: 20px 15px 10px 5px;</li>
+						</ul>
+					</section>
+					<section>
+						<p style="font-size: 2em">padding</p>
+						<ul>
+							<li>padding: 5px 10px 15px 20px;</li>
+						</ul>
+					</section>
+					<section>
+						<p style="font-size: 1.5em">margin, padding 口訣：上右下左</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">那 #ff0101 是怎麼回事？</p>
+						<div class="fragment">
+							<h4> 16 進位 RGB</h4>
+							<p>R:255, G: 1, B: 1</p>
+						</div>
+						<div class="fragment">
+							<h4> 2 進位...</h4>
+							<p>R:11111111 G:00000001 B:00000001</p>
+						</div>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">瀏覽器會依照 normal flow <br>來顯示 HTML 元素，<br>也就是上到下、左到右</p>
+						<img src="img/flow.png" />
+					</section>
+					<section>
+						<p style="font-size: 2em">positon</p>
+						<ul>
+							<li class="fragment">一般 normal flow，所有元素都是 positon: static，上到下、左到右</li>
+							<li class="fragment"> positon: fixed，會固定在視窗的絕對定位</li>
+							<li class="fragment"> positon: relative，會依照 normal flow 位子相對調整</li>
+							<li class="fragment"> positon: absolute，會從 normal flow 移除，改為相對於上一層為非 static 的元素，如果都沒有則相對於 body</li>
+						</ul>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">overflow</p>
+					</section>
+					<section>
+						<p>overflow 有幾種屬性：</p>
+						<table>
+							<tbody>
+								<tr>
+									<td>visible</td>
+									<td>預設的，長度超過會超出框框</td>
+								</tr>
+								<tr>
+									<td>visible</td>
+									<td>長度超過會隱藏</td>
+								</tr>
+								<tr>
+									<td>scroll</td>
+									<td>不管怎樣都出現滾動軸</td>
+								</tr>
+								<tr>
+									<td>auto</td>
+									<td>長度超過會有滾動軸，反之沒有</td>
+								</tr>
+							</tbody>
+						</table>
+					</section>
+					<section>
+						<p>overflow: visible</p>
+						<div style="border: 1px solid white; width: 500px">
+							MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+						</div>
+					</section>
+					<section>
+						<p>overflow: hidden</p>
+						<div style="border: 1px solid white; width: 500px; overflow: hidden">
+							MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+						</div>
+					</section>
+					<section>
+						<p>overflow: scroll</p>
+						<div style="border: 1px solid white; width: 500px; overflow: scroll">
+							MMMMMMMMMMMMMMMM
+						</div>
+						<br>
+						<div style="border: 1px solid white; width: 500px; overflow: scroll">
+							MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+						</div>
+					</section>
+					<section>
+						<p>overflow: auto</p>
+						<div style="border: 1px solid white; width: 500px; overflow: auto">
+							MMMMMMMMMMMMMMMM
+						</div>
+						<br>
+						<div style="border: 1px solid white; width: 500px; overflow: auto">
+							MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+						</div>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p>比例調整技巧</p>
+						<ul>
+							<li class="fragment">用 % 數在很小的時候會很難看</li>
+							<li class="fragment">media query 可針對不同大小制定不同 layout</li>
+						</ul>
+					</section>
+					<section>
+						<p>來不及提到的：</p>
+						<ul>
+							<li class="fragment">flexbox 是未來很有潛力的做法</li>
+							<li class="fragment">z-index 是來處理誰要疊上面的屬性</li>
+						</ul>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<p style="font-size: 2em">webpack</p>
+					<img src="img/webpack.png">
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">為什麼需要 webpack？</p>
+					</section>
+					<section>
+						<p>前端不能直接使用 CommonJS module</p>
+						<p class="fragment">需要編譯過</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<p style="font-size: 2em">安裝</p>
+<pre><code class="lang-bash">npm install -g webpack</code></pre>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">簡單的使用狀況</p>
+					</section>
+					<section>
+<pre><code class="lang-html">&lt;html/&gt;
+    &lt;head/&gt;
+        &lt;meta charset="utf-8"/&gt;
+    &lt;/head/&gt;
+    &lt;body/&gt;
+        &lt;script src="bundle.js"/&gt;&lt;/script/&gt;
+    &lt;/body/&gt;
+&lt;/html/&gt;
+</code></pre>
+<pre><code class="lang-js">// entry.js
+var add = require('./add');
+console.log('9876 + 1546 = ', add(9876, 1546));
+
+// add.js
+module.exports = function(a, b) { return a + b; }
+</code></pre>
+<pre><code class="lang-bash">// terminal
+webpack ./entry bundle.js
+</code></pre>
+					</section>
+					<section>
+<pre><code class="lang-bash">// terminal
+webpack ./entry bundle.js
+
+// webpack [entry-path] [output-path]
+// ./entry 是模組的進入點，編譯會從這裡開始
+// bundle.js 是常用的輸出檔案名稱
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 2em">練習</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">Watch Mode</p>
+<pre><code class="lang-bash">// terminal
+webpack --watch ./entry bundle.js
+
+// --watch 會監控檔案改變進行編譯
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">Loader</p>
+					</section>
+					<section>
+						<p>Webpack 可以透過 loader 來讓檔案經過某種處理</p>
+<pre><code class="lang-bash">先安裝 babel-loader
+npm install --save-dev babel-loader</code></pre>
+						<p class="fragment">上學期使用 babel v5，這學期則是 v6</p>
+					</section>
+					<section>
+<pre><code class="lang-js">// 因為稍微複雜了最好寫個設定檔 webpack.config.js
+module.exports = {
+  devtool: 'cheap-module-eval-source-map',
+  entry: './entry',  // 進入點
+  output: {
+    filename: 'bundle.js',  // 輸出的檔案名稱
+  },
+  module: {
+    loaders: [{
+      test: /\.js$/,   // 針對 js 檔
+      loaders: ['babel'],
+      exclude: /node_modules/   // 不要處理 3rd party 的 code
+    }]
+  }
+};
+</code></pre>
+<pre><code class="lang-js">// 設定檔寫好了所以直接 call 就好了
+webpack</code></pre>
+					</section>
+					<section>
+<pre><code class="lang-js">// 如果設定檔不想叫 webpack.config.js 的話，可以設定設定檔
+webpack --config webpack.config.dev.js</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<p style="font-size: 2em">改寫 Todo List</p>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<p style="font-size: 2em">Hot Reload</p>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p>“Hot Module Replacement” (HMR) is a feature to inject updated modules into the active runtime.</p>
+
+						<p>It’s like LiveReload for every module.</p>
+					</section>
+					<section>
+<pre><code class="lang-js">// webpack.config.js
+var webpack = require('webpack');
+module.exports = {
+  devtool: 'cheap-module-eval-source-map',
+  entry: './entry',
+  output: {
+    filename: 'bundle.js',
+  },
+  plugins: [ // 要加這些 plugin
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
+  ],
+  module: {
+    loaders: [{
+      test: /\.js$/,
+      loaders: ['babel'],
+      exclude: /node_modules/
+    }]
+  }
+};
+// HotModuleReplacementPlugin => 啟用 Hot Module Replacement
+// NoErrorsPlugin => 不要把錯誤的 Code 打包進來
+</code></pre>
+					</section>
+					<section>
+						<p>Watch v.s. Hot Module Replacement</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">React Hot Reload</p>
+						<p>搭配 Hot Module Replacement 使用 React Transform</p>
+					</section>
+					<section>
+						<p style="font-size: 2em">安裝</p>
+<pre><code class="lang-bash">// React 是不可缺的
+npm install --save react react-dom</code></pre>
+<pre><code class="lang-bash">// 乍看好像要裝一堆東西，但很多都很小
+npm install --save-dev babel-loader babel-preset-es2015 babel-preset-stage-0
+babel-preset-react babel-preset-react-hmre express
+webpack webpack-dev-middleware webpack-hot-middleware</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 2em">加一個 .babelrc</p>
+<pre><code class="lang-js">{
+  "presets": ["react", "es2015", "stage-0"],
+  "env": {
+    "development": {
+      "presets": ["react-hmre"]
+    }
+  }
+}</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 2em">加一個 devServer</p>
+<pre style="font-size: 15px;"><code class="lang-js">var path = require('path');
+var express = require('express');
+var webpack = require('webpack');
+var config = require('./webpack.config.dev');
+
+var app = express();
+var compiler = webpack(config);
+
+app.use(require('webpack-dev-middleware')(compiler, {
+  noInfo: true,
+  publicPath: config.output.publicPath
+}));
+
+app.use(require('webpack-hot-middleware')(compiler));
+
+app.get('*', function(req, res) {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+app.listen(3000, 'localhost', function(err) {
+  if (err) { return console.log(err); }
+  console.log('Listening at http://localhost:3000');
+});</code></pre>
+					</section>
+					<section>
+						<p>還有一個 webpack.config.dev.js</p>
+<pre style="font-size: 14px;"><code class="lang-js">var path = require('path');
+var webpack = require('webpack');
+
+module.exports = {
+  devtool: 'cheap-module-eval-source-map',
+  entry: [
+  	'webpack-hot-middleware/client', // 這多一個 hot reload 的 code entry
+  	'./src/index'
+  ],
+  output: {
+    path: path.join(__dirname, 'dist'),
+    filename: 'bundle.js',
+    publicPath: '/static/'
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
+  ],
+  module: {
+    loaders: [{
+      test: /\.js$/,
+      loaders: ['babel'],
+      include: path.join(__dirname, 'src')
+    }]
+  }
+};</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 2em">這樣就大致 ok 了！</p>
+						<p>程式進入點請寫在 src/index.js</p>
+						<p>也需要有一個 html 放在 project 根目錄</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65" style="text-align: left;">
+					<h1>THE END</h1>
+					<p>Thanks for listening</p>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				slideNumber: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'node_modules/prismjs/prism.js'},
+                    { src: 'node_modules/prismjs/components/prism-bash.min.js'},
+                    { src: 'node_modules/prismjs/components/prism-css.min.js'},
+                    { src: 'node_modules/prismjs/plugins/autolinker/prism-autolinker.min.js'},
+                    { src: 'node_modules/prismjs/components/prism-javascript.min.js', async: true, callback: function() {
+                    		Prism.highlightAll();
+                    	}
+                    },
+					// { src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() {
+					// 	hljs.initHighlightingOnLoad(); }
+					// },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+		</script>
+
+	</body>
+</html>
