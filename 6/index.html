@@ -56,7 +56,7 @@ a { color: white !important; text-decoration: underline !important;}
 					<p style="font-size: 2em">css</p>
 				</section>
 
-				<section data-transition="slide" data-background="#b5533c">
+				<section data-transition="slide" data-background="#4d7e65">
 					<section>
 						<p style="font-size: 2em">CSS 的多種 import 方式</p>
 					</section>
@@ -67,7 +67,7 @@ yo&lt;/div&gt;
 </code></pre>
 						<div style="color: red; background-color: #D8756E; font-size: 80px;">yo</div>
 						<p class="fragment">如果沒有特別的手段千萬別這樣做...</p>
-						<p class="fragment">以後會完全亂成一團...</p>
+						<p class="fragment">以後會完全亂成一團</p>
 					</section>
 					<section>
 						<p style="font-size: 2em">嵌入 style 區塊 (style block)</p>
@@ -80,8 +80,7 @@ h1 {
 					</section>
 					<section>
 						<p style="font-size: 2em">寫在另一個 CSS 檔案再匯入</p>
-<pre><code class="lang-css">
-&lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;
+<pre><code class="lang-css">&lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;
 </code></pre>
 						<p class="fragment">這才是主流作法</p>
 					</section>
@@ -97,6 +96,7 @@ h1 {
 					<section>
 						<p style="font-size: 2em">不然你就會像我三年前一樣</p>
 						<p class="fragment">怎麼到最後每個瀏覽器都長得不一樣...</p>
+						<p class="fragment">例如 chrome 的 default margin...</p>
 					</section>
 					<section>
 						<p style="font-size: 2em">normalize.css</p>
@@ -104,9 +104,14 @@ h1 {
 						<p class="fragment">css 世界最偉大的發明之一</p>
 						<p class="fragment">被許多 css framework 內建進去</p>
 					</section>
+					<section>
+						<p style="font-size: 2em">從 cdn import</p>
+<pre><code class="lang-bash">&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/normalize/4.0.0/normalize.min.css&quot;&gt;
+</code></pre>
+					</section>
 				</section>
 
-				<section data-transition="slide" data-background="#b5533c">
+				<section data-transition="slide" data-background="#4d7e65">
 					<section>
 						<p style="font-size: 2em">剛剛的 css...</p>
 <pre><code class="lang-css">h1 {
@@ -199,7 +204,7 @@ h1 {
 					</section>
 				</section>
 
-				<section data-transition="slide" data-background="#b5533c">
+				<section data-transition="slide" data-background="#4d7e65">
 					<section>
 						<h2>CSS 基本屬性</h2>
 						<p class="fragment">css 的屬性好多，多到有一些我也不會，不過那些大多不重要..</p>
@@ -251,6 +256,13 @@ h1 {
 						<code>a, img, span</code>
 					</section>
 					<section>
+						<p style="font-size: 2em">inline</p>
+						<ul>
+							<li class="fragment">無法調整 width, height</li>
+							<li class="fragment">無法調整 top, bottom 的 padding, margin</li>
+						</ul>
+					</section>
+					<section>
 						<p style="font-size: 2em">block</p>
 						<ul>
 							<li class="fragment">要置中必須設定長度並 margin: 0 auto;</li>
@@ -260,9 +272,13 @@ h1 {
 					<section>
 						<p style="font-size: 2em">inline-block</p>
 						<ul>
+							<li class="fragment">在 inline 擁有 block 特性</li>
 							<li class="fragment">排多個元素時比 float 簡單許多</li>
 							<li class="fragment">可能需要 vertical-align: top 來對齊最上面</li>
 						</ul>
+					</section>
+					<section>
+						<p>可以參考 egghead 的<a href="https://egghead.io/lessons/css-css-display-property-block-inline-block-and-inline" target="_blank">教學影片</a></p>
 					</section>
 					<section>
 						<p style="font-size: 1.5em">display: none v.s. visibility: hidden</p>
@@ -274,14 +290,14 @@ h1 {
 					</section>
 				</section>
 
-				<section data-transition="slide" data-background="#b5533c">
+				<section data-transition="slide" data-background="#4d7e65">
 					<section>
 						<img src="img/box-model.gif">
 					</section>
 					<section>
 						<p style="font-size: 2em">border</p>
 						<ul>
-							<li>border: 3px solid #000;</li>
+							<li>border: 3px solid #fff;</li>
 						</ul>
 					</section>
 					<section>
@@ -298,6 +314,10 @@ h1 {
 					</section>
 					<section>
 						<p style="font-size: 1.5em">margin, padding 口訣：上右下左</p>
+					</section>
+					<section>
+						<p style="font-size: 1.5em">強烈建議使用 box-sizing: border-box</p>
+						<p>一般人習慣認知 <br />width = content width + padding + border</p>
 					</section>
 				</section>
 
@@ -317,7 +337,7 @@ h1 {
 
 				<section data-transition="slide" data-background="#4d7e65">
 					<section>
-						<p style="font-size: 2em">瀏覽器會依照 normal flow <br>來顯示 HTML 元素，<br>也就是上到下、左到右</p>
+						<p style="font-size: 1.5em">瀏覽器會依照 normal flow <br>來顯示 HTML 元素，<br>也就是上到下、左到右</p>
 						<img src="img/flow.png" />
 					</section>
 					<section>
@@ -336,7 +356,7 @@ h1 {
 						<p style="font-size: 2em">overflow</p>
 					</section>
 					<section>
-						<p>overflow 有幾種屬性：</p>
+						<p style="font-size: 2em">overflow 有幾種屬性：</p>
 						<table>
 							<tbody>
 								<tr>
@@ -359,19 +379,19 @@ h1 {
 						</table>
 					</section>
 					<section>
-						<p>overflow: visible</p>
+						<p style="font-size: 2em">overflow: visible</p>
 						<div style="border: 1px solid white; width: 500px">
 							MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 						</div>
 					</section>
 					<section>
-						<p>overflow: hidden</p>
+						<p style="font-size: 2em">overflow: hidden</p>
 						<div style="border: 1px solid white; width: 500px; overflow: hidden">
 							MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 						</div>
 					</section>
 					<section>
-						<p>overflow: scroll</p>
+						<p style="font-size: 2em">overflow: scroll</p>
 						<div style="border: 1px solid white; width: 500px; overflow: scroll">
 							MMMMMMMMMMMMMMMM
 						</div>
@@ -381,7 +401,7 @@ h1 {
 						</div>
 					</section>
 					<section>
-						<p>overflow: auto</p>
+						<p style="font-size: 2em">overflow: auto</p>
 						<div style="border: 1px solid white; width: 500px; overflow: auto">
 							MMMMMMMMMMMMMMMM
 						</div>
@@ -394,16 +414,42 @@ h1 {
 
 				<section data-transition="slide" data-background="#4d7e65">
 					<section>
-						<p>比例調整技巧</p>
+						<p style="font-size: 2em">RWD (Responsive Web Design)</p>
 						<ul>
-							<li class="fragment">用 % 數在很小的時候會很難看</li>
-							<li class="fragment">media query 可針對不同大小制定不同 layout</li>
+							<li class="fragment">用 % 取代 px</li>
+							<li class="fragment">用 em, rem 來表示字體大小</li>
+							<li class="fragment">用 % 數在很小的時候會很難看，media query 可針對不同大小制定不同 layout</li>
 						</ul>
 					</section>
 					<section>
-						<p>來不及提到的：</p>
+						<p style="font-size: 2em">rem</p>
+<pre><code class="lang-css">/* 預設 font-size 16px * 62.5% = 10px，方便計算 */
+html { font-size: 62.5%; }
+body { font-size: 1.4rem; } /* =14px */
+h1   { font-size: 2.4rem; } /* =24px */</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 2em">media query</p>
+<pre><code class="lang-css">@media (min-width: 600px) {
+  // width 大於 600px 的 css
+}
+
+@media (min-width: 600px) and (max-width: 300px) {
+ // width 介於 300px-600px 的 css
+}
+
+@media (max-width: 300px) {
+  // width 小於 300px 的 css
+}
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">來不及提到的：</p>
 						<ul>
-							<li class="fragment">flexbox 是未來很有潛力的做法</li>
+							<li class="fragment">flexbox 是未來性做法</li>
 							<li class="fragment">z-index 是來處理誰要疊上面的屬性</li>
 						</ul>
 					</section>
@@ -424,7 +470,7 @@ h1 {
 					</section>
 				</section>
 
-				<section data-transition="slide" data-background="#b5533c">
+				<section data-transition="slide" data-background="#4d7e65">
 					<p style="font-size: 2em">安裝</p>
 <pre><code class="lang-bash">npm install -g webpack</code></pre>
 				</section>
@@ -481,13 +527,29 @@ webpack --watch ./entry bundle.js
 
 				<section data-transition="slide" data-background="#b5533c">
 					<section>
-						<p style="font-size: 2em">Loader</p>
+						<p style="font-size: 2em">Loaders</p>
+						<p>Webpack 可以透過 loader 來讓檔案經過某種處理</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">Babel Loader</p>
 					</section>
 					<section>
-						<p>Webpack 可以透過 loader 來讓檔案經過某種處理</p>
-<pre><code class="lang-bash">先安裝 babel-loader
+<pre><code class="lang-bash">// 先安裝 babel-loader
 npm install --save-dev babel-loader</code></pre>
-						<p class="fragment">上學期使用 babel v5，這學期則是 v6</p>
+						<p>上學期使用 babel v5，這學期則是 v6</p>
+<pre><code class="lang-bash">// v6 建議安裝以下 babel presets 語法擴充
+npm install --save-dev babel-preset-es2015 babel-preset-stage-0
+babel-preset-react</code></pre>
+					</section>
+					<section>
+						<p>寫 .babelrc 設定檔，使用這些語法擴充</p>
+<pre><code class="lang-js">{
+  "presets": ["react", "es2015", "stage-0"]
+}
+</code></pre>
 					</section>
 					<section>
 <pre><code class="lang-js">// 因為稍微複雜了最好寫個設定檔 webpack.config.js
@@ -515,135 +577,45 @@ webpack --config webpack.config.dev.js</code></pre>
 					</section>
 				</section>
 
-				<section data-transition="slide" data-background="#4d7e65">
-					<p style="font-size: 2em">改寫 Todo List</p>
-				</section>
-
 				<section data-transition="slide" data-background="#b5533c">
-					<p style="font-size: 2em">Hot Reload</p>
-				</section>
-
-				<section data-transition="slide" data-background="#4d7e65">
 					<section>
-						<p>“Hot Module Replacement” (HMR) is a feature to inject updated modules into the active runtime.</p>
-
-						<p>It’s like LiveReload for every module.</p>
+						<p style="font-size: 2em">Style & CSS Loader</p>
+					</section>
+					<section>
+<pre><code class="lang-bash">// 先安裝 style-loader css-loader
+npm install --save-dev style-loader css-loader</code></pre>
 					</section>
 					<section>
 <pre><code class="lang-js">// webpack.config.js
-var webpack = require('webpack');
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
-  entry: './entry',
+  entry: './entry',  // 進入點
   output: {
-    filename: 'bundle.js',
+    filename: 'bundle.js',  // 輸出的檔案名稱
   },
-  plugins: [ // 要加這些 plugin
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
-  ],
   module: {
     loaders: [{
-      test: /\.js$/,
+      test: /\.js$/,   // 針對 js 檔
       loaders: ['babel'],
-      exclude: /node_modules/
+      exclude: /node_modules/   // 不要處理 3rd party 的 code
+    }, {
+      test: /\.css$/,  // 針對 css 檔
+      loaders: ['style', 'css'],
+      exclude: /node_modules/   // 不要處理 3rd party 的 code
     }]
   }
 };
-// HotModuleReplacementPlugin => 啟用 Hot Module Replacement
-// NoErrorsPlugin => 不要把錯誤的 Code 打包進來
 </code></pre>
 					</section>
 					<section>
-						<p>Watch v.s. Hot Module Replacement</p>
+<pre><code class="lang-js">// 就可以這樣 import css
+import 'myCss2.css';
+require('myCss.css');</code></pre>
 					</section>
 				</section>
 
-				<section data-transition="slide" data-background="#b5533c">
-					<section>
-						<p style="font-size: 2em">React Hot Reload</p>
-						<p>搭配 Hot Module Replacement 使用 React Transform</p>
-					</section>
-					<section>
-						<p style="font-size: 2em">安裝</p>
-<pre><code class="lang-bash">// React 是不可缺的
-npm install --save react react-dom</code></pre>
-<pre><code class="lang-bash">// 乍看好像要裝一堆東西，但很多都很小
-npm install --save-dev babel-loader babel-preset-es2015 babel-preset-stage-0
-babel-preset-react babel-preset-react-hmre express
-webpack webpack-dev-middleware webpack-hot-middleware</code></pre>
-					</section>
-					<section>
-						<p style="font-size: 2em">加一個 .babelrc</p>
-<pre><code class="lang-js">{
-  "presets": ["react", "es2015", "stage-0"],
-  "env": {
-    "development": {
-      "presets": ["react-hmre"]
-    }
-  }
-}</code></pre>
-					</section>
-					<section>
-						<p style="font-size: 2em">加一個 devServer</p>
-<pre style="font-size: 15px;"><code class="lang-js">var path = require('path');
-var express = require('express');
-var webpack = require('webpack');
-var config = require('./webpack.config.dev');
-
-var app = express();
-var compiler = webpack(config);
-
-app.use(require('webpack-dev-middleware')(compiler, {
-  noInfo: true,
-  publicPath: config.output.publicPath
-}));
-
-app.use(require('webpack-hot-middleware')(compiler));
-
-app.get('*', function(req, res) {
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
-
-app.listen(3000, 'localhost', function(err) {
-  if (err) { return console.log(err); }
-  console.log('Listening at http://localhost:3000');
-});</code></pre>
-					</section>
-					<section>
-						<p>還有一個 webpack.config.dev.js</p>
-<pre style="font-size: 14px;"><code class="lang-js">var path = require('path');
-var webpack = require('webpack');
-
-module.exports = {
-  devtool: 'cheap-module-eval-source-map',
-  entry: [
-  	'webpack-hot-middleware/client', // 這多一個 hot reload 的 code entry
-  	'./src/index'
-  ],
-  output: {
-    path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js',
-    publicPath: '/static/'
-  },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
-  ],
-  module: {
-    loaders: [{
-      test: /\.js$/,
-      loaders: ['babel'],
-      include: path.join(__dirname, 'src')
-    }]
-  }
-};</code></pre>
-					</section>
-					<section>
-						<p style="font-size: 2em">這樣就大致 ok 了！</p>
-						<p>程式進入點請寫在 src/index.js</p>
-						<p>也需要有一個 html 放在 project 根目錄</p>
-					</section>
+				<section data-transition="slide" data-background="#4d7e65">
+					<p style="font-size: 1.5em">練習：用 webpack 改寫 Todo List</p>
 				</section>
 
 				<section data-transition="slide" data-background="#4d7e65" style="text-align: left;">
@@ -652,7 +624,6 @@ module.exports = {
 				</section>
 
 			</div>
-
 		</div>
 
 		<script src="lib/js/head.min.js"></script>
