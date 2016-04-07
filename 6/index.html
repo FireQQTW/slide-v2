@@ -341,12 +341,12 @@ h1 {
 						<img src="img/flow.png" />
 					</section>
 					<section>
-						<p style="font-size: 2em">positon</p>
+						<p style="font-size: 2em">position</p>
 						<ul>
-							<li class="fragment">一般 normal flow，所有元素都是 positon: static，上到下、左到右</li>
-							<li class="fragment"> positon: fixed，會固定在視窗的絕對定位</li>
-							<li class="fragment"> positon: relative，會依照 normal flow 位子相對調整</li>
-							<li class="fragment"> positon: absolute，會從 normal flow 移除，改為相對於上一層為非 static 的元素，如果都沒有則相對於 body</li>
+							<li class="fragment">一般 normal flow，所有元素都是 position: static，上到下、左到右</li>
+							<li class="fragment"> position: fixed，會固定在視窗的絕對定位</li>
+							<li class="fragment"> position: relative，會依照 normal flow 位子相對調整</li>
+							<li class="fragment"> position: absolute，會從 normal flow 移除，改為相對於上一層為非 static 的元素，如果都沒有則相對於 body</li>
 						</ul>
 					</section>
 				</section>
@@ -364,7 +364,7 @@ h1 {
 									<td>預設的，長度超過會超出框框</td>
 								</tr>
 								<tr>
-									<td>visible</td>
+									<td>hidden</td>
 									<td>長度超過會隱藏</td>
 								</tr>
 								<tr>
@@ -434,7 +434,7 @@ h1   { font-size: 2.4rem; } /* =24px */</code></pre>
   // width 大於 600px 的 css
 }
 
-@media (min-width: 600px) and (max-width: 300px) {
+@media (min-width: 300px) and (max-width: 600px) {
  // width 介於 300px-600px 的 css
 }
 
@@ -480,14 +480,14 @@ h1   { font-size: 2.4rem; } /* =24px */</code></pre>
 						<p style="font-size: 2em">簡單的使用狀況</p>
 					</section>
 					<section>
-<pre><code class="lang-html">&lt;html/&gt;
-    &lt;head/&gt;
-        &lt;meta charset="utf-8"/&gt;
-    &lt;/head/&gt;
-    &lt;body/&gt;
-        &lt;script src="bundle.js"/&gt;&lt;/script/&gt;
-    &lt;/body/&gt;
-&lt;/html/&gt;
+<pre><code class="lang-html">&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset="utf-8"&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;script src="bundle.js"&gt;&lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
 </code></pre>
 <pre><code class="lang-js">// entry.js
 var add = require('./add');
@@ -609,8 +609,8 @@ module.exports = {
 					</section>
 					<section>
 <pre><code class="lang-js">// 就可以這樣 import css
-import 'myCss2.css';
-require('myCss.css');</code></pre>
+import './myCss.css';
+require('./myCss2.css');</code></pre>
 					</section>
 				</section>
 
