@@ -1,0 +1,677 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Web Hackthon Seminar</title>
+
+		<meta name="description" content="Web Hackthon Seminar - 6">
+		<meta name="author" content="C. T. Lin">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="node_modules/prismjs/themes/prism.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+		<style>
+.reveal pre code { max-height: 500px !important;}
+a { color: white !important; text-decoration: underline !important;}
+		</style>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section data-background="#b5533c">
+					<h1>Web Hackthon Seminar </h1>
+					<h3>7</h3>
+					<p>
+						<small>UI framework/React Router/Webpack HMR</small>
+					</p>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<p style="font-size: 2em">UI framework</p>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<ul>
+						<li><a href="http://getbootstrap.com/" target="_blank">Bootstrap</a></li>
+						<li><a href="http://foundation.zurb.com/" target="_blank">Foundation</a></li>
+						<li><a href="http://purecss.io/" target="_blank">PureCss</a></li>
+						<li>...</li>
+					</ul>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<p style="font-size: 2em">Bootstrap</p>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<p style="font-size: 2em">使用 cdn 來載入</p>
+					<pre><code class="lang-js">&lt;link rel=&quot;stylesheet&quot; href=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css&quot;&gt;</code></pre>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">Grid</p>
+						<p>用格子的方式來排版</p>
+					</section>
+					<section>
+						<p style="font-size: 2em">Container</p>
+						<ul>
+							<li>.container：在 break point 調整寬度</li>
+							<li>.container-fluid：流動式的調整寬度</li>
+						</ul>
+					</section>
+					<section>
+						<p style="font-size: 2em">裡面會放一行行的 row</p>
+						<pre><code class="lang-bash">&lt;div class=&quot;container&quot;&gt;
+  &lt;div class=&quot;row&quot;&gt;
+    ...
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 2em">一個 row 可以分成 12 格</p>
+					</section>
+					<section>
+						<p><img src="img/row1.png" /></p>
+						<pre><code class="lang-bash">&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col-md-1&quot;&gt;.col-md-1&lt;/div&gt;
+  &lt;div class=&quot;col-md-1&quot;&gt;.col-md-1&lt;/div&gt;
+  &lt;div class=&quot;col-md-1&quot;&gt;.col-md-1&lt;/div&gt;
+  &lt;div class=&quot;col-md-1&quot;&gt;.col-md-1&lt;/div&gt;
+  &lt;div class=&quot;col-md-1&quot;&gt;.col-md-1&lt;/div&gt;
+  &lt;div class=&quot;col-md-1&quot;&gt;.col-md-1&lt;/div&gt;
+  &lt;div class=&quot;col-md-1&quot;&gt;.col-md-1&lt;/div&gt;
+  &lt;div class=&quot;col-md-1&quot;&gt;.col-md-1&lt;/div&gt;
+  &lt;div class=&quot;col-md-1&quot;&gt;.col-md-1&lt;/div&gt;
+  &lt;div class=&quot;col-md-1&quot;&gt;.col-md-1&lt;/div&gt;
+  &lt;div class=&quot;col-md-1&quot;&gt;.col-md-1&lt;/div&gt;
+  &lt;div class=&quot;col-md-1&quot;&gt;.col-md-1&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+					</section>
+					<section>
+						<p><img src="img/row2.png" /></p>
+						<pre><code class="lang-bash">&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col-md-8&quot;&gt;.col-md-8&lt;/div&gt;
+  &lt;div class=&quot;col-md-4&quot;&gt;.col-md-4&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+					</section>
+					<section>
+						<p><img src="img/row3.png" /></p>
+						<pre><code class="lang-bash">&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col-md-4&quot;&gt;.col-md-4&lt;/div&gt;
+  &lt;div class=&quot;col-md-4&quot;&gt;.col-md-4&lt;/div&gt;
+  &lt;div class=&quot;col-md-4&quot;&gt;.col-md-4&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+					</section>
+					<section>
+						<p><img src="img/row4.png" /></p>
+						<pre><code class="lang-bash">&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col-md-8&quot;&gt;.col-md-6&lt;/div&gt;
+  &lt;div class=&quot;col-md-4&quot;&gt;.col-md-6&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">Responsive</p>
+					</section>
+					<section>
+						<p><img src="img/rwd.png" /></p>
+					</section>
+					<section>
+						<p><img src="img/show.png" /></p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em"><a href="http://getbootstrap.com/components/" target="_blank">Components</a></p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 1.2em">Bootstrap 的 theme</p>
+						<ul>
+							<li><a href="https://bootswatch.com/" target="_blank">bootwatch</a></li>
+							<li><a href="http://designmodo.github.io/Flat-UI/" target="_blank">flat-ui</a></li>
+						</ul>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<p style="font-size: 2em">與 React 結合使用</p>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em"><a href="https://github.com/JedWatson/classnames" target="_blank">classnames</a></p>
+					</section>
+					<section>
+						<p style="font-size: 2em">安裝</p>
+					<pre><code class="lang-js">npm install --save classnames
+</code></pre>
+					</section>
+					<section>
+						<p>可以方便地去組合出 className</p>
+					<pre><code class="lang-js">import classNames from 'classnames';
+
+classNames('foo', 'bar'); // => 'foo bar'
+classNames('foo', { bar: true }); // => 'foo bar'
+classNames({ 'foo-bar': true }); // => 'foo-bar'
+classNames({ 'foo-bar': false }); // => ''
+classNames({ foo: true }, { bar: true }); // => 'foo bar'
+classNames({ foo: true, bar: true }); // => 'foo bar'
+
+// lots of arguments of various types
+classNames('foo', { bar: true, duck: false }, 'baz', { quux: true });
+// => 'foo bar baz quux'
+
+// other falsy values are just ignored
+classNames(null, false, 'bar', undefined, 0, 1, { baz: null }, '');
+// => 'bar 1'
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">或是使用 <a href="https://github.com/react-bootstrap/react-bootstrap" target="_blank">React Bootstrap</a></p>
+					</section>
+					<section>
+						<p style="font-size: 2em">但我個人不太建議</p>
+						<ul>
+							<li>還沒 1.x (Under active development - APIs will change)</li>
+							<li>1.0.0 Roadmap 差得太多</li>
+							<li>東西太多過於複雜</li>
+						</ul>
+					</section>
+					<section>
+						<p style="font-size: 2em">js 相關的 UI component</p>
+						<p>建議選用較小型好 debug 的套件</p>
+						<p>或是自己把 3rd party api 包成 component</p>
+						<ul>
+							<li><a href="https://github.com/reactjs/react-modal" target="_blank">react-modal</a></li>
+							<li><a href="https://github.com/reactjs/react-tabs" target="_blank">react-tabs</a></li>
+							<li><a href="https://github.com/JedWatson/react-select" target="_blank">react-select</a></li>
+							<li><a href="https://github.com/akiran/react-slick" target="_blank">react-slick</a></li>
+							<li><a href="https://github.com/yuanyan/halogen" target="_blank">halogen</a></li>
+							<li><a href="https://github.com/yuanyan/boron" target="_blank">boron</a></li>
+							<li><a href="https://github.com/chentsulin/sweetalert-react" target="_blank">sweetalert-react</a></li>
+						</ul>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 1.2em">另外有不少直接用 React 實作的 UI framework</p>
+						<ul>
+							<li><a href="http://www.material-ui.com/#/" target="_blank">material-ui</a></li>
+							<li><a href="http://react-toolbox.com/" target="_blank">react-toolbox</a></li>
+							<li><a href="http://react-native-material-design.github.io/" target="_blank">react-native-material-design</a></li>
+							<li><a href="http://www.xinthink.com/react-native-material-kit/" target="_blank">react-native-material-kit</a></li>
+							<li><a href="http://gabrielbull.github.io/react-desktop/demo/" target="_blank">react-desktop</a></li>
+						</ul>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<p style="font-size: 2em">React Router</p>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p>前幾天發生的事..</p>
+						<p style="font-size: 2em"><a href="https://medium.com/@taion/react-router-is-dead-long-live-rrtr-d229ca30e318#.r0soc2iy4" target="_blank">React Router is dead. Long live rrtr.</a></p>
+					</section>
+					<section>
+						<p><a href="https://github.com/taion/rrtr/pull/19/files">Deprecate...</a></p>
+						<p class="fragment"><a href="https://github.com/scottcorgan/awesome-js-drama">值得被收錄到 awesome-js-drama</a></p>
+					</section>
+					<section>
+						<p>總之 taion 取得了 react router publish right</p>
+						<p><img src="img/taion.png" /></p>
+						<p class="fragment">可喜可賀</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 1.5em">每一個前端 framework 都會有個 router</p>
+						<ul>
+							<li>React Router</li>
+							<li>Angular New Router</li>
+							<li>Angular ui-router</li>
+							<li>Ember.Router</li>
+							<li>vue-router</li>
+							<li>aurelia-router</li>
+						</ul>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">為什麼需要前端 Router</p>
+						<ul>
+							<li>Single Page Application 的內容不只 Single Page</li>
+							<li>需要根據 Url 不同給不同內容</li>
+							<li>決定要切換至哪頁通常是反映使用者前端互動</li>
+							<li>方便 Ajax 與模組化</li>
+							<li><a href="https://webpack.github.io/docs/code-splitting.html" target="_blank">Code Splitting</a></li>
+						</ul>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">History</p>
+						<p>瀏覽器的歷史紀錄</p>
+						<p class="fragment">也就是讓你可以按上一頁下一頁的東西</p>
+					</section>
+					<section>
+						<p style="font-size: 2em">移動 current 的方式</p>
+<pre><code class="lang-js">window.history.back(); // 回上一頁
+window.history.forward(); // 回下一頁
+window.history.go(-1); // 前兩頁
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 2em">主要有兩種操作 history 的方式</p>
+						<ul>
+							<li>Hash History</li>
+							<li>Browser History</li>
+						</ul>
+					</section>
+					<section>
+						<p style="font-size: 2em">Hash History</p>
+<pre><code class="lang-js">// 網址 # 後面的 string 可以藉由 window.location.hash 去 get, set
+window.location.hash = '#/2';
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 2em">Browser History</p>
+<pre><code class="lang-js">// HTML 5
+// 新增一個 entry
+// pushState(state, title, url);
+window.history.pushState(null, null, 'hello');
+
+// 取代目前的 entry
+// replaceState(state, title, url);
+window.history.replaceState(null, null, 'hello');
+
+// 事件
+window.addEventListner('popstate', function() {
+  // 歷史紀錄被更動
+});
+</code></pre>
+					</section>
+					<section>
+						<p>React Router 底層有一個實作了跨瀏覽器的 <a href="https://github.com/mjackson/history" target="_blank">history</a> library</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<p style="font-size: 2em">安裝</p>
+					<pre><code class="lang-js">npm install --save react-router
+</code></pre>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p>把 Router render 到畫面上</p>
+						<p>而必須在 Router 裡面定義 Routes</p>
+					</section>
+					<section>
+						<pre><code class="lang-js">import React from 'react';
+import { render } from 'react-dom';
+import { Router, Route, browserHistory } from 'react-router';
+
+// 把 Router render 到畫面上
+render(
+  &lt;Router history={browserHistory}&gt;
+    &lt;Route path=&quot;/&quot; component={App}&gt;
+      &lt;Route path=&quot;about&quot; component={About}/&gt;
+      &lt;Route path=&quot;users&quot; component={Users}&gt;
+        &lt;Route path=&quot;:userId&quot; component={User}/&gt;
+      &lt;/Route&gt;
+      &lt;Route path=&quot;*&quot; component={NoFound}/&gt;
+    &lt;/Route&gt;
+  &lt;/Router&gt;
+, document.getElementById('root'));
+</code></pre>
+					</section>
+					<section>
+						<pre><code class="lang-js">// Router 需要有一個 history prop 傳入，通常使用 browserHistory
+&lt;Router history={browserHistory}&gt;
+  &lt;Route path=&quot;/&quot; component={App}&gt;
+    &lt;Route path=&quot;about&quot; component={About}/&gt;
+    &lt;Route path=&quot;users&quot; component={Users}&gt;
+      &lt;Route path=&quot;:userId&quot; component={User}/&gt;
+    &lt;/Route&gt;
+    &lt;Route path=&quot;*&quot; component={NoFound}/&gt;
+  &lt;/Route&gt;
+&lt;/Router&gt;
+</code></pre>
+					</section>
+					<section>
+						<pre><code class="lang-js">// Route 可以指定 path 跟 component
+&lt;Route path=&quot;/&quot; component={App}&gt;
+
+  {/* /about 會 render &lt;App&gt;&lt;About /&gt;&lt;/App&gt; */}
+  &lt;Route path=&quot;about&quot; component={About}/&gt;
+
+  {/* /users/:userId 會 render &lt;App&gt;&lt;Users&gt;&lt;User /&gt;&lt;/Users&gt;&lt;/App&gt; */}
+  &lt;Route path=&quot;users&quot; component={Users}&gt;
+    &lt;Route path=&quot;:userId&quot; component={User}/&gt;
+  &lt;/Route&gt;
+
+  {/* 到最後都沒有 match 出現 404 畫面 */}
+  &lt;Route path=&quot;*&quot; component={NoFound}/&gt;
+&lt;/Route&gt;
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p>其他值得一提的 Route 設定</p>
+						<ul>
+							<li>IndexRoute</li>
+							<li>Redirect</li>
+						</ul>
+						<p><a href="https://github.com/web-seminar/react-router-simple-demo/blob/master/src/routes.js" target="_blank">參考範例</a></p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<p style="font-size: 2em">切換頁面的方法</p>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">Link</p>
+						<pre><code class="lang-js">// Route 可以指定 path 跟 component
+import { Link } from 'react-router';
+
+//....
+  render() {
+	return (
+	  &lt;div&gt;
+        &lt;Link to=&quot;/about&quot;&gt;&#40670;&#25802;&#21040; About &#38913;&#38754;&lt;/Link&gt;
+      &lt;/div&gt;
+	);
+  }
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">router Context</p>
+						<pre><code class="lang-js">//....
+class Users extends Component {
+  // 重要！需要宣告 contextTypes 否則 router 不會被傳進 this.context
+  static contextTypes = {
+    router: PropTypes.object.isRequired
+  };
+  handleClick() {
+	this.context.router.push('/about');
+  }
+  render() {
+	return (
+	  &lt;div&gt;
+        &lt;button onClick={this.handleClick.bind(this)}&gt;About&lt;/button&gt;
+      &lt;/div&gt;
+	);
+  }
+}
+</code></pre>
+					</section>
+					<section>
+						<a href="https://github.com/web-seminar/react-router-simple-demo/blob/master/src/components/PostList.js" target="_blank">範例</a>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">路徑參數 this.props.params</p>
+						<pre><code class="lang-js">// path="/users/:userId"
+//....
+class SingleUserPage extends Component {
+  render() {
+	return (
+	  &lt;div&gt;
+        {`User: ${this.props.params.userId}`}
+      &lt;/div&gt;
+	);
+  }
+}
+</code></pre>
+					</section>
+					<section>
+						<a href="https://github.com/web-seminar/react-router-simple-demo/blob/master/src/components/SinglePost.js" target="_blank">範例</a>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<p style="font-size: 2em">Advanced Webpack</p>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<p style="font-size: 2em">Hot Reload</p>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p>“Hot Module Replacement” (HMR) is a feature to inject updated modules into the active runtime.</p>
+
+						<p>It’s like LiveReload for every module.</p>
+					</section>
+					<section>
+<pre><code class="lang-js">var webpack = require('webpack');
+module.exports = {
+  ...
+
+  plugins: [ // 要加這些 plugin
+    new webpack.HotModuleReplacementPlugin(), // => 啟用 HMR
+    new webpack.NoErrorsPlugin() // => 不要把錯誤的 Code 打包進來
+  ],
+};
+</code></pre>
+					</section>
+					<section>
+						<p>Watch v.s. Hot Module Replacement</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">React Hot Reload</p>
+					</section>
+					<section>
+						<img src="https://cloud.githubusercontent.com/assets/1539088/11611771/ae1a6bd8-9bac-11e5-9206-42447e0fe064.gif" />
+						<p><a href="https://github.com/gaearon/react-transform-boilerplate" target="_blank">React Transform Boilerplate</a></p>
+					</section>
+					<section>
+						<img src="https://camo.githubusercontent.com/1a35ffa6ea33ccf2b7aa2199297bb65b9c57147b/687474703a2f2f692e696d6775722e636f6d2f32746465426e6d2e676966" />
+						<p><a href="https://github.com/gaearon/react-blessed-hot-motion" target="_blank">react-blessed-hot-motion</a>
+					</section>
+					<section>
+						<img src="https://cloud.githubusercontent.com/assets/3382565/10557547/b1f07a4e-74e3-11e5-8d27-79ab6947d429.gif" />
+						<p><a href="https://github.com/chentsulin/electron-react-boilerplate" target="_blank">Electron React Boilerplate</a>
+					</section>
+					<section>
+						<p><a href="https://github.com/facebook/react-native/releases/tag/v0.22.0" target="_blank">React Native 0.22 ships with Hot Reloading!</a></p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p>搭配 Hot Module Replacement 使用 React Transform</p>
+					</section>
+					<section>
+						<p style="font-size: 2em">要多安裝的東西</p>
+<pre><code class="lang-bash">// 乍看好像要裝一堆東西，但很多都很小
+npm install --save-dev babel-preset-react-hmre express
+webpack webpack-dev-middleware webpack-hot-middleware</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 1.5em">.babelrc 要在開發環應啟用 hmre</p>
+<pre><code class="lang-js">{
+  "presets": ["react", "es2015", "stage-0"],
+  "env": {
+    "development": {
+      "presets": ["react-hmre"]
+    }
+  }
+}</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 2em">加一個 devServer</p>
+<pre style="font-size: 15px;"><code class="lang-js">var path = require('path');
+var express = require('express');
+var webpack = require('webpack');
+var config = require('./webpack.config.dev');
+
+var app = express();
+var compiler = webpack(config);
+
+app.use(require('webpack-dev-middleware')(compiler, {
+  noInfo: true,
+  publicPath: config.output.publicPath
+}));
+
+app.use(require('webpack-hot-middleware')(compiler));
+
+app.get('*', function(req, res) {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+app.listen(3000, 'localhost', function(err) {
+  if (err) { return console.log(err); }
+  console.log('Listening at http://localhost:3000');
+});</code></pre>
+					</section>
+					<section>
+						<p>還有一個 webpack.config.dev.js</p>
+<pre style="font-size: 14px;"><code class="lang-js">var path = require('path');
+var webpack = require('webpack');
+
+module.exports = {
+  devtool: 'cheap-module-eval-source-map',
+  entry: [
+  	'webpack-hot-middleware/client', // 這多一個 hot reload 的 code entry
+  	'./src/index'
+  ],
+  output: {
+    path: path.join(__dirname, 'dist'),
+    filename: 'bundle.js',
+    publicPath: '/dist/'
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
+  ],
+  module: {
+    loaders: [{
+      test: /\.js$/,
+      loaders: ['babel'],
+      include: path.join(__dirname, 'src')
+    }]
+  }
+};</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 2em">這樣就 ok 了！</p>
+						<p>程式進入點請寫在 src/index.js</p>
+						<p>也需要有一個 html 放在 project 根目錄</p>
+						<p>用下面的指令啟用開發用 server</p>
+<pre><code class="lang-bash">node devServer.js</code></pre>
+					</section>
+
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<p style="font-size: 2em">練習</p>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65" style="text-align: left;">
+					<h1>THE END</h1>
+					<p>Thanks for listening</p>
+				</section>
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				slideNumber: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'node_modules/prismjs/prism.js'},
+                    { src: 'node_modules/prismjs/components/prism-bash.min.js'},
+                    { src: 'node_modules/prismjs/components/prism-css.min.js'},
+                    { src: 'node_modules/prismjs/plugins/autolinker/prism-autolinker.min.js'},
+                    { src: 'node_modules/prismjs/components/prism-javascript.min.js', async: true, callback: function() {
+                    		Prism.highlightAll();
+                    	}
+                    },
+					// { src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() {
+					// 	hljs.initHighlightingOnLoad(); }
+					// },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+		</script>
+
+	</body>
+</html>
