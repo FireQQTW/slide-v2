@@ -1,0 +1,731 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Web Hackthon Seminar</title>
+
+		<meta name="description" content="Web Hackthon Seminar - 8">
+		<meta name="author" content="C. T. Lin">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="node_modules/prismjs/themes/prism.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+		<style>
+.reveal pre code { max-height: 500px !important;}
+a { color: white !important; text-decoration: underline !important;}
+		</style>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section data-background="#b5533c">
+					<h1>Web Hackthon Seminar </h1>
+					<h3>8</h3>
+					<p>
+						<small>RESTful/Promise/fetch/Webpack Production</small>
+					</p>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">REST</p>
+						<p>表徵性狀態傳輸 (Representational State Transfer)</p>
+						<p>2000 年就由 Roy Fielding 在博士論文提出</p>
+						<p>但在 Rails 1.2 實作後才紅起來</p>
+						<br />
+						<p class="fragment">是設計風格而不是標準</p>
+					</section>
+					<section>
+						<p style="font-size: 2em">RESTful</p>
+						<p>符合 REST 設計風格的 Web API 稱為 RESTful API</p>
+					</section>
+					<section>
+						<ul>
+							<li>資源是由 URI 指定</li>
+							<li>對資源的操作包括獲取、創建、修改、刪除，剛好對應 GET、POST、PUT、DELETE</li>
+							<li>依照不同需求給予不同格式的回應</li>
+							<li>利用 Cache 增加性能</li>
+							<li>正確的 HTTP status code</li>
+						</ul>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">資源是由 URI 指定</p>
+					</section>
+					<section>
+<pre><code class="lang-sh">不 RESTful..
+
+/getDevice
+/getDeviceList
+/getDevices
+/getMyDevice
+/getOtherDevice
+/updateDeviceList
+/addNewDevice
+</code></pre>
+						<p class="fragment">頗難記，重寫一次可能不一樣</p>
+						<p class="fragment">到底是 post 還是 get，參數哪裡來？</p>
+					</section>
+					<section>
+<pre><code class="lang-sh">RESTful
+
+GET /devices
+POST /devices/
+GET /devices/123
+PUT /devices/123
+DELETE /devices/123
+</code></pre>
+						<p class="fragment">換一個人寫也一樣</p>
+					</section>
+					<section>
+<pre><code class="lang-sh">例如 Stackoverflow：
+
+http://stackoverflow.com/questions
+http://stackoverflow.com/questions/389169
+http://stackoverflow.com/tags
+http://stackoverflow.com/users
+http://stackoverflow.com/users/3012290
+</code></pre>
+					</section>
+					<section>
+<pre><code class="lang-sh">還可以有 query string：
+
+- Filter
+- Sorting
+- Searching
+
+GET /tickets?q=return&state=open&sort=-prority,created_at
+</code></pre>
+					</section>
+					<section>
+<pre><code class="lang-sh">Rails 中的巢狀資源表示法
+
+GET /users/123/devices/2
+GET /users/123/posts
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">CRUD</p>
+					</section>
+					<section>
+<pre><code class="lang-sh">一致的規則
+
+取得資源清單 -> GET  /resources
+新增資源    -> POST /resources
+取得單一資源 -> GET  /resources/:id
+修改單一資源 -> PUT  /resources/:id
+刪除單一資源 -> DELETE /resources/:id
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">HTML 的表單沒有支援 PUT、DELETE？</p>
+					</section>
+					<section>
+<pre><code class="lang-html">一般會加一個 hidden 的 _method input 讓後端 mapping
+Rails 就是這樣做的
+
+&lt;form action=&quot;url/to/action&quot; method=&quot;POST&quot;&gt;
+	&lt;input type=&quot;hidden&quot; name=&quot;_method&quot; value=&quot;PUT&quot;&gt;
+	....
+&lt;/form&gt;
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">Accept</p>
+					</section>
+					<section>
+<pre><code class="lang-sh">用 Accept 跟 Server 溝通格式
+
+接收 純文字 -> Accept: text/plain
+接收 HTML  -> Accept: text/html
+接收 JSON  -> Accept: application/json
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">標準的 Status Code</p>
+					</section>
+					<section>
+<pre><code class="lang-sh">不同的 Status Code 區段
+
+1xx -> 訊息
+2xx -> 成功
+3xx -> 重導向
+4xx -> 用戶端錯誤
+5xx -> 伺服器端錯誤
+</code></pre>
+					</section>
+					<section>
+<pre><code class="lang-sh">常見 Status Code
+
+200 OK
+--
+301 Moved Permanently
+302 Found
+304 Not Modified
+--
+400 Bad Request
+401 Unauthorized
+403 Forbidden
+404 Not Found
+405 Method Not Allowed
+408 Request Timeout
+--
+500 Internal Server Error
+502 Bad Gateway
+503 Service Unavailable
+504 Gateway Timeout
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">錯誤的回傳訊息</p>
+					</section>
+					<section>
+<pre><code class="lang-sh">給充分的資訊
+
+{
+	"response_code": 400,
+	"message": "Your input is not allow.",
+	"code": 1200578,
+	"error_page": "http://...."
+}
+</code></pre>
+					</section>
+					<section>
+						<img src="img/fb-error.png" />
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">不要完全被限制，可以適當的放寬</p>
+					</section>
+					<section>
+<pre><code class="lang-sh">例如：
+
+/about-us
+/user/me
+/search
+</code></pre>
+					</section>
+				</section>
+
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">Ajax (Asynchronous JavaScript and XML)</p>
+						<p>不是瀏覽器自動進行 http request</p>
+						<p>而是在 JS 的 Code 中進行 http request</p>
+					</section>
+					<section>
+						<p>雖然叫做 Asynchronous JavaScript and XML...<br>但現在都用 JSON</p>
+						<img src="img/xml-vs-json.png">
+					</section>
+					<section>
+						<p style="font-size: 2em">XML</p>
+						<img src="img/xml.jpg" style="width: 100%;">
+					</section>
+					<section>
+						<p style="font-size: 2em">JSON</p>
+						<img src="img/json.png" style="width: 100%;">
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">JSON</p>
+					</section>
+					<section>
+						<ul>
+							<li>Value 的值可以是 Number, String, Boolean, Obeject, Array, null</li>
+							<li>最外層只能是 Array 或 Object</li>
+						</ul>
+					</section>
+					<section>
+						<p>JSON 跟 JS Object 互相轉換</p>
+<pre><code class="lang-js">JSON.stringify({ a: 1, b: '2' });
+// => '{"a":1,"b":"2"}'
+
+JSON.parse('{"a":1,"b":"2"}');
+// => { a: 1, b: '2' }
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">XMLHttpRequest</p>
+						<p>在 IE7 (2006) 年就有的 API</p>
+						<p>從命名上看出一些怪怪的地方：</p>
+						<ul>
+							<li>現在大部份都是用 JSON 比較少用 XML</li>
+							<li>為什麼 XML 都是大寫，但卻是 Http 不是 HTTP?</li>
+						</ul>
+					</section>
+					<section>
+						<p style="font-size: 2em">而且 API 太過低階</p>
+						<p class="fragment">所以不打算教這個</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p>目前還有幾個不錯的 API</p>
+						<p>可以 run 在 browser、node、react native (ios, android):</p>
+						<ul>
+							<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch" target="_blank">fetch</a></li>
+							<li><a href="https://visionmedia.github.io/superagent/" target="_blank">superagent</a></li>
+							<li><a href="https://github.com/mzabriskie/axios" target="_blank">axios</a></li>
+						</ul>
+					</section>
+					<section>
+						<p>因為 <a href="https://fetch.spec.whatwg.org/" target="_blank">fetch</a> 是 WHATWG</p>
+						<p>(Web Hypertext Application Technology Working Group)</p>
+						<p>訂出來的標準</p>
+						<p>所以主要會介紹這個</p>
+					</section>
+					<section>
+						<p style="font-size: 2em">不過必須先提到 Promise</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">Promise</p>
+					</section>
+					<section>
+						<p>像是個狀態機</p>
+						<img src="img/promise.png" width="800">
+						<p>pending, fulfilled, rejected 三種狀態</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">Promise 的好處？</p>
+					</section>
+					<section>
+						<p style="font-size: 1.6em">有標準的 API 來描述成功失敗</p>
+						<ul>
+							<li>不會每個人寫起來都不太一樣</li>
+							<li>不會很容易發生 callback 沒被 call</li>
+							<li>不會很容易發生 callback 被重複 call</li>
+							<li>成功失敗後狀態不能再轉換</li>
+							<li>可以組合與串接</li>
+						</ul>
+					</section>
+					<section>
+						<p>減少深度巢狀的 callback hell</p>
+						<p>處理掉非同步的部分</p>
+						<img src="img/callback_hell.png" />
+					</section>
+					<section>
+						<p>讓 stage 3 的 <a href="https://github.com/tc39/ecmascript-asyncawait" target="_blank">async await</a> 變得可行</p>
+						<p>這是一個 C# 有的語法</p>
+<pre><code class="lang-js">async function foo() {
+  try {
+	let data = await getDate();
+	console.log(data);
+  } catch (err) {
+    console.log('Oh, no..', err);
+  }
+}</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">Promise 種類</p>
+					</section>
+					<section>
+						<p>現行有兩種比較盛行的 Promise</p>
+						<ul>
+							<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank">ES6 Promise: js 標準</a></li>
+							<li><a href="https://promisesaplus.com/" target="_blank">Promise A+: 只提供最簡化的 .then</a></li>
+						</ul>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">ES6 Promise</p>
+					</section>
+					<section>
+						<p style="font-size: 2em">產生一個 Promise</p>
+<pre><code class="lang-js">new Promise(function(resolve, reject) {
+
+});</code></pre>
+						<p>丟進去的 function 會獲得 resolve, reject 兩個 function</p>
+					</section>
+					<section>
+						<p style="font-size: 2em">Promise 的狀態轉移</p>
+<pre><code class="lang-js">new Promise(function(resolve, reject) {
+  try {
+	var data = getData(); // 這個必須是 sync 的才 catch 得到
+	resolve(data);
+  } catch (err) {
+  	reject(err);
+  }
+});</code></pre>
+						<p>resolve, reject 可以轉換 promise 的狀態</p>
+					</section>
+					<section>
+						<p style="font-size: 2em">Promise 狀態處理</p>
+<pre><code class="lang-js">new Promise(function(resolve, reject) {
+  try {
+	var data = getData();
+	resolve(data);
+  } catch (err) {
+  	reject(err);
+  }
+})
+.then(function handleResolved() {
+
+}, function handleRejected() {
+
+});</code></pre>
+						<p>最重要的一樣是 .then，可以處理 fulfilled 跟 rejected</p>
+					</section>
+					<section>
+						<p style="font-size: 2em">Promise 狀態處理</p>
+<pre><code class="lang-js">new Promise(function(resolve, reject) {
+  try {
+	var data = getData();
+	resolve(data);
+  } catch (err) {
+  	reject(err);
+  }
+})
+.then(function handleResolved() {
+
+})
+.catch(function handleRejected() {
+
+});</code></pre>
+						<p>.catch，跟前面是一樣意思</p>
+					</section>
+
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 1.6em"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve" target="_blank">Promise.resolve</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/reject" target="_blank">Promise.reject</a></p>
+						<p>製造馬上會再下一輪事件迴圈被 handle 的 Promise</p>
+<pre><code class="lang-js">// 等同 new Promise(resolve => resolve(1));
+Promise.resolve(1)
+.then(val => console.log(val));
+
+// 等同 new Promise((resolve, reject) => reject(new TypeError('a wrong type')));
+Promise.reject(new TypeError('a wrong type'))
+.catch(err => console.log(err));
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 1.6em"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all" target="_blank">Promise.all</a></p>
+<pre><code class="lang-js">// 等一起完成
+var p1 = new Promise(function(resolve, reject) {
+    setTimeout(resolve, 500, "one");
+});
+var p2 = new Promise(function(resolve, reject) {
+    setTimeout(resolve, 100, "two");
+});
+
+Promise.race([p1, p2]).then(function(value) {
+  console.log(value); // "two"
+  // Both resolve, but p2 is faster
+});
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 1.6em"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/race" target="_blank">Promise.race</a></p>
+						<pre><code class="lang-js">// 看誰先完成
+var p1 = new Promise(function(resolve, reject) {
+    setTimeout(resolve, 500, "one");
+});
+var p2 = new Promise(function(resolve, reject) {
+    setTimeout(resolve, 100, "two");
+});
+
+Promise.race([p1, p2]).then(function(value) {
+  console.log(value); // "two"
+  // Both resolve, but p2 is faster
+});
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<p style="font-size: 2em">練習</p>
+					<ul>
+						<li><p><a href="http://bevacqua.github.io/promisees/#" target="_blank">Promise Playground</a></p></li>
+						<li>node >= 0.12</li>
+						<li><a href="http://caniuse.com/#search=Promise" target="_blank">Can I use Promise</a></li>
+					</ul>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">fetch</p>
+					</section>
+					<section>
+						<img src="img/fetch-caniuse.png">
+						<p>瀏覽器原生支援狀況</p>
+					</section>
+					<section>
+						<p style="font-size: 2em">在各環境的用法</p>
+						<ul>
+							<li>瀏覽器原生 - <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API" target="_blank">window.fetch</a> </li>
+							<li>fetch polyfill - <a href="https://github.com/github/fetch" target="_blank">whatwg-fetch</a></li>
+							<li>on node - <a href="https://github.com/bitinn/node-fetch" target="_blank">node-fetch</a></li>
+							<li>結合前兩項 - <a href="https://github.com/matthew-andrews/isomorphic-fetch" target="_blank">isomorphic-fetch</a></li>
+							<li>React Native - <a href="https://facebook.github.io/react-native/docs/network.html#fetch" target="_blank">內建支援 API</a></li>
+						</ul>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<p>需要注意一點是環境裡面必須要有可以用的 Promise!</p>
+					<p>node 0.12 以上的版本有內建</p>
+					<p>比較舊的瀏覽器都沒有內建</p>
+<pre><code class="lang-js">// npm i --save babel-polyfill isomorphic-fetch
+
+// 引用方式 (Webpack + Babel ES2015)
+import('babel-polyfill');
+
+import fetch from 'isomorphic-fetch';</code></pre>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">fetch 的使用</p>
+					</section>
+					<section>
+						<p style="font-size: 1.5em">必須用 <code>.then</code> 來等 Promise resolve</p>
+<pre><code class="lang-js">fetch('/users.json').then(function(response) {
+  // fetch 本身會回傳 promise
+});
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 1.5em">可以取得其他 Metadata</p>
+<pre><code class="lang-js">fetch('/users.json').then(function(response) {
+  console.log(response.headers.get('Content-Type'));
+  console.log(response.status);
+  console.log(response.statusText);
+});
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 1.5em">取得回應文字 .text 又會回傳 Promise</p>
+<pre><code class="lang-js">fetch('/users.html')
+  .then(function(response) {
+    return response.text();
+  })
+  .then(function(body) {
+    document.body.innerHTML = body;
+  });
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 1.5em">取得回應 JSON .json 又會回傳 Promise</p>
+<pre><code class="lang-js">fetch('/users.json')
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(json) {
+    console.log(json);
+  });
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 1.5em">用 POST 送 json 並接收 json</p>
+<pre><code class="lang-js">fetch('/users', {
+  method: 'post',
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    name: 'Hubot',
+    login: 'hubot',
+  }),
+});
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 1.5em">第二個參數是一個 options 物件</p>
+						<ul>
+							<li>method 可以是 post, put, delete..</li>
+							<li>method 不傳就是 get</li>
+							<li>所有的 request header 都可以放在 headers</li>
+							<li>body 可以用 JSON.stringify 轉成 JSON 字串</li>
+						</ul>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<p style="font-size: 2em"><a href="https://github.com/github/fetch#caveats" target="_blank">Caveats</a></p>
+					<ul>
+						<li>status 4xx, 5xx 不會被 reject</li>
+						<li>預設不會傳 cookie 到 server</li>
+					</ul>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<p style="font-size: 2em">練習</p>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<p style="font-size: 2em">Advanced Webpack: Production Build</p>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">Plugins</p>
+					</section>
+					<section>
+						<p style="font-size: 2em">ExtractTextPlugin</p>
+<pre><code class="lang-js">// 把 css 抽取到 css 檔
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+module.exports = {
+  module: {
+    loaders: [
+      { test: /\.css$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader') },
+    ],
+  },
+  plugins: [
+    new ExtractTextPlugin('styles.css', { allChunks: true }),
+  ],
+};
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 1.5em">webpack.optimize.UglifyJsPlugin</p>
+						<p>壓縮 js 與 css-loader 的 css</p>
+<pre><code class="lang-js">// 壓縮
+new webpack.optimize.UglifyJsPlugin({
+  compress: {
+    screw_ie8: true, // 不想管 ie8
+    warnings: false,
+  },
+})
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 1.5em">webpack.optimize.OccurenceOrderPlugin</p>
+						<p>比較常出現的 module 跟 chunk id 用比較短的長度</p>
+<pre><code class="lang-js">//
+new webpack.optimize.OccurenceOrderPlugin()
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<p style="font-size: 2em">Babel Optimize</p>
+					<p><a href="https://github.com/4Catalyzer/babel-plugin-dev-expression" target="_blank">babel-plugin-dev-expression</a></p>
+					<p><a href="https://github.com/thejameskyle/babel-react-optimize" target="_blank">babel-react-optimize</a></p>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<p style="font-size: 2em">Resource</p>
+					<p><a href="https://github.com/petehunt/webpack-howto" target="_blank">webpack-howto</a></p>
+					<p><a href="https://github.com/ruanyf/webpack-demos" target="_blank">webpack-demos</a></p>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65" style="text-align: left;">
+					<h1>THE END</h1>
+					<p>Thanks for listening</p>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				slideNumber: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'node_modules/prismjs/prism.js'},
+                    { src: 'node_modules/prismjs/components/prism-bash.min.js'},
+                    { src: 'node_modules/prismjs/plugins/autolinker/prism-autolinker.min.js'},
+                    { src: 'node_modules/prismjs/components/prism-javascript.min.js', async: true, callback: function() {
+                    		Prism.highlightAll();
+                    	}
+                    },
+					// { src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() {
+					// 	hljs.initHighlightingOnLoad(); }
+					// },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+		</script>
+
+	</body>
+</html>
