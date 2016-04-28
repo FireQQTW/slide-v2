@@ -366,7 +366,7 @@ JSON.parse('{"a":1,"b":"2"}');
 						<p>這是一個 C# 有的語法</p>
 <pre><code class="lang-js">async function foo() {
   try {
-	let data = await getDate();
+	let data = await getData();
 	console.log(data);
   } catch (err) {
     console.log('Oh, no..', err);
@@ -475,9 +475,8 @@ var p2 = new Promise(function(resolve, reject) {
     setTimeout(resolve, 100, "two");
 });
 
-Promise.race([p1, p2]).then(function(value) {
-  console.log(value); // "two"
-  // Both resolve, but p2 is faster
+Promise.all([p1, p2]).then(function(value) {
+  console.log(value);
 });
 </code></pre>
 					</section>
