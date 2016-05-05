@@ -1,0 +1,977 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Web Hackthon Seminar</title>
+
+		<meta name="description" content="Web Hackthon Seminar - 9">
+		<meta name="author" content="C. T. Lin">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="node_modules/prismjs/themes/prism.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+		<style>
+.reveal pre code { max-height: 500px !important;}
+a { color: white !important; text-decoration: underline !important;}
+		</style>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section data-background="#b5533c">
+					<h1>Web Hackthon Seminar </h1>
+					<h3>9</h3>
+					<p>
+						<small>ESLint/Testing</small>
+					</p>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<p style="font-size: 2em">Coding Style</p>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<p>寫讓人看不懂的程式碼也是有點難度的</p>
+<pre><code class="lang-js">// go function
+function go(a,b, c,d){ return a+b-c/d}
+
+switch(act){
+case 'a':
+// TODO: there are some bugs here
+  case 'b':
+  break;
+ // case 'c':
+ //case 'd':
+ default:
+  return 1000
+}
+</code></pre>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 1.2em">六個月後再回來專案，怎麼連自己都看不懂</p>
+					</section>
+					<section>
+						<ul>
+							<li>讀 code 的時間 90%，寫 code 的時間 10%</li>
+							<li>體諒要看你的程式碼的人</li>
+							<li>Project 應該保持一致</li>
+							<li>寫一些沒什麼用的註解不如認真命名跟重構</li>
+						</ul>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<p style="font-size: 1.2em">各種程式語言都有比較有名的 Style Guide</p>
+					<ul>
+						<li>JavaScript: <a href="https://github.com/airbnb/javascript" target="_blank">Airbnb</a></li>
+						<li>Python: <a href="https://www.python.org/dev/peps/pep-0008/" target="_blank">PEP 8</a></li>
+						<li>PHP: <a href="http://www.php-fig.org/psr/" target="_blank">psr</a></li>
+						<li>Puby: <a href="https://github.com/bbatsov/ruby-style-guide" target="_blank">ruby-style-guide</a></li>
+					</ul>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">Coding Style 沒有絕對的好壞</p>
+					</section>
+					<section>
+						<ul>
+							<li>跟團隊討論後選擇適合的</li>
+							<li>持續 follow 一樣的規範</li>
+						</ul>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">JS Linter 歷史更替</p>
+						<p>JSlint -> JSHint -> ESLint</p>
+					</section>
+					<section>
+						<p style="font-size: 2em"><a href="https://github.com/douglascrockford/JSLint" target="_blank">JSLint</a></p>
+						<p><a href="https://github.com/douglascrockford" target="_blank">Douglas Crockford</a> 根據自己的 JavaScript: The Good Parts 內容所建構的程式碼檢查工具</p>
+					</section>
+					<section>
+						<p style="font-size: 1.2em">JSLint 的規則太強硬了，於是..</p>
+					</section>
+					<section>
+						<p style="font-size: 2em"><a href="https://github.com/jshint/jshint" target="_blank">JSHint</a></p>
+						<p>可以關掉不喜歡的 Rule</p>
+					</section>
+					<section>
+						<p style="font-size: 1.2em">JSHint Rule 種類不夠</p>
+						<p style="font-size: 1.2em">於是...</p>
+					</section>
+					<section>
+						<p style="font-size: 2em"><a href="https://github.com/eslint/eslint" target="_blank">ESLint</a></p>
+						<p><a href="https://github.com/nzakas" target="_blank">Nicholas C. Zakas</a> 在 2013 年開始做的可擴充程式碼檢查工具，有許多 extend 跟 plugin</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<p style="font-size: 2em">安裝 ESLint Editor Plugin</p>
+					<p><a href="http://eslint.org/docs/user-guide/integrations#editors" target="_blank">尋找自己使用的 Editor 的安裝方式</a></p>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<p style="font-size: 2em">Airbnb JavaScript Style Guide</p>
+					<p><a href="https://github.com/airbnb/javascript" target="_blank">英文版</a> <a href="https://github.com/jigsawye/javascript" target="_blank">中文版</a></p>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">使用 <a href="https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb" target="_blank">eslint-config-airbnb</a></p>
+					</section>
+					<section>
+						<p>安裝</p>
+<pre><code class="lang-sh">npm install --save-dev eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-react eslint-plugin-jsx-a11y
+</code></pre>
+					</section>
+					<section>
+						<p>把 airbnb 加到 .eslintrc.json</p>
+<pre><code class="lang-js">{
+  "extends": "airbnb"
+}
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">parser: babel-eslint</p>
+					</section>
+					<section>
+						<p>如果有用 babel 來寫進階的 js 語法</p>
+						<p>要用 babel-eslint 作為 parser</p>
+<pre><code class="lang-sh">npm i --save-dev babel-eslint
+</code></pre>
+<pre><code class="lang-js">{
+  "parser": "babel-eslint",
+  "extends": "airbnb"
+}
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 1.5em">用 env 允許一些環境的全域變數</p>
+<pre><code class="lang-js">{
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "env": {
+    "browser": true,
+    "node": true,
+    "mocha": true
+  }
+}
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">Rule 調整</p>
+						<p><a href="http://eslint.org/docs/rules/" target="_blank">List of available rules</a></p>
+					</section>
+					<section>
+						<p>把自訂 rules 加到 .eslintrc.json</p>
+<pre><code class="lang-js">{
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "env": {
+    "browser": true,
+    "node": true,
+    "mocha": true
+  },
+  "rules": {
+    "no-console": 0,
+    "no-else-return": 0
+  }
+}</code></pre>
+					</section>
+					<section>
+						<p>在特定檔案調整某些 rules</p>
+<pre><code class="lang-js">// try-console.js
+/* eslint no-console: 0, no-else-return: 0  */
+
+console.log('try!!!!!');
+</code></pre>
+					</section>
+					<section>
+						<p>在特定行關掉某些 rules</p>
+<pre><code class="lang-js">// try-console.js
+
+console.log('try!!!!!'); // eslint-disable-line no-console */
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<p style="font-size: 1.8em">Plugins</p>
+					<p>以 <a href="https://github.com/yannickcr/eslint-plugin-react" target="_blank">eslint-plugin-react</a> 來說</p>
+<pre><code class="lang-js">{
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "env": {
+    "browser": true,
+    "node": true,
+    "mocha": true
+  },
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "react/prefer-stateless-function": 0
+  }
+}</code></pre>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<p style="font-size: 2em">.eslintignore</p>
+					<p>指定忽略的檔案</p>
+<pre><code class="lang-js">// .eslintignore
+node_modules
+build</code></pre>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<p style="font-size: 1.8em">把 eslint 加到 npm scripts</p>
+<pre><code class="lang-js">// package.json
+{
+  ....,
+  "scripts": {
+  	"lint": "eslint ."
+  }
+}</code></pre>
+
+<pre><code class="lang-sh">npm run lint</code></pre>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<p style="font-size: 2em">練習</p>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<p style="font-size: 2em">Testing</p>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 1.4em">不熟自動化測試的人，通常都：</p>
+						<ul>
+							<li class="fragment">打開瀏覽器看看正不正常</li>
+							<li class="fragment">加多一點的 console.log 看看結果</li>
+							<li class="fragment">資料庫塞塞看可能有問題的資料</li>
+							<li class="fragment">回報這個 bug 無法重現</li>
+						</ul>
+					</section>
+					<section>
+						<p>手動測試跟幾秒鐘就可以跑上百個</p>
+						<p>且能精準定位問題並重複執行的單元測試相比</p>
+						<p>非常的沒有效率</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 1.2em">迷思：我沒有時間寫測試</p>
+					</section>
+					<section>
+						<p style="font-size: 1.2em">大多寫的根本是不可測試程式碼</p>
+<pre><code class="lang-js">function check() {
+  if (a > 1) {
+    if (a === 2) {
+	  if (b === 'ya') {
+
+	  } else {
+	    if (c) {
+	  	  doSomething();
+	    }
+	  }
+    } else {
+    }
+  } else {
+  }
+}</code></pre>
+						<p class="fragment">巢狀 n 個 if 就是 2 的 n 次方種可能性</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<p style="font-size: 2em">寫測試絕對比 debug 來的快</p>
+				</section>
+
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<p style="font-size: 1.2em">寫測試可以審視 API 設計</p>
+					<p style="font-size: 1.2em">也可以當作使用手冊與文件</p>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<p>許多耗時三個月以上的 Project 的敗亡</p>
+					<p>都是因為沒有寫測試</p>
+					<p>原本的開發者無法應付複雜度，或是換人無法接手</p>
+					<br />
+					<p class="fragment">要在上萬行且已經上線的專案之中，不改壞任何功能？</p>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">不同層級的測試</p>
+						<ul>
+							<li>單元測試 Unit Testing</li>
+							<li>整合測試 Integration Testing</li>
+							<li>驗收測試 Acceptance Testing</li>
+						</ul>
+					</section>
+					<section>
+						<p style="font-size: 2em">單元測試 Unit Testing</p>
+						<p>驗證一個單元 (function、class、module) 的功能與可靠性</p>
+						<p>是專案測試的根基</p>
+					</section>
+					<section>
+						<p style="font-size: 2em">整合測試 Integration Testing</p>
+						<p>驗證一個設計項目 (一組單元) 的功能、效能、可靠性</p>
+						<p>各物件之間的互動運作正常</p>
+					</section>
+					<section>
+						<p style="font-size: 2em">驗收測試 Acceptance Testing</p>
+						<p>是否能針對 uesr story 正常運作功能</p>
+						<p>應該用使用者能懂的方式撰寫驗收測試</p>
+					</section>
+				</section>
+
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 1.8em">TDD <br />(Test-Driven Development)</p>
+						<p>測試驅動開發</p>
+					</section>
+					<section>
+						<ol>
+							<li>先寫測試</li>
+							<li>執行測試，看到測試失敗</li>
+							<li>撰寫最少的 code 讓測試通過</li>
+							<li>執行測試，看到測試通過</li>
+							<li>重構</li>
+							<li>維持測試通過</li>
+						</ol>
+					</section>
+					<section>
+						<p style="font-size: 1.4em">回報 bug 的最好方式就是提交失敗的測試</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 1.8em">BDD <br />(Behavior-Driven Development)</p>
+						<p>行為驅動開發</p>
+					</section>
+					<section>
+						<ul>
+							<li>描述行為的 specifications</li>
+							<li>domain-specific language (DSL)</li>
+							<li>寫得像是英文語句</li>
+						</ul>
+					</section>
+				</section>
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">TDD v.s. BDD</p>
+					</section>
+					<section>
+<pre><code class="lang-js">// TDD
+assertEqual(runner.name, 'Mocha');
+
+// BDD
+runner.should.have.property('name').equal('Mocha');
+expect(runner).to.have.property('name').equal('Mocha');
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 1.2em">Test Runners</p>
+					</section>
+					<section>
+						<p>純粹執行 js 也能進行測試，不過用 runner 有許多好處</p>
+						<ul>
+							<li>可以比較有架構性的建構測試</li>
+							<li>可以過濾特定的測試</li>
+							<li>有比較好的 reporter</li>
+							<li>有些有平行執行的功能 (Ava)</li>
+							<li>等等...</li>
+						</ul>
+					</section>
+					<section>
+						<img src="img/runner.png" />
+					</section>
+					<section>
+						<ul>
+							<li><a href="https://github.com/jasmine/jasmine" target="_blank">Jasmine</a> - Behavior-driven development framework</li>
+							<li><a href="https://github.com/facebook/jest" target="_blank">Jest</a> - Facebook 基於 Jasmine 打造的 auto-mock runner</li>
+							<li><a href="https://github.com/mochajs/mocha" target="_blank">Mocha</a> - <a href="https://github.com/tj" target="_blank">tj</a> 以前的作品，現在是主流</li>
+							<li><a href="https://github.com/sindresorhus/ava" target="_blank">Ava</a> - <a href="https://github.com/sindresorhus" target="_blank">sindresorhus</a> 花大量時間投入的專案，可平行</li>
+						</ul>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<p style="font-size: 2em">Mocha</p>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">Install</p>
+<pre><code class="lang-sh">npm install -g mocha</code></pre>
+					</section>
+					<section>
+<pre><code class="lang-sh">mocha</code></pre>
+						<p style="font-size: 1.2em">預設會執行 test 資料夾裡面的 js 檔</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">用 it 寫一個個的測試</p>
+<pre><code class="lang-js">// test/node-assert.js
+const assert = require('assert');
+
+it('should be true', () => {
+  assert(true);
+});
+
+it('should equal', () => {
+  assert.deepEqual({ name: 'Amy'}, { name: 'Amy' });
+});
+
+it('should throw', () => {
+  assert.throws(
+    () => { throw new Error('爆了') }
+  );
+});
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 2em">用 describe 來組織一組測試</p>
+<pre><code class="lang-js">// test/node-assert.js
+const assert = require('assert');
+
+describe('Node Assertions', () => {
+  it('should be true', () => {
+    assert(true);
+  });
+
+  it('should equal', () => {
+    assert.deepEqual({ name: 'Amy'}, { name: 'Amy' });
+  });
+
+  it('should throw', () => {
+    assert.throws(
+      () => { throw new Error('爆了') }
+    );
+  });
+});
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">Async Tests</p>
+					</section>
+					<section>
+						<p style="font-size: 2em">接 done callback 並在結束後 call</p>
+<pre><code class="lang-js">// test/node-assert.js
+const assert = require('assert');
+
+it('should be true', (done) => {
+  setTimeout(() => {
+    assert(true);
+    done();
+  }, 200);
+});
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 2em">或是回傳 Promise</p>
+<pre><code class="lang-js">// test/node-assert.js
+const assert = require('assert');
+
+it('should be true', () => {
+  return new Promise((resolve, reject) => {
+	setTimeout(() => {
+      assert(true);
+      resolve();
+    }, 200);
+  });
+});
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">Assertions</p>
+					</section>
+					<section>
+						<ul>
+							<li><a href="https://nodejs.org/api/assert.html" target="_blank">node assert</a></li>
+							<li><a href="https://github.com/tj/should.js/" target="_blank">should.js</a></li>
+							<li><a href="https://github.com/mjackson/expect" target="_blank">expect</a></li>
+							<li><a href="http://chaijs.com/" target="_blank">chai</a></li>
+						</ul>
+					</section>
+				</section>
+
+				<section  data-transition="slide" data-background="#b5533c">
+					<p style="font-size: 2em"><a href="https://nodejs.org/api/assert.html" target="_blank">node assert</a></p>
+					<img src="img/assert.png" />
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em"><a href="https://github.com/tj/should.js/" target="_blank">should.js</a></p>
+					</section>
+					<section>
+<pre><code class="lang-js">var should = require('should');
+
+var user = {
+    name: 'tj'
+  , pets: ['tobi', 'loki', 'jane', 'bandit']
+};
+
+user.should.have.property('name', 'tj');
+user.should.have.property('pets').with.lengthOf(4);
+
+someAsyncTask(foo, function(err, result){
+  should.not.exist(err);
+  should.exist(result);
+  result.bar.should.equal(foo);
+});
+</code></pre>
+					</section>
+					<section>
+						<p>不建議用 should，因為他主要基於繼承 Object</p>
+<pre><code class="lang-js">var should = require('should');
+// if the object was created with Object.create(null)
+// then it doesn't inherit `Object` and have the `should` getter
+// so you can do:
+
+should(user).have.property('name', 'tj');
+should(true).ok;
+
+// 不能對非物件 call .should
+const user = null;
+user.should.have.property('name', 'tj');
+// Boom!!
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em"><a href="http://chaijs.com/api/bdd/" target="_blank">Chai (expect)</a></p>
+					</section>
+					<section>
+						<p>chai 支援 should, expect, assert 三種</p>
+						<p>我個人偏好使用 expect (BDD)</p>
+						<img src="img/chai.png" />
+					</section>
+					<section>
+						<pre><code class="lang-js">const expect = requiure('chai').expect;
+
+expect(foo).to.be.a('string');
+expect(foo).to.equal('bar');
+expect(foo).to.have.length(3);
+expect(tea).to.have.property('flavors').with.length(3);
+</code></pre>
+					</section>
+
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">Chai plugins</p>
+					</section>
+					<section>
+						<p style="font-size: 1.5em">幾個我常用的 plugins</p>
+						<ul>
+							<li><a href="https://github.com/domenic/chai-as-promised" target="_blank">chai-as-promised</a></li>
+							<li><a href="https://github.com/domenic/sinon-chai" target="_blank">sinon-chai</a></li>
+							<li><a href="https://github.com/producthunt/chai-enzyme" target="_blank">chai-enzyme</a></li>
+						</ul>
+					</section>
+					<section>
+						<p>用 chai.use(...) 來啟用</p>
+						<pre><code class="lang-js">const chai = require('chai');
+const chaiAsPromised = require('chai-as-promised');
+const sinonChai = require('sinon-chai');
+const chaiEnzyme = require('chai-enzyme');
+
+chai.use(chaiAsPromised);
+chai.use(sinonChai);
+chai.use(chaiEnzyme());
+chai.use</code></pre>
+					</section>
+					<section>
+						<p>不是用得多就是好</p>
+						<p>要在測試程式碼可讀性跟學習曲線跟穩地度上做取捨</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">Test Express/Koa App</p>
+						<p>建議使用 <a href="https://github.com/visionmedia/supertest" target="_blank">supertest</a></p>
+					</section>
+					<section>
+						<p style="font-size: 2em">Test Express/Koa App</p>
+						<p>Express 可以參考 <a href="https://github.com/Chiara-yen/startLearningNodejs/blob/master/ex-21-express-supertest/test/test.js" target="_blank">這裡</a></p>
+						<p>Koa 可以參考 <a href="https://github.com/Chiara-yen/startLearningNodejs/blob/master/ex-22-koa-supertest/test/test.js" target="_blank">這裡</a></p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<p style="font-size: 2em">Testing Double (測試替身)</p>
+					<ul>
+						<li>Spy</li>
+						<li>Mock</li>
+						<li>Stub</li>
+						<li>Fake</li>
+						<li>Dummy</li>
+					</ul>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">Spy</p>
+						<p>一個 spy function 或是包裝既有的 function</p>
+						<p>判斷 function 有沒有被 call、用什麼參數 call、call 幾次</p>
+					</section>
+					<section>
+						<p style="font-size: 2em">用 sinon 做 spy</p>
+<pre><code class="lang-js">const callback = sinon.spy();
+
+callback();
+callback();
+callback();
+
+expect(callback.calledThrice).to.be.true;
+expect(callback).to.have.been.calledThrice; // with sinon-chai
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">Mock</p>
+						<p>與 spy 類似，但需要事先設定期望發生的呼叫，然後在之後驗證</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">Stub</p>
+						<p>被 call 會提供特定的回傳值、拋出 Error</p>
+					</section>
+					<section>
+						<p>試想：怎麼模擬寫入檔案失敗？</p>
+					</section>
+					<section>
+						<p style="font-size: 2em">手動做</p>
+<pre><code class="lang-js">const fs = require('fs');
+
+const _writeFile = fs.writeFile;
+fs.writeFile = () => { throw new Error('Err!!!') };
+
+fs.writeFile(....) // throws..
+
+// restore
+fs.writeFile = _writeFile;
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 2em">用 sinon 做 stub</p>
+<pre><code class="lang-js">const callback = sinon.stub();
+callback.withArgs(42).returns(1);
+callback.withArgs(1).throws("TypeError");
+
+callback(); // No return value, no exception
+callback(42); // Returns 1
+callback(1); // Throws TypeError
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">Fake</p>
+						<p>簡化過的邏輯</p>
+					</section>
+					<section>
+<pre><code class="lang-js">// 假想有一個 FileSaver Class
+const fs = require('fs');
+const options = {};
+const saver = new FileSaver(fs, options);
+saver.save('hello.txt', 'Say Hello~~~');
+
+
+// 用 memory 來取代真實的 file system
+const MemoryFileSystem = require('memory-fs');
+const fs = new MemoryFileSystem();
+const options = {};
+const saver = new FileSaver(fs, options);
+saver.save('hello.txt', 'Say Hello~~~');
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 2em">或是</p>
+					</section>
+					<section>
+					<pre><code class="lang-js">// 登入資訊
+const credential = {
+  username: 'xxx',
+  password: 'yyy',
+};
+
+// 假設有個 system object
+system.authorise = (credential) => { // 複雜 ... };
+
+// 先把它存起來，以便之後可以恢復
+const _authorise = system.authorise;
+
+system.authorise = (credential) =>
+	credential.username === 'xxx' &&
+	credential.password === 'yyy'
+
+system.authorise(credential);
+// true;
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">Dummy</p>
+						<p>參數需要有，但是測試實際上根本不會用到的假物件</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">London schools of TDD <br />v.s.<br /> Chicago schools of TDD</p>
+					</section>
+					<section>
+<pre><code class="lang-js">// http://programmers.stackexchange.com/a/123672/121521
+// 假設 ledger.calculate('5 * 7') 會呼叫 calculator.multiply(5,7) 並得到 35
+
+// London schools of TDD
+const spy = sinon.spy(calculator, 'multiply');
+spy.withArgs(5, 7);
+
+ledger.calculate('5 * 7');
+
+expect(spy.withArgs(5, 7).calledOnce).to.be.true;
+
+
+// Chicago schools of TDD
+expect(ledger.calculate('5 * 7')).to.equal(35);
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<p style="font-size: 2em">測試瀏覽器環境</p>
+					<ul>
+						<li><a href="https://github.com/tmpvar/jsdom" target="_blank">jsdom</a> - 在 node 模擬 dom</li>
+						<li><a href="https://github.com/karma-runner/karma" target="_blank">Karma Runner</a> - 可以 launch 在各大瀏覽器</li>
+					</ul>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em"><a href="https://github.com/airbnb/enzyme" target="_blank">Enzyme</a></p>
+					</section>
+					<section>
+<pre><code class="lang-js">import React from 'react';
+import { shallow } from 'enzyme';
+import sinon from 'sinon';
+
+describe('&lt;MyComponent /&gt;', () =&gt; {
+  it('renders three &lt;Foo /&gt; components', () =&gt; {
+    const wrapper = shallow(&lt;MyComponent /&gt;);
+    expect(wrapper.find(Foo)).to.have.length(3);
+  });
+
+  it('simulates click events', () =&gt; {
+    const onButtonClick = sinon.spy();
+    const wrapper = shallow(
+      &lt;Foo onButtonClick={onButtonClick} /&gt;
+    );
+    wrapper.find('button').simulate('click');
+    expect(onButtonClick.calledOnce).to.equal(true);
+  });
+});
+</code></pre>
+					</section>
+					<section>
+						<p><a href="https://github.com/chentsulin/redux-boilerplate" target="_blank">範例</a></p>
+					</section>
+				</section>
+
+
+				<section data-transition="slide" data-background="#b5533c">
+					<p style="font-size: 1.2em">在測試裡面用 babel</p>
+<pre><code class="lang-sh">npm i --save-dev babel-register
+mocha --compilers js:babel-register
+</code></pre>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<p style="font-size: 1.2em">測試一定要自動化、想測試一個指令即可觸發</p>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 1.5em">Continuous Integration (CI)</p>
+					</section>
+					<section>
+						<p>可以把自動化 test、release、deploy 整合</p>
+						<p>最好是幾分鐘就能做一個新的 release</p>
+						<p>下班前 master 不能 build fail</p>
+						<p>把 master 搞到 build fail 的人要受逞罰</p>
+					</section>
+					<section>
+						<p style="font-size: 2em">CI 服務</p>
+						<ul>
+							<li><a href="https://travis-ci.org/" target="_blank">Travis CI</a></li>
+						</ul>
+						<ul>
+							<li><a href="https://circleci.com/" target="_blank">Circle CI</a></li>
+						</ul>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">Code Coverage</p>
+						<p>有百分之多少的程式碼、function 被測試過、跑過幾次</p>
+					</section>
+					<section>
+						<p>涵蓋率低品質一定不好，但涵蓋率高不太表品質好</p>
+						<p>有可能沒測到重點</p>
+					</section>
+					<section>
+						<p style="font-size: 2em">測試涵蓋率工具</p>
+						<ul>
+							<li><a href="https://github.com/gotwarlost/istanbul" target="_blank">istanbul</a></li>
+							<li><a href="https://github.com/douglasduteil/isparta" target="_blank">isparta - unmaintained</a></li>
+							<li><a href="https://github.com/bcoe/nyc" target="_blank">nyc</a></li>
+						</ul>
+					</section>
+					<section>
+						<p style="font-size: 2em">測試涵蓋率服務</p>
+						<p><a href="https://coveralls.io/" target="_blank">Coveralls</a></p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 1.2em">測試極端、負面案例</p>
+					</section>
+					<section>
+<pre><code class="lang-js">// 正面案例
+add(1, 2);
+add(1, 3.14);
+
+// 負面案例
+add(null, undefined);
+add(1, '1');
+add(0x80, '00001');
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<p style="font-size: 1.2em">好的設計不能用工具強制獲得，它是由彼此交談、互相學習、結隊進行代碼審查的人創造的。 - The Art of Unit Testing</p>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65" style="text-align: left;">
+					<h1>THE END</h1>
+					<p>Thanks for listening</p>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				slideNumber: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'node_modules/prismjs/prism.js'},
+                    { src: 'node_modules/prismjs/components/prism-bash.min.js'},
+                    { src: 'node_modules/prismjs/plugins/autolinker/prism-autolinker.min.js'},
+                    { src: 'node_modules/prismjs/components/prism-javascript.min.js', async: true, callback: function() {
+                    		Prism.highlightAll();
+                    	}
+                    },
+					// { src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() {
+					// 	hljs.initHighlightingOnLoad(); }
+					// },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+		</script>
+
+	</body>
+</html>
