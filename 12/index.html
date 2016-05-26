@@ -967,7 +967,7 @@ Product.where(:name => 'Mac').first_or_create
 						<p style="font-size: 2em">修改</p>
 					</section>
 					<section>
-						<p>update</p>
+						<p style="font-size: 2em">update</p>
 <pre><code class="lang-ruby"># attributes 是一個 hash
 p = Product.first
 p.update attributes
@@ -983,18 +983,18 @@ p.update! attributes
 						<p style="font-size: 2em">刪除</p>
 					</section>
 					<section>
-						<p>delete (用 id)</p>
+						<p style="font-size: 2em">delete (用 id)</p>
 <pre><code class="lang-ruby">Product.delete 2
 Product.delete [1, 2, 3]
 </code></pre>
 					</section>
 					<section>
-						<p>destroy (對物件)</p>
+						<p style="font-size: 2em">destroy (對物件)</p>
 <pre><code class="lang-ruby">first_product = Product.first
 first_product.destroy</code></pre>
 					</section>
 					<section>
-						<p>destroy_all</p>
+						<p style="font-size: 2em">destroy_all</p>
 <pre><code class="lang-ruby">Product.destroy_all</code></pre>
 					</section>
 				</section>
