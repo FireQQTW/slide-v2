@@ -1,0 +1,1116 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Web Hackathon Seminar</title>
+
+		<meta name="description" content="Web Hackthon Seminar - 11">
+		<meta name="author" content="C. T. Lin">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="node_modules/prismjs/themes/prism.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+		<style>
+.reveal pre code { max-height: 500px !important;}
+a { color: white !important; text-decoration: underline !important;}
+		</style>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section data-background="#b5533c">
+					<h1>Web Hackathon Seminar</h1>
+					<h3>11</h3>
+					<p>
+						<small>Ruby/Rails/MVC/Migration/Model/Association</small>
+					</p>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<p style="font-size: 2em">Ruby</p>
+					<img src="img/ruby.png" style="background-color: white" />
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+<pre><code class="lang-sh">首先要先確認 Ruby 版本 > 2
+
+ruby -v
+</code></pre>
+					</section>
+					<section>
+						<p>可以用 irb 來練習 (Interactive Ruby)</p>
+						<p>可參考<a href="https://www.ruby-lang.org/zh_tw/documentation/quickstart/">這裡</a></p>
+						<p>確認可以執行：</p>
+<pre><code class="lang-ruby">puts "Hello World"</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 1.8em">Ruby 是完全物件導向的語言</p>
+						<p>沒有 int, bool 之類的原始型別 (primitive types)</p>
+						<p>所有的實字 (literal) 都會被解析成對應的物件來使用</p>
+					</section>
+					<section>
+						<img src="img/class.png" style="background-color: #fff" />
+					</section>
+					<section>
+						<table>
+						<tbody>
+							<tr>
+								<td>String</td>
+								<td>'字串', "字串"</td>
+							</tr>
+							<tr>
+								<td>Symbol</td>
+								<td>:products</td>
+							</tr>
+							<tr>
+								<td>Integer</td>
+								<td>1</td>
+							</tr>
+							<tr>
+								<td>Float</td>
+								<td>0.1</td>
+							</tr>
+							<tr>
+								<td>Array</td>
+								<td>[1, 2, 3]</td>
+							</tr>
+							<tr>
+								<td>Hash</td>
+								<td>{:a => 1, :b => 2}</td>
+							</tr>
+							<tr>
+								<td>Range</td>
+								<td>1..28</td>
+							</tr>
+							<tr>
+								<td>Nil</td>
+								<td>nil</td>
+							</tr>
+							<tr>
+								<td>True</td>
+								<td>true</td>
+							</tr>
+							<tr>
+								<td>False</td>
+								<td>false</td>
+							</tr>
+						</tbody>
+						</table>
+					</section>
+					<section>
+						<p>可以用 <code>.class</code> 來檢查</p>
+						<p>Ruby 中只有 false 和 nil 是判斷為 false</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">一些 Ruby 語法</p>
+					</section>
+					<section>
+						<p style="font-size: 1.8em">用 puts 來印出東西</p>
+<pre><code class="lang-ruby">puts "yo~~"
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 1.6em">一般不打分號，block 用 end 結束</p>
+<pre><code class="lang-ruby">def index
+	# ... logic
+end
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 1.8em">「如果不」通常會用 unless</p>
+<pre><code class="lang-ruby">if !works
+	# ..logic
+end
+
+unless works
+	# ..logic
+end
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 1.8em">直到 xxx 通常會用 until</p>
+<pre><code class="lang-ruby">while !works do
+	# ..logic
+end
+
+until works do
+	# ..logic
+end
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 1.6em">簡單的式子會用 if , unless modifier</p>
+<pre><code class="lang-ruby">puts "yo" if true
+
+puts "yo" unless false
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 1.8em">最後一個結果會自動 return</p>
+<pre><code class="lang-ruby">def is_odd?(x)
+	x % 2 != 0
+end
+
+is_odd? 1
+is_odd? 2
+
+z = if x < y
+      true
+    else
+      false
+    end
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 1.8em">symbol 是個 unique 的值</p>
+						<p>不需要用字串來代表 unique key</p>
+<pre><code class="lang-ruby">class MyClass
+	attr_accessor :instance_var
+end
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 1.8em">幾乎不會用到 for</p>
+						<p>用 times, each 等等</p>
+<pre><code class="lang-ruby">3.times do
+	puts 1
+end
+
+(1..10).each do |n|
+	puts n
+end
+
+[1, 2, 3, 4, 5].each do |n|
+	puts n
+end
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 1.8em">hash</p>
+						<p>跟 js 的 object 差不多</p>
+<pre><code class="lang-ruby"># key => value
+h = {1 => [], :b => 2}
+
+h[:b]
+
+{:a => 1, :b => 2}
+# 用 symbol 當 key 的可以簡寫成
+{a: 1, b: 2}
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 1.8em">case when</p>
+<pre><code class="lang-ruby">num = 543
+
+case num
+when 0..9
+	puts "1 digit."
+when 10..99
+	puts "2 digits."
+when 100...999
+	puts "3 digits."
+else
+	puts "other.."
+end
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 1.8em">instance variable</p>
+<pre><code class="lang-ruby">class CatalogController < ApplicationController
+  def index
+  	@x = 1
+  end
+end
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 1.8em">全部運算子都是 method</p>
+<pre><code class="lang-ruby"># 這個
+1 + 2
+# 等同於 ...
+1.+(2)
+# 也等同於:
+1.send "+", 2
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">Rails</p>
+						<img src="img/rails.jpg" />
+					</section>
+					<section>
+						<p>主要功能：</p>
+						<ul>
+							<li>Routing</li>
+							<li>MVC</li>
+							<li>Active Record</li>
+							<li>Template and Layout</li>
+							<li>Asset Pipeline</li>
+							<li>Internationalization</li>
+							<li>Mailer</li>
+							<li>Job</li>
+							<li>Command Line Tools & Rake Task</li>
+							<li>Generator</li>
+							<li>Migration</li>
+							<li>....</li>
+						</ul>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">開新專案</p>
+<pre><code class="lang-sh">rails new blog
+
+# 預設是 sqlite 也可以改用 mysql
+rails new blog -d mysql</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 2em">執行 server</p>
+<pre><code class="lang-sh">rails server
+
+# 或是用縮寫 s
+# 會把 WEBrick server 執行在 localhost 3000 port
+rails s
+</code></pre>
+					</section>
+					<section>
+						<table>
+						<tbody>
+							<tr>
+								<td>app</td>
+								<td>網站相關的 code，包含 MVC</td>
+							</tr>
+							<tr>
+								<td>bin</td>
+								<td>可執行的指令腳本</td>
+							</tr>
+							<tr>
+								<td>config</td>
+								<td>設定檔</td>
+							</tr>
+							<tr>
+								<td>db</td>
+								<td>schema, migration, seeds</td>
+							</tr>
+							<tr>
+								<td>lib</td>
+								<td>可獨立於網站外的程式碼</td>
+							</tr>
+							<tr>
+								<td>public</td>
+								<td>公開資源</td>
+							</tr>
+							<tr>
+								<td>test</td>
+								<td>測試程式</td>
+							</tr>
+							<tr>
+								<td>vender</td>
+								<td>第三方程式碼</td>
+							</tr>
+							<tr>
+								<td>Gemfile</td>
+								<td>依賴套件設定</td>
+							</tr>
+							<tr>
+								<td>Gemfile.lock</td>
+								<td>鎖 Gem 版本讓每個人裝到一樣的</td>
+							</tr>
+							<tr>
+								<td>Rakefile</td>
+								<td>載入 Rails 內建任務和 lib/tasks 的任務</td>
+							</tr>
+						</tbody>
+						</table>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">Routing</p>
+					</section>
+					<section>
+						<p style="font-size: 2em">看有哪些 routes</p>
+<pre><code class="lang-sh"># 會列出所有 routes
+rake routes</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 2em">設定檔放在 config/routes.rb</p>
+						<p>在 <code>Rails.application.routes.draw</code> 裡面做設定</p>
+					</section>
+					<section>
+						<p style="font-size: 2em">詳細設定可參考</p>
+						<ul>
+							<li><a href="http://guides.rubyonrails.org/routing.html" target="_blank">Rails Routing from the Outside In — Ruby on Rails Guides</a></li>
+							<li><a href="https://ihower.tw/rails4/routing.html" target="_blank">Ruby on Rails 實戰聖經| 路由(Routing) - ihower</a></li>
+						</ul>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">Index Route</p>
+					</section>
+					<section>
+						<p>把 <code>/</code> 指向 welcome controller 的 index method</p>
+<pre><code class="lang-ruby">Rails.application.routes.draw do
+	root 'welcome#index'
+end
+</code></pre>
+<p>用 generator 產生 controller</p>
+<pre><code class="lang-sh">// rails g controller (controller_name) [actions..]
+rails g controller welcome index
+
+// 相反地使用 rails d controller 可以把上面產生的都刪光
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">Resource routes</p>
+					</section>
+					<section>
+						<img src="img/resources.png">
+					</section>
+					<section>
+						<p style="font-size: 2em">把資源的 CRUD 一起搞定</p>
+<pre><code class="lang-ruby">Rails.application.routes.draw do
+	resources :products
+end
+</code></pre>
+	<p>用 generator 產生 scaffold controller</p>
+	<pre><code class="lang-sh">rails g scaffold_controller product</code></pre>
+
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">MVC</p>
+						<p>Model-View-Controller</p>
+					</section>
+					<section>
+						<p>MVC 是個年代悠久的模式</p>
+						<p>也衍伸出許多的變種：</p>
+						<p>MVP, MVVM, MVW...等等</p>
+						<p>現在 Web Server 的因為透過網路其實不是傳統的 MVC</p>
+						<p>而是一種叫作 Model2 的模式</p>
+						<p>不過一般直接都稱作 MVC</p>
+					</section>
+					<section>
+						<img src="img/mvc.png" />
+					</section>
+					<section>
+						<p style="font-size: 2em">Router</p>
+						<p>HTTP Request 先經過 Router 找到對應的 Route</p>
+						<p>在發送到處理的 Controller Action</p>
+					</section>
+					<section>
+						<p style="font-size: 2em">Controller</p>
+						<p>接收 Request Input，query, params, body 並發送給 Model</p>
+					</section>
+					<section>
+						<p style="font-size: 2em">Model</p>
+						<p>核心商業邏輯</p>
+						<p>包括 Database Model 跟其他各種 Service</p>
+						<p>處理完送回 Controller</p>
+					</section>
+					<section>
+						<p style="font-size: 2em">View</p>
+						<p>Model 處理完的資料送進來產生 View</p>
+						<p>網頁的話通常是產生 HTML</p>
+						<p>再透過 Controller Response 回去 Client</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<p style="font-size: 2em">Controller</p>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<p style="font-size: 2em">params</p>
+<pre><code class="lang-ruby"># params 是一個 HashWithIndifferentAccess 物件
+# 所以 hash[:foo] 跟 hash["foo"] 在這邊是一樣的
+
+# query, body, path_parameters 都會進到 params 裡面
+class CatalogController < ApplicationController
+  def purchase
+  	@id = params[:id]
+  end
+end
+</code></pre>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">render</p>
+					</section>
+					<section>
+						<p style="font-size: 2em">回傳純文字</p>
+<pre><code class="lang-ruby">class CatalogController < ApplicationController
+  def index
+  	render plain: "OK", status: :ok
+  end
+end
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 2em">回傳 HTML</p>
+<pre><code class="lang-ruby">class CatalogController < ApplicationController
+  def index
+  	# 為了安全必須跳脫特殊字元
+  	render html: &quot;&lt;strong&gt;Not Found&lt;/strong&gt;&quot;.html_safe, status: :not_found
+  end
+end
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 2em">回傳 JSON</p>
+<pre><code class="lang-ruby">class CatalogController < ApplicationController
+  def index
+  	# 傳進去的東西會自動 call to_json
+  	render json: @product, status: :ok
+  end
+end
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 2em">回傳 template</p>
+<pre><code class="lang-ruby">class CatalogController < ApplicationController
+  def index
+  	# 屬於同一個 controller 的 view template
+  	render :edit
+  end
+end
+
+# 或是
+class CatalogController < ApplicationController
+  def index
+  	# 可以 render 不同 controller 的 view template
+  	render "books/edit"
+  end
+end
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 2em">這些都是一樣的效果...</p>
+						<img src="img/render.png" />
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<p style="font-size: 2em">Backend with Database</p>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">ActiveRecord as ORM</p>
+					</section>
+					<section>
+						<p style="font-size: 1.5em">Object Relational Mapping</p>
+						<p>用於實現物件導向編程語言裡</p>
+						<p>不同類型系統的資料之間的轉換</p>
+						<img src="img/orm.png" />
+					</section>
+					<section>
+						<p style="font-size: 2em">Naming Convention</p>
+						<ul>
+							<li>Model 用 首字大寫的單數型態命名</li>
+							<li>table 用 小寫 + 底線的多數型態命名</li>
+							<li>用一個 id 當作 Primary keys</li>
+							<li>Foreign keys 用 table name + id，例如：user_id</li>
+						</ul>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">Rails console</p>
+					</section>
+					<section>
+<pre><code class="lang-ruby"># 進入有載入 Rails 環境的 irb
+rails console
+
+或是
+
+# 縮寫
+rails c
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">首先要先確定<br /> MySQL 有執行起來</p>
+					</section>
+					<section style="text-align: left">
+						<p>Rails 支援的選擇 (提供 preconfiguration)：</p>
+							<li>mysql</li>
+							<li>oracle</li>
+							<li>postgresql</li>
+							<li>sqlite3</li>
+							<li>frontbase</li>
+							<li>ibm_db</li>
+							<li>sqlserver</li>
+							<li>jdbcmysql</li>
+							<li>jdbcsqlite3</li>
+							<li>jdbcpostgresql</li>
+							<li>jdbc</li>
+						</ul>
+					</section>
+
+					<section>
+						<p>找到資料庫設定檔：<code>config/database.yml</code></p>
+						<p>設定 development、test、production 用資料庫</p>
+					</section>
+					<section>
+<pre><code class="lang-yaml" style="font-size: 0.8em; line-height: 0.8em">default: &amp;default
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  username: hello
+  password: hello
+  host: 127.0.0.1
+
+development:
+  &lt;&lt;: *default
+  database: hello_dev
+
+# Do not set this db to the same as development or production.
+test:
+  &lt;&lt;: *default
+  database: hello_test
+
+production:
+  &lt;&lt;: *default
+  database: hello_production
+  username: &lt;%= ENV['PRODUCTION_DATABASE_USERNAME'] %&gt;
+  password: &lt;%= ENV['PRODUCTION_DATABASE_PASSWORD'] %&gt;
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 2em">環境變數</p>
+<pre><code class="lang-sh"># 用 -e
+rails s -e production
+
+或是
+
+# 用 RAILS_ENV
+RAILS_ENV=production rails s
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 2em">建出所有 database !</p>
+						<pre><code class="lang-sh">rake db:create:all</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">Migration</p>
+					</section>
+					<section>
+						<p>在不同的時間、不同人、不同電腦間需要同步</p>
+						<p>SQL 寄來寄去的不是一個解決之道</p>
+					</section>
+					<section>
+<pre><code class="lang-sh">rails g migration CreateUsers</code></pre>
+						<p>就會產生類似 <code>20151209102010_create_users.rb</code></p>
+						<p>用日期來標記檔案的順序以及唯一性</p>
+					</section>
+					<section>
+<pre><code class="lang-ruby">class CreateUser < ActiveRecord::Migration
+  def change
+    create_table :users do |t|
+    end
+  end
+end</code></pre>
+						<p>所有的 migration 都繼承自 ActiveRecord::Migration</p>
+						<p>並會在執行時呼叫 change 方法</p>
+					</section>
+					<section>
+<pre><code class="lang-ruby">def change
+  create_table :users do |t|
+    t.string :email, null: false
+    t.string :password, null: false
+    t.string :name
+    t.integer :age
+    t.timestamps null: false
+  end
+end
+</code></pre>
+						<p>建立 users 資料表、並放上 email, password, name, age, created_at, updated_at 等欄位</p>
+					</section>
+					<section>
+<pre><code class="lang-sh"># 執行 migration
+rake db:migrate
+
+# 回朔 migration
+rake db:rollback
+
+# 查看狀態
+rake db:migrate:status</code></pre>
+						<p>會在 db 建一個表來追蹤</p>
+					</section>
+					<section>
+						<table>
+							<tbody>
+								<tr><td>:integer</td><td>整數</td></tr>
+								<tr><td>:float</td><td>浮點數</td></tr>
+								<tr><td>:decimal</td><td>十進位</td></tr>
+								<tr><td>:boolean</td><td>布林值</td></tr>
+								<tr><td>:string</td><td>有限長度變動字串</td></tr>
+								<tr><td>:text</td><td>不限長度變動字串</td></tr>
+								<tr><td>:datetime</td><td>日期時間</td></tr>
+								<tr><td>:timestamp</td><td>時間戳記</td></tr>
+								<tr><td>:time</td><td>時間</td></tr>
+								<tr><td>:date</td><td>日期</td></tr>
+								<tr><td>:binary</td><td>二進位</td></tr>
+							</tbody>
+						</table>
+					</section>
+					<section>
+						<ul>
+							<li>指定資料表後就可以藉由參數 t 來操作</li>
+							<li>用 t.xxx 來新增指定屬性的欄位</li>
+							<li>null: false 可以讓欄位不能為空值</li>
+							<li>用 t.timestamps 會加上 created_at, updated_at</li>
+						</ul>
+					</section>
+					<section>
+						<p style="font-size: 2em">建立資料表</p>
+<pre><code class="lang-ruby">def change
+  create_table :users do |t|
+    t.string :email, null: false
+    t.string :password, null: false
+    t.string :name
+    t.integer :age
+    t.timestamps null: false
+  end
+end
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 2em">修改資料表</p>
+<pre><code class="lang-ruby">def change
+  change_table :users do |t|
+    t.string :first_name
+    t.string :last_name
+  end
+end
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 2em">資料表改名</p>
+<pre><code class="lang-ruby">def change
+  rename_table :users, :admins
+end
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 2em">刪除資料表</p>
+<pre><code class="lang-ruby">def change
+  drop_table :users
+end
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 2em">新增欄位</p>
+<pre><code class="lang-ruby">def change
+  add_column :users, :nick_name
+end
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 2em">修改欄位名稱</p>
+<pre><code class="lang-ruby">def change
+  rename_column :users, :nick_name, :other_name
+end
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 2em">變更欄位型別</p>
+<pre><code class="lang-ruby">def change
+  change_column :users, :nick_name, :text
+end
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 2em">移除欄位</p>
+<pre><code class="lang-ruby">def change
+  remove_column :users, :nick_name
+end
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 2em">加上索引</p>
+<pre><code class="lang-ruby">def change
+  add_index :user, :name
+end
+</code></pre>
+						<p style="font-size: 2em">加上 unique 索引</p>
+<pre><code class="lang-ruby">def change
+  add_index :user, :name, unique: true
+end
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 2em">移除索引</p>
+<pre><code class="lang-ruby">def change
+  remove_index :users, :nick_name
+end
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 2em">加上外鍵</p>
+<pre><code class="lang-ruby">def change
+  add_foreign_key :users, :nick_name
+end
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 2em">移除外鍵</p>
+<pre><code class="lang-ruby">def change
+  remove_foreign_key :users, :nick_name
+end
+</code></pre>
+					</section>
+					<section>
+						<p>無法直接推出 rollback 的需要定義 up 和 down</p>
+						<p>例如：remove 類的</p>
+<pre><code class="lang-ruby">class DropUser < ActiveRecord::Migration
+  def up
+  	drop_table :users
+  end
+
+  def down
+  	create_table :users do |t|
+  	  t.xxx.....
+  	  t.yyy.....
+  	  ....
+    end
+  end
+end
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">Rake Task</p>
+					</section>
+					<section>
+<pre><code class="lang-sh">rake db:create  # 建立現在環境的 db
+rake db:create:all  # 建立全部環境的 db
+rake db:drop  # 刪除現在環境的 db
+rake db:drop:all  # 刪除全部環境的 db
+rake db:migrate  # 執行 migration
+rake db:rollback  # 回朔 migration
+rake db:migrate:status  # 查看 migration 狀態
+rake db:seed  ＃ 執行 seeding</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<p style="font-size: 2em">Model (Active Record)</p>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">產生 Model</p>
+<pre><code class="lang-sh">rails g model User email:string password:string name:string</code></pre>
+						<p>因為這個也會產生 migration 所以建議直接用這個</p>
+					</section>
+					<section>
+						<p>會產生一個 app/models/user.rb</p>
+<pre><code class="lang-ruby">class User < ActiveRecord::Base
+end</code></pre>
+						<p>繼承自 ActiveRecord::Base</p>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">查詢</p>
+					</section>
+					<section>
+						<p style="font-size: 2em">all</p>
+<pre><code class="lang-ruby"># 取得全部 product
+Product.all
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 2em">find</p>
+<pre><code class="lang-ruby"># 用 id 找
+product = Product.find 1
+
+products = Product.find [1, 2, 3]
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 2em">find_by_xxx</p>
+<pre><code class="lang-ruby"># 可以用欄位的特殊方法查詢
+User.find_by_email 'test@gmail.com'
+
+User.find_by_username 'example'
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 2em">where</p>
+<pre><code class="lang-ruby"># 加上一個條件 hash
+p = Product.where(name: 'Mac', x: 1)
+
+# 在 Ruby 下面三個是一樣的
+p = Product.where(:name => 'Mac', :x => 1)
+p = Product.where(name: 'Mac', x: 1)
+p = Product.where name: 'Mac', x: 1
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 2em">select</p>
+<pre><code class="lang-ruby"># 選擇特定欄位
+User.select('username, email')
+</code></pre>
+					</section>
+					<section>
+<pre><code class="lang-ruby"># limit 限制筆數
+User.limit 10
+
+# order 設定排序
+User.order('username')
+
+# offset 忽略前幾筆
+User.offset 100
+
+# 可以串在一起
+users = User.where('age >= ?', 18).order('username').offset(100).limit(10)
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">新增</p>
+					</section>
+					<section>
+						<p style="font-size: 2em">new</p>
+<pre><code class="lang-ruby"># 失敗回傳 false
+a = Product.new(:name => 'Windows')
+a.save
+
+# 失敗 raise error
+b = Product.new(:name => 'Mac')
+a.save!
+</code></pre>
+
+					</section>
+					<section>
+						<p style="font-size: 2em">create</p>
+<pre><code class="lang-ruby"># 失敗回傳 false
+Product.create(:name => 'Windows')
+
+# 失敗 raise error
+Product.create!(:name => 'Mac')
+</code></pre>
+						<p>等同 new 完接 save</p>
+					</section>
+					<section>
+						<p style="font-size: 2em">first_or_initialize, first_or_create</p>
+<pre><code class="lang-ruby"># 取第一個，查不到就 new
+Product.where(:name => 'Windows').first_or_initialize
+
+# 取第一個，查不到就 create
+Product.where(:name => 'Mac').first_or_create
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">修改</p>
+					</section>
+					<section>
+						<p>update</p>
+<pre><code class="lang-ruby"># attributes 是一個 hash
+p = Product.first
+p.update attributes
+
+# 失敗會 raise error 的版本
+p.update! attributes
+</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c">
+					<section>
+						<p style="font-size: 2em">刪除</p>
+					</section>
+					<section>
+						<p>delete (用 id)</p>
+<pre><code class="lang-ruby">Product.delete 2
+Product.delete [1, 2, 3]
+</code></pre>
+					</section>
+					<section>
+						<p>destroy (對物件)</p>
+<pre><code class="lang-ruby">first_product = Product.first
+first_product.destroy</code></pre>
+					</section>
+					<section>
+						<p>destroy_all</p>
+<pre><code class="lang-ruby">Product.destroy_all</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65">
+					<section>
+						<p style="font-size: 2em">Associations</p>
+					</section>
+					<section>
+						<p>有時候不同的 Model 間會有關係</p>
+<pre><code class="lang-ruby">class Customer < ActiveRecord::Base
+end
+
+class Order < ActiveRecord::Base
+end
+</code></pre>
+					</section>
+					<section>
+						<p>刪除一個顧客時需要先把訂單刪光</p>
+<pre><code class="lang-ruby">@orders = Order.where(customer_id: @customer.id)
+@orders.each do |order|
+  order.destroy
+end
+@customer.destroy
+</code></pre>
+					</section>
+					<section>
+						<p>直接定義一個關聯，並宣告 dependent: :destroy</p>
+<pre><code class="lang-ruby">class Customer < ActiveRecord::Base
+  has_many :orders, dependent: :destroy
+end
+
+class Order < ActiveRecord::Base
+  belongs_to :customer
+end
+</code></pre>
+					</section>
+					<section>
+						<p style="font-size: 2em">belongs_to</p>
+						<img src="img/belongs_to.png" />
+					</section>
+					<section>
+						<p style="font-size: 2em">has_one</p>
+						<img src="img/has_one.png" />
+					</section>
+					<section>
+						<p style="font-size: 2em">has_many</p>
+						<img src="img/has_many.png" />
+					</section>
+					<section>
+						<p style="font-size: 2em">has_many through</p>
+						<img src="img/has_many_through1.png" />
+					</section>
+					<section>
+						<p style="font-size: 2em">has_many through</p>
+						<img src="img/has_many-through2.png" />
+					</section>
+					<section>
+						<p>has_and_belongs_to_many</p>
+						<img src="img/has_and_belongs_to_many.png" />
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65" style="text-align: left;">
+					<h1>THE END</h1>
+					<p>Thanks for listening</p>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				slideNumber: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'node_modules/prismjs/prism.js'},
+                    { src: 'node_modules/prismjs/components/prism-bash.min.js'},
+                    { src: 'node_modules/prismjs/plugins/autolinker/prism-autolinker.min.js'},
+                    { src: 'node_modules/prismjs/components/prism-javascript.min.js', async: true, callback: function() {
+                    		Prism.highlightAll();
+                    	}
+                    },
+                    { src: 'node_modules/prismjs/components/prism-bash.min.js', async: true, callback: function() {
+                    		Prism.highlightAll();
+                    	}
+                    },
+                    { src: 'node_modules/prismjs/components/prism-ruby.min.js', async: true, callback: function() {
+                    		Prism.highlightAll();
+                    	}
+                    },
+					// { src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() {
+					// 	hljs.initHighlightingOnLoad(); }
+					// },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+		</script>
+
+	</body>
+</html>
